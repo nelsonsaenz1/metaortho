@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import Logo from "@/components/ui/Logo";
 
 const navLinks = [
-  { label: "How It Works", href: "/#how-it-works" },
+  { label: "How It Works", href: "/home#how-it-works" },
   { label: "Services", href: "/pricing" },
   { label: "About", href: "/about" },
   { label: "Risk Assessment", href: "/assessment" },
@@ -47,7 +47,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-16 lg:h-[72px]">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group text-[var(--color-bg-dark)]">
+            <Link href="/home" className="flex items-center gap-2.5 group text-[var(--color-bg-dark)]">
               <Logo size={32} />
               <span className="text-[19px] font-semibold text-[var(--color-text-heading)] tracking-[-0.03em]">
                 MetaOrtho

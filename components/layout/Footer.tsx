@@ -74,7 +74,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {[
                 { label: "About Dr. Saenz", href: "/about" },
-                { label: "How It Works", href: "/#how-it-works" },
+                { label: "How It Works", href: "/home#how-it-works" },
                 { label: "Contact", href: "mailto:info@metaortho.com" },
               ].map((link) => (
                 <li key={link.label}>
