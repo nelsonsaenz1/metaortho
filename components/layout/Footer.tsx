@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Logo from "@/components/ui/Logo";
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--color-bg-darkest)] text-white">
+    <footer data-site-footer className="bg-[var(--color-bg-darkest)] text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-20 pb-12">
         {/* Top section — CTA */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-16 border-b border-white/10">
@@ -103,13 +104,8 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-white/80">
-                <path d="M12 2L4 7V17L12 22L20 17V7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-                <path d="M12 8V16M8 12H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </div>
+          <div className="flex items-center gap-2.5 text-white/60">
+            <Logo size={22} />
             <span className="text-xs text-white/50">
               &copy; {new Date().getFullYear()} MetaOrthopedics. All rights reserved.
             </span>

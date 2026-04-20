@@ -133,3 +133,10 @@ html {
 .animate-fade-up {
   animation: fadeUp 0.6s ease-out forwards;
 }
+
+/* Landing page: hide global chrome */
+body.landing-mode [data-site-navbar],
+body.landing-mode [data-site-footer],
+body.landing-mode [data-mobile-cta] {
+  display: none !important;
+}

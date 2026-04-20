@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import Logo from "@/components/ui/Logo";
 
 const navLinks = [
   { label: "How It Works", href: "/#how-it-works" },
@@ -24,7 +25,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <>
+    <div data-site-navbar>
       {/* Top announcement bar */}
       <div className="bg-[var(--color-bg-dark)] text-center py-2.5 px-4 text-sm text-[var(--color-text-on-dark)] tracking-[-0.01em] relative z-50">
         <span className="opacity-80">Orthopedic surgeon-led telehealth</span>
@@ -46,13 +47,8 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-16 lg:h-[72px]">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-8 h-8 rounded-[var(--radius-sm)] bg-[var(--color-bg-dark)] flex items-center justify-center">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-white">
-                  <path d="M12 2L4 7V17L12 22L20 17V7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-                  <path d="M12 8V16M8 12H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </div>
+            <Link href="/" className="flex items-center gap-2.5 group text-[var(--color-bg-dark)]">
+              <Logo size={32} />
               <span className="text-[19px] font-semibold text-[var(--color-text-heading)] tracking-[-0.03em]">
                 MetaOrtho
               </span>
@@ -120,6 +116,6 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-    </>
+    </div>
   );
 }

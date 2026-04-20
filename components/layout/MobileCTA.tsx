@@ -13,6 +13,7 @@ export default function MobileCTA() {
 
   return (
     <div
+      data-mobile-cta
       className={`fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white/95 backdrop-blur-xl border-t border-[var(--color-border)] px-5 py-3 transition-all duration-300 ${
         visible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
       }`}

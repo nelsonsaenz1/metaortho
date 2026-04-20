@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import Logo from "@/components/ui/Logo";
 
 function LoginForm() {
   const [password, setPassword] = useState("");
@@ -33,13 +34,8 @@ function LoginForm() {
       <div className="max-w-sm w-full mx-4">
         <div className="bg-white rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] border border-[var(--color-border)] p-8">
           <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-[var(--radius-sm)] bg-[var(--color-bg-dark)] flex items-center justify-center">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-white">
-                  <path d="M12 2L4 7V17L12 22L20 17V7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-                  <path d="M12 8V16M8 12H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </div>
+            <div className="flex items-center justify-center gap-2.5 mb-4 text-[var(--color-bg-dark)]">
+              <Logo size={34} />
               <span className="text-lg font-semibold text-[var(--color-text-heading)] tracking-[-0.02em]">
                 MetaOrtho
               </span>
