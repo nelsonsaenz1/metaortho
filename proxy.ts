@@ -4,12 +4,12 @@ import type { NextRequest } from "next/server";
 // ============================================================
 // SITE PASSWORD PROTECTION
 // Set SITE_PASSWORD in your Vercel environment variables to
-// enable password protection. Remove this middleware (or set
+// enable password protection. Remove this proxy (or set
 // SITE_PASSWORD to empty) to make the site public.
 // ============================================================
 const SITE_PASSWORD = process.env.SITE_PASSWORD || "";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // If no password is set, allow all traffic through
   if (!SITE_PASSWORD) {
     return NextResponse.next();
