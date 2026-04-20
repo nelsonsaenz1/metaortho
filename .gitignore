@@ -39,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+MetaOrtho_Case4_PreVisit_Summary_DRAFT.docx
+.env*
