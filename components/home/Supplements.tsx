@@ -94,7 +94,7 @@ export default function Supplements() {
               Join bundle waitlist
             </WaitlistCTA>
             <p className="text-sm text-[var(--color-text-tertiary)] self-center">
-              Est. $59–$89/month
+              Est. $59–$89
             </p>
           </div>
         </motion.div>
