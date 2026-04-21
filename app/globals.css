@@ -137,6 +137,13 @@ html {
 /* Landing page: hide global chrome */
 body.landing-mode [data-site-navbar],
 body.landing-mode [data-site-footer],
-body.landing-mode [data-mobile-cta] {
+body.landing-mode [data-mobile-cta],
+body.landing-mode [data-waitlist-sticky] {
   display: none !important;
+}
+
+/* Waitlist sticky slide-up */
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }

@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import MobileCTA from "@/components/layout/MobileCTA";
 import CookieConsent from "@/components/layout/CookieConsent";
+import WaitlistStickyFooter from "@/components/WaitlistStickyFooter";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -107,6 +108,7 @@ export default function RootLayout({
         <Footer />
         <MobileCTA />
         <CookieConsent />
+        <WaitlistStickyFooter />
       </body>
     </html>
   );
