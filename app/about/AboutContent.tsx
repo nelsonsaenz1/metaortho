@@ -45,7 +45,7 @@ export default function AboutContent() {
               </p>
               <div className="space-y-5 text-[var(--color-text-secondary)] leading-relaxed text-lg">
                 <p>
-                  Dr. Saenz is a fellowship-trained orthopedic surgeon who founded MetaOrthopedics to address one of the most significant unmet needs in modern medicine: the musculoskeletal consequences of GLP-1 weight loss medications.
+                  Dr. Saenz is a board-certified orthopedic surgeon who founded MetaOrthopedics to address one of the most significant unmet needs in modern medicine: the musculoskeletal consequences of GLP-1 weight loss medications.
                 </p>
                 <p>
                   With millions of Americans on Ozempic, Wegovy, Mounjaro, and Zepbound, patients are losing weight rapidly — but up to 40% of that loss is lean mass. Their prescribing physicians focus on metabolic markers. Nobody is monitoring what the weight loss is doing to their bodies structurally.
@@ -84,7 +84,7 @@ export default function AboutContent() {
                 ),
               },
               {
-                institution: "Campbell Clinic",
+                institution: "University of Tennessee–Campbell Clinic",
                 detail: "Orthopedic Surgery Residency — Memphis, TN",
                 icon: (
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

@@ -8,9 +8,9 @@ import TiltCard from "@/components/ui/motion/TiltCard";
 const ease = [0.23, 1, 0.32, 1] as const;
 
 const credentials = [
-  "University of Arkansas — BS",
+  "University of Arkansas — Bachelor of Science",
   "UAMS — Doctor of Medicine",
-  "Campbell Clinic — Ortho Residency",
+  "University of Tennessee–Campbell Clinic — Ortho Residency",
   "AAOS Member",
   "43 State Licenses",
   "Board Certified",
@@ -83,7 +83,7 @@ export default function DoctorPreview() {
                 Verified credentials
               </p>
               <p className="text-[10px] text-[var(--color-text-tertiary)]">
-                Campbell Clinic · AAOS
+                UT–Campbell Clinic · AAOS
               </p>
             </div>
           </motion.div>
