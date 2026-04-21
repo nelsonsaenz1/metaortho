@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import PageHeader from "@/components/portal/PageHeader";
 
-const ease = [0.25, 0.1, 0.25, 1] as const;
+const ease = [0.23, 1, 0.32, 1] as const;
 
 type Status = "daily" | "weekly" | "monthly" | "quarterly" | "as-needed";
 

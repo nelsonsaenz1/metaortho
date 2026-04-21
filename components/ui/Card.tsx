@@ -23,7 +23,7 @@ export default function Card({
     <div
       className={`bg-white rounded-[var(--radius-lg)] border border-[var(--color-border)] ${paddings[padding]} ${
         hover
-          ? "hover:shadow-[var(--shadow-lg)] hover:-translate-y-1 transition-all duration-300"
+          ? "transition-[box-shadow,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
           : ""
       } ${className}`}
     >

@@ -1,59 +1,127 @@
 "use client";
 
+import { motion } from "framer-motion";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import Button from "@/components/ui/Button";
+import Marquee from "@/components/ui/motion/Marquee";
+import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
+
+const ease = [0.23, 1, 0.32, 1] as const;
 
 const supplements = [
-  { name: "High-Quality Protein", purpose: "Prevent muscle wasting", icon: "🥛" },
-  { name: "Vitamin D3 + K2", purpose: "Protect bone density", icon: "☀️" },
-  { name: "Calcium", purpose: "Bone strength", icon: "🦴" },
-  { name: "Creatine Monohydrate", purpose: "Muscle preservation", icon: "💪" },
-  { name: "HMB", purpose: "Reduce protein breakdown", icon: "🧬" },
-  { name: "Vitamin B12", purpose: "Energy & nerve health", icon: "⚡" },
+  { name: "High-Quality Protein", purpose: "Prevent muscle wasting", dose: "140 g/day" },
+  { name: "Vitamin D3 + K2", purpose: "Protect bone density", dose: "5,000 IU + 180 mcg" },
+  { name: "Calcium Citrate", purpose: "Bone strength", dose: "1,200 mg/day" },
+  { name: "Creatine Monohydrate", purpose: "Muscle preservation", dose: "5 g/day" },
+  { name: "HMB", purpose: "Reduce protein breakdown", dose: "3 g/day" },
+  { name: "Vitamin B12", purpose: "Energy & nerve health", dose: "1,000 mcg" },
+  { name: "Magnesium Glycinate", purpose: "Muscle & sleep", dose: "400 mg" },
+  { name: "Omega-3 (EPA/DHA)", purpose: "Joint & anti-inflammatory", dose: "2 g EPA+DHA" },
 ];
+
+function SupplementPill({
+  name,
+  purpose,
+  dose,
+}: {
+  name: string;
+  purpose: string;
+  dose: string;
+}) {
+  return (
+    <div className="glass-light rounded-[var(--radius-lg)] px-6 py-5 w-[280px] shrink-0 hover:-translate-y-0.5 transition-transform duration-[var(--dur-hover)] ease-[var(--ease-out)] motion-reduce:hover:translate-y-0">
+      <div className="flex items-start justify-between mb-2">
+        <p className="font-semibold text-[var(--color-text-heading)] text-[14px] tracking-[-0.01em]">
+          {name}
+        </p>
+        <span className="text-[10px] font-mono text-[var(--color-accent-primary)] tabular-nums bg-[var(--color-accent-light)] rounded-[var(--radius-sm)] px-2 py-0.5 whitespace-nowrap">
+          {dose}
+        </span>
+      </div>
+      <p className="text-[12px] text-[var(--color-text-tertiary)] leading-relaxed">
+        {purpose}
+      </p>
+    </div>
+  );
+}
 
 export default function Supplements() {
   return (
     <SectionWrapper bg="warm">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-accent-warm)] mb-4 font-[var(--font-body)]">
-            Coming Soon
-          </p>
+      <div className="grid lg:grid-cols-[1.1fr_1.3fr] gap-12 lg:gap-16 items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease }}
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white rounded-[var(--radius-pill)] border border-[var(--color-border)] mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-warm)] animate-breath" />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--color-accent-warm)]">
+              Coming soon · Bundles
+            </span>
+          </div>
           <h2 className="text-[clamp(2rem,4vw,3rem)] font-normal tracking-[-0.02em] mb-6">
-            GLP-1 Body Protection supplement bundle
+            GLP-1 Body Protection
+            <br />
+            supplement bundle
           </h2>
           <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed mb-6">
-            Physician-curated supplement kits designed specifically for GLP-1 patients. Everything your body needs to maintain muscle, protect bones, and optimize nutrition during weight loss.
+            Physician-curated supplement kits designed specifically for GLP-1
+            patients. Everything your body needs to maintain muscle, protect
+            bones, and optimize nutrition during weight loss.
           </p>
           <p className="text-[var(--color-text-secondary)] mb-8 leading-relaxed">
-            Each bundle is selected by Dr. Saenz based on the latest evidence. No guesswork — just the right supplements at the right doses, delivered monthly.
+            Each bundle is selected by Dr. Saenz based on the latest evidence.
+            No guesswork — just the right supplements at the right doses,
+            delivered monthly.
           </p>
 
           <div className="flex flex-col sm:flex-row items-start gap-4">
-            <Button href="/book" variant="dark">
-              Join the Waitlist
-            </Button>
+            <WaitlistCTA
+              variant="dark"
+              size="md"
+              source="supplements"
+              eyebrow="Supplement bundle · Waitlist"
+              headline={
+                <>
+                  Be first to get the
+                  <br />
+                  MetaOrtho bundle.
+                </>
+              }
+              subcopy="Monthly, physician-curated, delivered to your door. You'll be first in line."
+            >
+              Join bundle waitlist
+            </WaitlistCTA>
             <p className="text-sm text-[var(--color-text-tertiary)] self-center">
-              Starting at $59/month
+              Est. $59–$89/month
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-2 gap-3">
-          {supplements.map((supp) => (
-            <div
-              key={supp.name}
-              className="bg-white rounded-[var(--radius-lg)] px-5 py-5 border border-[var(--color-border)] hover:shadow-[var(--shadow-md)] transition-all duration-300"
-            >
-              <span className="text-2xl mb-3 block">{supp.icon}</span>
-              <p className="font-semibold text-[var(--color-text-heading)] text-sm tracking-[-0.01em] mb-1">
-                {supp.name}
-              </p>
-              <p className="text-xs text-[var(--color-text-tertiary)]">{supp.purpose}</p>
+        {/* Marquee of supplement pills */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, delay: 0.15, ease }}
+          className="relative -mx-5 sm:-mx-8 lg:mx-0"
+        >
+          <div className="space-y-3">
+            <Marquee>
+              {supplements.slice(0, 4).map((s) => (
+                <SupplementPill key={s.name} {...s} />
+              ))}
+            </Marquee>
+            <div style={{ direction: "rtl" }}>
+              <Marquee>
+                {supplements.slice(4).map((s) => (
+                  <SupplementPill key={s.name} {...s} />
+                ))}
+              </Marquee>
             </div>
-          ))}
-        </div>
+          </div>
+        </motion.div>
       </div>
     </SectionWrapper>
   );

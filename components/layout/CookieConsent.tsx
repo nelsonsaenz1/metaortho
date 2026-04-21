@@ -28,13 +28,13 @@ export default function CookieConsent() {
       <div className="flex gap-2">
         <button
           onClick={accept}
-          className="px-5 py-2 bg-white text-[var(--color-bg-dark)] text-sm font-semibold rounded-[var(--radius-pill)] hover:bg-white/90 transition-colors cursor-pointer"
+          className="px-5 py-2 bg-white text-[var(--color-bg-dark)] text-sm font-semibold rounded-[var(--radius-pill)] hover:bg-white/90 transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] active:duration-[var(--dur-press)] motion-reduce:active:scale-100 cursor-pointer"
         >
           Accept
         </button>
         <button
           onClick={accept}
-          className="px-5 py-2 text-white/70 text-sm font-medium rounded-[var(--radius-pill)] hover:text-white/80 transition-colors cursor-pointer"
+          className="px-5 py-2 text-white/90 text-sm font-medium rounded-[var(--radius-pill)] hover:text-white transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)] active:opacity-60 motion-reduce:active:opacity-100 cursor-pointer"
         >
           Dismiss
         </button>

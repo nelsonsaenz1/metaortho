@@ -1,78 +1,63 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import MeshBackground from "@/components/ui/motion/MeshBackground";
+import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
 
-const ease = [0.25, 0.1, 0.25, 1] as const;
+const ease = [0.23, 1, 0.32, 1] as const;
 
 const riskTimeline = [
   {
     month: "Month 1–3",
     title: "The weight drops fast",
     detail:
-      "You’re on Ozempic, Wegovy, Mounjaro, or Zepbound. The scale is moving. No one mentions what else is changing.",
-    severity: 1,
-    color: "var(--color-accent-primary)",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-      </svg>
-    ),
+      "You're on Ozempic, Wegovy, Mounjaro, or Zepbound. The scale is moving. No one mentions what else is changing.",
+    dotTone: "var(--color-accent-primary)",
   },
   {
     month: "Month 3–6",
     title: "Muscle starts disappearing",
     detail:
-      "20+ lbs gone — but you’re not resistance training. Up to 40% of what you lost is lean tissue, not fat. You feel weaker. Your prescriber says “that’s normal.”",
-    severity: 2,
-    color: "var(--color-warning)",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+      "20+ lbs gone — but you're not resistance training. Up to 40% of what you lost is lean tissue, not fat. You feel weaker. Your prescriber says \"that's normal.\"",
+    dotTone: "var(--color-warning)",
   },
   {
     month: "Month 6–12",
     title: "Bones weaken silently",
     detail:
-      "No DEXA scan ordered. No vitamin D or calcium checked. Bone density is declining but you have zero symptoms — until you don’t.",
-    severity: 3,
-    color: "#E67E22",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+      "No DEXA scan ordered. No vitamin D or calcium checked. Bone density is declining but you have zero symptoms — until you don't.",
+    dotTone: "#E67E22",
   },
   {
     month: "Month 12+",
     title: "The damage surfaces",
     detail:
-      "A fracture from a minor fall. A gout flare that sends you to the ER. Joint pain that won’t resolve. Weakness that limits your life. The weight is gone — and so is your structural health.",
-    severity: 4,
-    color: "var(--color-danger)",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M4.93 4.93l14.14 14.14M12 2a10 10 0 100 20 10 10 0 000-20z" />
-      </svg>
-    ),
+      "A fracture from a minor fall. A gout flare that sends you to the ER. Joint pain that won't resolve. Weakness that limits your life. The weight is gone — and so is your structural health.",
+    dotTone: "var(--color-danger)",
   },
 ];
 
 export default function IsThisYou() {
+  const reduce = useReducedMotion();
+
   return (
-    <section className="relative py-24 md:py-32 bg-white overflow-hidden">
-      <div className="max-w-5xl mx-auto px-5 sm:px-8 lg:px-12">
+    <section className="relative py-24 md:py-36 bg-white overflow-hidden">
+      <MeshBackground variant="light" className="opacity-40" />
+
+      <div className="relative max-w-5xl mx-auto px-5 sm:px-8 lg:px-12">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-accent-primary)] mb-5">
+            The arc most people don&apos;t see coming
+          </p>
           <h2
-            className="text-[clamp(3rem,8vw,6rem)] font-normal tracking-[-0.04em] leading-[1] text-[var(--color-text-heading)] whitespace-nowrap"
+            className="text-[clamp(3rem,8vw,6.5rem)] font-normal tracking-[-0.045em] leading-[0.95] text-[var(--color-text-heading)]"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             Is this you?
@@ -82,43 +67,95 @@ export default function IsThisYou() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="mt-5 text-base text-[var(--color-text-secondary)] max-w-lg mx-auto leading-relaxed"
+            className="mt-6 text-base text-[var(--color-text-secondary)] max-w-lg mx-auto leading-relaxed"
           >
             Here&apos;s what unmonitored GLP-1 weight loss looks like over time.
           </motion.p>
         </motion.div>
 
-        {/* Timeline */}
+        {/* Timeline with drawn vertical path */}
         <div className="relative max-w-2xl mx-auto">
-          <div className="absolute left-5 top-0 bottom-0 w-px bg-[var(--color-border-strong)] hidden sm:block" />
+          {/* Animated connector line — drawn on scroll */}
+          <svg
+            aria-hidden
+            className="absolute left-[19px] top-[20px] -translate-x-1/2 h-[calc(100%-40px)] overflow-visible hidden sm:block"
+            width="2"
+            viewBox="0 0 2 800"
+            preserveAspectRatio="none"
+          >
+            <motion.line
+              x1="1"
+              x2="1"
+              y1="0"
+              y2="800"
+              stroke="url(#timelineGrad)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: reduce ? 0 : 2.2, ease }}
+            />
+            <defs>
+              <linearGradient id="timelineGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="var(--color-accent-primary)" />
+                <stop offset="50%" stopColor="var(--color-warning)" />
+                <stop offset="100%" stopColor="var(--color-danger)" />
+              </linearGradient>
+            </defs>
+          </svg>
 
-          <div className="space-y-5">
+          <div className="space-y-6">
             {riskTimeline.map((stage, i) => (
               <motion.div
                 key={stage.month}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: i * 0.1, ease }}
+                transition={{
+                  duration: 0.55,
+                  delay: i * 0.12,
+                  ease,
+                }}
                 className="relative grid sm:grid-cols-[40px_1fr] gap-4 items-start"
               >
-                <div className="relative z-10 flex-shrink-0 hidden sm:flex items-center justify-center">
-                  <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center ring-[3px] ring-white"
-                    style={{ backgroundColor: "var(--color-bg-cream)", color: "var(--color-accent-primary)" }}
+                <div className="relative z-10 flex-shrink-0 hidden sm:flex items-center justify-center pt-5">
+                  <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.45,
+                      delay: 0.2 + i * 0.12,
+                      ease,
+                    }}
+                    className="w-10 h-10 rounded-full bg-white flex items-center justify-center ring-[3px] ring-white shadow-[0_2px_12px_rgba(0,0,0,0.08)] border"
+                    style={{ borderColor: stage.dotTone }}
                   >
-                    {stage.icon}
-                  </div>
+                    <span
+                      className="text-[13px] font-bold tabular-nums"
+                      style={{ color: stage.dotTone, fontFamily: "var(--font-heading)" }}
+                    >
+                      {i + 1}
+                    </span>
+                  </motion.div>
                 </div>
 
-                <div className="bg-[var(--color-bg-cream)] rounded-[var(--radius-lg)] px-6 py-5 border border-[var(--color-border)] hover:shadow-[var(--shadow-md)] transition-all duration-300">
+                <div className="glass-cream rounded-[var(--radius-lg)] px-6 py-6 hover:shadow-[var(--shadow-lg)] transition-[box-shadow] duration-[var(--dur-hover)] ease-[var(--ease-out)]">
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--color-accent-primary)]">
+                    <span
+                      className="w-1.5 h-1.5 rounded-full"
+                      style={{ backgroundColor: stage.dotTone }}
+                    />
+                    <span
+                      className="text-[11px] font-bold uppercase tracking-[0.14em]"
+                      style={{ color: stage.dotTone }}
+                    >
                       {stage.month}
                     </span>
                   </div>
                   <h3
-                    className="text-lg font-normal tracking-[-0.02em] mb-1.5 text-[var(--color-text-heading)]"
+                    className="text-xl font-normal tracking-[-0.02em] mb-2 text-[var(--color-text-heading)]"
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
                     {stage.title}
@@ -138,20 +175,29 @@ export default function IsThisYou() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.6, ease }}
-          className="mt-14 text-center"
+          className="mt-20 text-center"
         >
-          <p className="text-lg font-normal tracking-[-0.02em] text-[var(--color-text-secondary)] mb-6">
+          <p className="text-lg font-normal tracking-[-0.02em] text-[var(--color-text-secondary)] mb-8">
             Recognize yourself?{" "}
             <span className="text-[var(--color-text-heading)] font-medium">
               You can change the outcome.
             </span>
           </p>
-          <a
-            href="/book"
-            className="inline-flex items-center justify-center px-8 py-3.5 text-[15px] font-semibold rounded-[var(--radius-pill)] bg-[var(--color-bg-dark)] text-white hover:bg-[var(--color-bg-darkest)] shadow-[var(--shadow-lg)] transition-all duration-300 tracking-[-0.01em]"
+          <WaitlistCTA
+            variant="dark"
+            size="lg"
+            source="is-this-you"
+            eyebrow="Early access"
+            headline={
+              <>
+                Change the outcome —
+                <br />
+                join the waitlist.
+              </>
+            }
           >
-            Get Your Assessment — $149
-          </a>
+            Join the waitlist
+          </WaitlistCTA>
         </motion.div>
       </div>
     </section>

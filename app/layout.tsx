@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import MobileCTA from "@/components/layout/MobileCTA";
 import CookieConsent from "@/components/layout/CookieConsent";
 import WaitlistStickyFooter from "@/components/WaitlistStickyFooter";
+import { WaitlistProvider } from "@/components/waitlist/WaitlistModal";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -103,12 +104,14 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <MobileCTA />
-        <CookieConsent />
-        <WaitlistStickyFooter />
+        <WaitlistProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <MobileCTA />
+          <CookieConsent />
+          <WaitlistStickyFooter />
+        </WaitlistProvider>
       </body>
     </html>
   );

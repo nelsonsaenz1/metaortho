@@ -56,7 +56,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="hidden md:flex w-64 flex-col bg-white border-r border-[var(--color-border)] h-screen sticky top-0">
+    <aside className="hidden md:flex w-64 flex-col bg-white border-r border-[var(--color-border)] h-[100dvh] sticky top-0">
       {/* Logo */}
       <div className="px-6 py-6 border-b border-[var(--color-border)]">
         <Link href="/portal" className="flex items-center gap-2.5 text-[var(--color-bg-dark)]">
@@ -75,7 +75,7 @@ export default function Sidebar() {
         {/* Return to main site */}
         <Link
           href="/home"
-          className="flex items-center gap-3 px-3 py-2 mb-3 rounded-[var(--radius-md)] text-[12px] font-medium text-[var(--color-text-tertiary)] hover:text-[var(--color-text-heading)] hover:bg-[var(--color-bg-cream)] transition-colors"
+          className="flex items-center gap-3 px-3 py-2 mb-3 rounded-[var(--radius-md)] text-[12px] font-medium text-[var(--color-text-tertiary)] hover:text-[var(--color-text-heading)] hover:bg-[var(--color-bg-cream)] transition-[color,background-color] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:bg-[var(--color-bg-warm)]"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -92,7 +92,8 @@ export default function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-[14px] font-medium transition-colors ${
+              aria-current={active ? "page" : undefined}
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] text-[14px] font-medium transition-[color,background-color] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:bg-[var(--color-bg-warm)] ${
                 active
                   ? "bg-[var(--color-bg-cream)] text-[var(--color-text-heading)]"
                   : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-cream)] hover:text-[var(--color-text-heading)]"
@@ -124,7 +125,7 @@ export default function Sidebar() {
         </div>
         <button
           onClick={signOut}
-          className="mt-2 w-full text-left px-3 py-2 text-[13px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-heading)] hover:bg-[var(--color-bg-cream)] rounded-[var(--radius-md)] transition-colors cursor-pointer"
+          className="mt-2 w-full text-left px-3 py-2 text-[13px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-heading)] hover:bg-[var(--color-bg-cream)] rounded-[var(--radius-md)] transition-[color,background-color] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:bg-[var(--color-bg-warm)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)]"
         >
           Sign out
         </button>

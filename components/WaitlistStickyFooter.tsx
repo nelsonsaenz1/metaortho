@@ -52,7 +52,7 @@ export default function WaitlistStickyFooter() {
   return (
     <div
       data-waitlist-sticky
-      className="fixed bottom-0 left-0 right-0 z-30 animate-[slide-up_0.35s_ease-out]"
+      className="fixed bottom-0 left-0 right-0 z-30 animate-slide-up motion-reduce:animate-none"
     >
       <WaitlistForm
         variant="sticky_footer"

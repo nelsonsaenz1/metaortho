@@ -22,12 +22,12 @@
   --color-accent-teal: #2E7D7D;
 
   /* Text */
-  --color-text-primary: rgba(0, 0, 0, 0.88);
+  --color-text-primary: rgba(0, 0, 0, 0.94);
   --color-text-heading: #0A2633;
-  --color-text-secondary: rgba(0, 0, 0, 0.65);
-  --color-text-tertiary: rgba(0, 0, 0, 0.50);
+  --color-text-secondary: rgba(0, 0, 0, 0.80);
+  --color-text-tertiary: rgba(0, 0, 0, 0.70);
   --color-text-light: #FFFFFF;
-  --color-text-on-dark: rgba(255, 255, 255, 0.9);
+  --color-text-on-dark: rgba(255, 255, 255, 0.95);
 
   /* Functional */
   --color-success: #1A8754;
@@ -55,6 +55,16 @@
   --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
   --shadow-xl: 0 16px 48px rgba(0,0,0,0.1), 0 4px 16px rgba(0,0,0,0.05);
+
+  /* Motion — strong ease curves (Emil Kowalski). Defaults are too weak. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* UI durations */
+  --dur-press: 140ms;
+  --dur-hover: 200ms;
+  --dur-panel: 240ms;
 }
 
 @theme inline {
@@ -76,18 +86,20 @@ body {
   line-height: 1.6;
 }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-heading);
-  color: var(--color-text-heading);
-  line-height: 1.1;
-}
+@layer base {
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--color-text-heading);
+    line-height: 1.1;
+  }
 
-h1 {
-  letter-spacing: -0.03em;
-}
+  h1 {
+    letter-spacing: -0.03em;
+  }
 
-h2 {
-  letter-spacing: -0.02em;
+  h2 {
+    letter-spacing: -0.02em;
+  }
 }
 
 /* Smooth scrolling */
@@ -116,14 +128,6 @@ html {
   background: rgba(0,0,0,0.25);
 }
 
-/* Gradient text utility */
-.gradient-text {
-  background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-teal));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 /* Animate in */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -131,7 +135,29 @@ html {
 }
 
 .animate-fade-up {
-  animation: fadeUp 0.6s ease-out forwards;
+  animation: fadeUp 0.6s var(--ease-out) forwards;
+}
+
+/* Touch-device hover guard — avoid sticky hover states on tap */
+@media (hover: none) {
+  .no-touch-hover:hover {
+    transform: none !important;
+    box-shadow: inherit !important;
+  }
+}
+
+/* Reduced motion — keep opacity/color, drop movement */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Landing page: hide global chrome */
@@ -146,4 +172,206 @@ body.landing-mode [data-waitlist-sticky] {
 @keyframes slide-up {
   from { transform: translateY(100%); }
   to { transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.35s var(--ease-out) forwards;
+}
+
+/* ---------------------------------------------------------------
+   LIQUID GLASS — physical glass with inner refraction
+--------------------------------------------------------------- */
+.glass-light {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.72) 0%,
+    rgba(255, 255, 255, 0.45) 100%
+  );
+  backdrop-filter: saturate(160%) blur(16px);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 rgba(10, 38, 51, 0.06),
+    0 20px 40px -15px rgba(10, 38, 51, 0.08);
+}
+
+.glass-dark {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  backdrop-filter: saturate(140%) blur(20px);
+  -webkit-backdrop-filter: saturate(140%) blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 20px 50px -20px rgba(0, 0, 0, 0.55);
+}
+
+.glass-cream {
+  background: linear-gradient(
+    145deg,
+    rgba(251, 248, 245, 0.82) 0%,
+    rgba(245, 240, 232, 0.6) 100%
+  );
+  backdrop-filter: saturate(150%) blur(14px);
+  -webkit-backdrop-filter: saturate(150%) blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 20px 40px -18px rgba(10, 38, 51, 0.08);
+}
+
+/* ---------------------------------------------------------------
+   MESH GRADIENT — animated lava-lamp blobs
+--------------------------------------------------------------- */
+@keyframes mesh-drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(4%, -3%) scale(1.08); }
+  66%  { transform: translate(-3%, 5%) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.mesh-blob {
+  animation: mesh-drift 22s var(--ease-in-out) infinite;
+  will-change: transform;
+}
+.mesh-blob-slow {
+  animation: mesh-drift 34s var(--ease-in-out) infinite;
+  animation-direction: alternate;
+  will-change: transform;
+}
+
+/* ---------------------------------------------------------------
+   SHIMMER — for bars, progress, and skeleton states
+--------------------------------------------------------------- */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-120%); }
+  100% { transform: translateX(220%); }
+}
+.shimmer-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 70%
+  );
+  animation: shimmer-sweep 2.4s var(--ease-in-out) infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mesh-blob,
+  .mesh-blob-slow,
+  .shimmer-overlay::after {
+    animation: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------
+   MARQUEE — infinite horizontal scroll
+--------------------------------------------------------------- */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee-x 40s linear infinite;
+  width: max-content;
+}
+.marquee-paused:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none !important; }
+}
+
+/* ---------------------------------------------------------------
+   SPOTLIGHT CARD — cursor-tracked radial highlight
+   JS sets --mx / --my on hover.
+--------------------------------------------------------------- */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    240px circle at var(--mx, 50%) var(--my, 50%),
+    var(--spotlight-color, rgba(42, 111, 151, 0.55)),
+    transparent 65%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--dur-hover) var(--ease-out);
+  pointer-events: none;
+  z-index: 1;
+}
+.spotlight:hover::before { opacity: 1; }
+
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    400px circle at var(--mx, 50%) var(--my, 50%),
+    var(--spotlight-glow, rgba(42, 111, 151, 0.08)),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--dur-hover) var(--ease-out);
+  pointer-events: none;
+  z-index: 0;
+}
+.spotlight:hover::after { opacity: 1; }
+
+/* ---------------------------------------------------------------
+   PERPETUAL float + subtle pulse for status dots
+--------------------------------------------------------------- */
+@keyframes soft-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+.animate-float {
+  animation: soft-float 6s var(--ease-in-out) infinite;
+}
+
+@keyframes breath {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.6; transform: scale(1.18); }
+}
+.animate-breath {
+  animation: breath 2.4s var(--ease-in-out) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-breath { animation: none !important; }
+}
+
+/* Pill ring for sticky nav indicator */
+.pill-ring {
+  box-shadow:
+    0 0 0 1px rgba(10, 38, 51, 0.06),
+    0 2px 8px rgba(10, 38, 51, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }

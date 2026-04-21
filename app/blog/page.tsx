@@ -37,7 +37,7 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="block group"
               >
-                <article className="bg-white rounded-[var(--radius-xl)] border border-[var(--color-border)] p-8 hover:shadow-[var(--shadow-lg)] hover:-translate-y-0.5 transition-all duration-300">
+                <article className="bg-white rounded-[var(--radius-xl)] border border-[var(--color-border)] p-8 hover:shadow-[var(--shadow-lg)] hover:-translate-y-0.5 transition-[box-shadow,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] motion-reduce:hover:translate-y-0 group-active:scale-[0.995] motion-reduce:group-active:scale-100">
                   <div className="flex flex-wrap gap-2 mb-3">
                     {post.tags.map((tag) => (
                       <Badge key={tag} variant="default">
@@ -45,7 +45,7 @@ export default function BlogPage() {
                       </Badge>
                     ))}
                   </div>
-                  <h2 className="text-2xl font-normal tracking-[-0.02em] text-[var(--color-text-heading)] group-hover:text-[var(--color-accent-primary)] transition-colors mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
+                  <h2 className="text-2xl font-normal tracking-[-0.02em] text-[var(--color-text-heading)] group-hover:text-[var(--color-accent-primary)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)] mb-3" style={{ fontFamily: 'var(--font-heading)' }}>
                     {post.title}
                   </h2>
                   <p className="text-[var(--color-text-secondary)] leading-relaxed mb-4">

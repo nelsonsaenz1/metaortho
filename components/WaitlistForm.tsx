@@ -119,9 +119,9 @@ export default function WaitlistForm(props: WaitlistFormProps) {
     },
     dark: {
       input:
-        "bg-white/10 border-white/15 text-white placeholder:text-white/40 focus:border-white/60 backdrop-blur-sm",
+        "bg-white/10 border-white/20 text-white placeholder:text-white/75 focus:border-white/80 backdrop-blur-sm",
       button: "bg-white text-[var(--color-bg-dark)] hover:bg-white/90",
-      consentLabel: "text-white/60",
+      consentLabel: "text-white/80",
       consentBox: "border-white/30",
       success: "text-[var(--color-success)]",
       error: "text-[#ff8a7b]",
@@ -146,7 +146,7 @@ export default function WaitlistForm(props: WaitlistFormProps) {
     <button
       type="submit"
       disabled={status === "loading"}
-      className={`px-6 text-[14px] font-semibold rounded-[var(--radius-pill)] transition-all tracking-[-0.01em] disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer ${palette.button}`}
+      className={`px-6 text-[14px] font-semibold rounded-[var(--radius-pill)] transition-[background-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] active:duration-[var(--dur-press)] motion-reduce:active:scale-100 tracking-[-0.01em] disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2 ${palette.button}`}
     >
       {status === "loading" ? "…" : buttonText}
     </button>
@@ -201,7 +201,7 @@ export default function WaitlistForm(props: WaitlistFormProps) {
         </div>
         <div className="relative max-w-3xl mx-auto px-5 sm:px-8 py-20 md:py-28 text-center">
           {eyebrow && (
-            <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/60 mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/75 mb-4">
               {eyebrow}
             </p>
           )}
@@ -214,7 +214,7 @@ export default function WaitlistForm(props: WaitlistFormProps) {
             </h2>
           )}
           {subcopy && (
-            <p className="text-[15px] md:text-base text-white/60 max-w-xl mx-auto leading-relaxed mb-10">
+            <p className="text-[15px] md:text-base text-white/80 max-w-xl mx-auto leading-relaxed mb-10">
               {subcopy}
             </p>
           )}
@@ -241,7 +241,7 @@ export default function WaitlistForm(props: WaitlistFormProps) {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className={`h-12 px-7 text-[14px] font-semibold rounded-[var(--radius-pill)] transition-all tracking-[-0.01em] disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer ${palette.button}`}
+                className={`h-12 px-7 text-[14px] font-semibold rounded-[var(--radius-pill)] transition-[background-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] active:duration-[var(--dur-press)] motion-reduce:active:scale-100 tracking-[-0.01em] disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-dark)] ${palette.button}`}
               >
                 {status === "loading" ? "…" : buttonText}
               </button>
@@ -281,7 +281,7 @@ export default function WaitlistForm(props: WaitlistFormProps) {
             <button
               type="submit"
               disabled={status === "loading"}
-              className={`h-10 px-5 text-[13px] font-semibold rounded-[var(--radius-pill)] transition-all tracking-[-0.01em] disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer ${palette.button}`}
+              className={`h-10 px-5 text-[13px] font-semibold rounded-[var(--radius-pill)] transition-[background-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] active:duration-[var(--dur-press)] motion-reduce:active:scale-100 tracking-[-0.01em] disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2 ${palette.button}`}
             >
               {status === "loading" ? "…" : buttonText}
             </button>
@@ -308,7 +308,7 @@ export default function WaitlistForm(props: WaitlistFormProps) {
           <div className="flex-1 min-w-0 md:pr-4">
             <p className="text-[13px] font-medium leading-snug">
               Get early access to MetaOrtho —{" "}
-              <span className="text-white/60">1–2 emails/mo, no filler.</span>
+              <span className="text-white/80">1–2 emails/mo, no filler.</span>
             </p>
           </div>
           <div className="flex items-stretch gap-2 flex-1 max-w-md">
@@ -326,7 +326,7 @@ export default function WaitlistForm(props: WaitlistFormProps) {
             <button
               type="submit"
               disabled={status === "loading"}
-              className={`h-9 px-4 text-[12px] font-semibold rounded-[var(--radius-pill)] transition-all tracking-[-0.01em] disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer ${palette.button}`}
+              className={`h-9 px-4 text-[12px] font-semibold rounded-[var(--radius-pill)] transition-[background-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] active:duration-[var(--dur-press)] motion-reduce:active:scale-100 tracking-[-0.01em] disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-dark)] ${palette.button}`}
             >
               {status === "loading" ? "…" : "Join"}
             </button>
@@ -335,7 +335,7 @@ export default function WaitlistForm(props: WaitlistFormProps) {
                 type="button"
                 onClick={onDismiss}
                 aria-label="Dismiss"
-                className="shrink-0 h-9 w-9 flex items-center justify-center rounded-full text-white/50 hover:text-white/90 hover:bg-white/10 transition-colors cursor-pointer"
+                className="shrink-0 h-9 w-9 flex items-center justify-center rounded-full text-white/75 hover:text-white hover:bg-white/10 transition-[color,background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.9] motion-reduce:active:scale-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                   <path

@@ -60,14 +60,14 @@ export default function PortalShell({
 
   if (!ready) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg-cream)]">
+      <div className="min-h-[100dvh] flex items-center justify-center bg-[var(--color-bg-cream)]">
         <div className="text-sm text-[var(--color-text-tertiary)]">Loading…</div>
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen bg-[var(--color-bg-cream)]">
+    <div className="flex min-h-[100dvh] bg-[var(--color-bg-cream)]">
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0">
         {/* Mobile-only top bar */}
@@ -84,7 +84,7 @@ export default function PortalShell({
             </Link>
             <Link
               href="/home"
-              className="inline-flex items-center gap-1 text-[12px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-heading)] transition-colors"
+              className="inline-flex items-center gap-1 text-[12px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-heading)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)] active:opacity-70 motion-reduce:active:opacity-100 px-2 py-1 rounded-[var(--radius-sm)]"
             >
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />

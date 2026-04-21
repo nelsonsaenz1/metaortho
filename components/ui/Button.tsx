@@ -52,7 +52,11 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center font-semibold rounded-[var(--radius-pill)] transition-all duration-300 cursor-pointer tracking-[-0.01em]";
+    "inline-flex items-center justify-center font-semibold rounded-[var(--radius-pill)] cursor-pointer tracking-[-0.01em] " +
+    "transition-[background-color,color,box-shadow,transform,border-color] duration-[var(--dur-hover)] ease-[var(--ease-out)] " +
+    "active:scale-[0.97] active:duration-[var(--dur-press)] " +
+    "motion-reduce:active:scale-100 " +
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2";
   const classes = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
 
   if ("href" in props && props.href) {

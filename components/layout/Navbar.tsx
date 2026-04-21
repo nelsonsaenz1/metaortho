@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Button from "@/components/ui/Button";
 import Logo from "@/components/ui/Logo";
+import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
 
 const navLinks = [
   { label: "How It Works", href: "/home#how-it-works" },
@@ -27,18 +27,18 @@ export default function Navbar() {
   return (
     <div data-site-navbar>
       {/* Top announcement bar */}
-      <div className="bg-[var(--color-bg-dark)] text-center py-2.5 px-4 text-sm text-[var(--color-text-on-dark)] tracking-[-0.01em] relative z-50">
-        <span className="opacity-80">Orthopedic surgeon-led telehealth</span>
-        <span className="mx-2 opacity-40">|</span>
-        <span className="opacity-80">Licensed in 43 states</span>
-        <span className="mx-2 opacity-40">|</span>
-        <Link href="/assessment" className="underline underline-offset-2 font-medium hover:opacity-100 transition-opacity">
+      <div className="bg-[var(--color-bg-dark)] text-center py-2.5 px-4 text-sm text-white tracking-[-0.01em] relative z-50">
+        <span>Orthopedic surgeon-led telehealth</span>
+        <span className="mx-2 text-white/75">|</span>
+        <span>Licensed in 43 states</span>
+        <span className="mx-2 text-white/75">|</span>
+        <Link href="/assessment" className="underline underline-offset-2 font-semibold hover:opacity-100 transition-opacity duration-[var(--dur-hover)] ease-[var(--ease-out)]">
           Free risk assessment →
         </Link>
       </div>
 
       <nav
-        className={`sticky top-0 z-50 transition-all duration-300 ${
+        className={`sticky top-0 z-50 transition-[background-color,box-shadow] duration-[var(--dur-panel)] ease-[var(--ease-out)] ${
           scrolled
             ? "bg-white/95 backdrop-blur-xl shadow-[var(--shadow-sm)] border-b border-[var(--color-border)]"
             : "bg-white border-b border-[var(--color-border)]"
@@ -60,7 +60,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-3.5 py-2 text-[14px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-heading)] transition-colors rounded-[var(--radius-sm)] hover:bg-[var(--color-bg-cream)]"
+                  className="px-3.5 py-2 text-[14px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-heading)] transition-[color,background-color] duration-[var(--dur-hover)] ease-[var(--ease-out)] rounded-[var(--radius-sm)] hover:bg-[var(--color-bg-cream)]"
                 >
                   {link.label}
                 </Link>
@@ -71,20 +71,21 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-3">
               <Link
                 href="/portal/login"
-                className="text-[14px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-heading)] transition-colors px-3 py-2"
+                className="text-[14px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-heading)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)] px-3 py-2"
               >
                 Log in
               </Link>
-              <Button href="/book" size="sm" variant="dark">
-                Get Started
-              </Button>
+              <WaitlistCTA variant="dark" size="sm" source="navbar">
+                Join waitlist
+              </WaitlistCTA>
             </div>
 
             {/* Mobile Toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 -mr-2 text-[var(--color-text-primary)] cursor-pointer"
+              className="lg:hidden p-2 -mr-2 text-[var(--color-text-primary)] cursor-pointer transition-transform duration-[var(--dur-press)] ease-[var(--ease-out)] active:scale-[0.9] motion-reduce:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] rounded-[var(--radius-sm)]"
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 {mobileOpen ? (
@@ -99,7 +100,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         <div
-          className={`lg:hidden absolute top-full left-0 right-0 bg-white border-b border-[var(--color-border)] shadow-[var(--shadow-lg)] transition-all duration-300 ${
+          className={`lg:hidden absolute top-full left-0 right-0 bg-white border-b border-[var(--color-border)] shadow-[var(--shadow-lg)] transition-[opacity,transform] duration-[var(--dur-panel)] ease-[var(--ease-out)] origin-top ${
             mobileOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
           }`}
         >
@@ -109,7 +110,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 text-base font-medium text-[var(--color-text-primary)] hover:text-[var(--color-accent-primary)] hover:bg-[var(--color-bg-cream)] rounded-[var(--radius-md)] transition-colors"
+                className="block px-4 py-3 text-base font-medium text-[var(--color-text-primary)] hover:text-[var(--color-accent-primary)] hover:bg-[var(--color-bg-cream)] rounded-[var(--radius-md)] transition-[color,background-color] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:bg-[var(--color-bg-warm)]"
               >
                 {link.label}
               </Link>
@@ -118,13 +119,18 @@ export default function Navbar() {
               <Link
                 href="/portal/login"
                 onClick={() => setMobileOpen(false)}
-                className="block text-center px-4 py-3 text-base font-medium text-[var(--color-text-primary)] hover:text-[var(--color-accent-primary)] hover:bg-[var(--color-bg-cream)] rounded-[var(--radius-md)] transition-colors border border-[var(--color-border)]"
+                className="block text-center px-4 py-3 text-base font-medium text-[var(--color-text-primary)] hover:text-[var(--color-accent-primary)] hover:bg-[var(--color-bg-cream)] rounded-[var(--radius-md)] transition-[color,background-color] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:bg-[var(--color-bg-warm)] border border-[var(--color-border)]"
               >
                 Log in
               </Link>
-              <Button href="/book" className="w-full" variant="dark">
-                Get Started
-              </Button>
+              <WaitlistCTA
+                variant="dark"
+                size="md"
+                source="navbar-mobile"
+                className="w-full"
+              >
+                Join waitlist
+              </WaitlistCTA>
             </div>
           </div>
         </div>

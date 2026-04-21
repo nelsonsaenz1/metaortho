@@ -175,7 +175,7 @@ export default async function BlogPost({
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button href="/book" variant="dark" size="lg">
-                Book Assessment
+                Join the waitlist
               </Button>
               <Button href="/assessment" variant="outline" size="lg">
                 Take Free Risk Quiz

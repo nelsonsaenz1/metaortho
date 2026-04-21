@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { questions, calculateResult, type AssessmentResult } from "@/lib/assessment-logic";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
+import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
 
 export default function AssessmentPage() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -86,7 +87,7 @@ export default function AssessmentPage() {
             </div>
             <div className="h-1.5 bg-[var(--color-bg-cream)] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[var(--color-accent-primary)] rounded-full transition-all duration-500 ease-out"
+                className="h-full bg-[var(--color-accent-primary)] rounded-full transition-[width] duration-500 ease-[var(--ease-out)]"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -99,7 +100,7 @@ export default function AssessmentPage() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
               >
                 <h2 className="text-2xl font-normal tracking-[-0.02em] text-[var(--color-text-heading)] mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
                   {questions[currentStep].question}
@@ -110,9 +111,9 @@ export default function AssessmentPage() {
                     <button
                       key={option.value}
                       onClick={() => handleAnswer(questions[currentStep].id, option.score)}
-                      className="w-full text-left p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white hover:border-[var(--color-accent-primary)] hover:bg-[var(--color-accent-light)] transition-all duration-200 cursor-pointer group"
+                      className="w-full text-left p-5 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-white hover:border-[var(--color-accent-primary)] hover:bg-[var(--color-accent-light)] transition-[background-color,border-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.99] active:duration-[var(--dur-press)] motion-reduce:active:scale-100 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2"
                     >
-                      <span className="text-[var(--color-text-primary)] font-medium tracking-[-0.01em] group-hover:text-[var(--color-accent-primary)] transition-colors">
+                      <span className="text-[var(--color-text-primary)] font-medium tracking-[-0.01em] group-hover:text-[var(--color-accent-primary)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]">
                         {option.label}
                       </span>
                     </button>
@@ -124,7 +125,7 @@ export default function AssessmentPage() {
                 key="result"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
               >
                 <div
                   className={`rounded-[var(--radius-xl)] p-8 md:p-10 border ${riskStyles[result.level].bg} ${riskStyles[result.level].border}`}
@@ -158,9 +159,22 @@ export default function AssessmentPage() {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <Button href="/book" size="lg" variant="dark">
-                      Book MSK Assessment &mdash; $149
-                    </Button>
+                    <WaitlistCTA
+                      variant="dark"
+                      size="lg"
+                      source={`assessment-result-${result.level}`}
+                      eyebrow="Coming soon · Based on your assessment"
+                      headline={
+                        <>
+                          Protect what the
+                          <br />
+                          scale can&apos;t measure.
+                        </>
+                      }
+                      subcopy="You're a strong fit for MetaOrtho. Join the waitlist and we'll reach out the day we open enrollment in your state."
+                    >
+                      Join the waitlist
+                    </WaitlistCTA>
                     <Button onClick={restart} variant="outline" size="lg">
                       Retake Assessment
                     </Button>

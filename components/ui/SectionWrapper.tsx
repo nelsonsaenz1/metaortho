@@ -39,7 +39,7 @@ export default function SectionWrapper({
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.05 }}
-      transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+      transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
       className={`py-24 md:py-32 lg:py-40 ${bgColors[bg]} ${className}`}
     >
       <div className={`${maxWidths[size]} mx-auto px-5 sm:px-8 lg:px-12`}>

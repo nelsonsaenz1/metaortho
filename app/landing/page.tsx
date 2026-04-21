@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
 
-const ease = [0.25, 0.1, 0.25, 1] as const;
+const ease = [0.23, 1, 0.32, 1] as const;
 
 /* ---------------------------------------------------------------
    MINI LOGO BAR — replaces the full navbar
@@ -41,7 +41,7 @@ function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center overflow-hidden bg-[var(--color-bg-dark)]"
+      className="relative min-h-[100dvh] flex items-center overflow-hidden bg-[var(--color-bg-dark)]"
     >
       {/* Atmospheric gradients */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
@@ -67,7 +67,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius-pill)] border border-white/10 bg-white/5 backdrop-blur-sm text-sm text-white/60 mb-10"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius-pill)] border border-white/10 bg-white/5 backdrop-blur-sm text-sm text-white/80 mb-10"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-success)] animate-pulse" />
             Now accepting patients in 43 states
@@ -93,7 +93,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35, ease }}
-            className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed mb-14 tracking-[-0.01em]"
+            className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed mb-14 tracking-[-0.01em]"
           >
             Research shows up to{" "}
             <strong className="text-white/90 font-semibold">
@@ -566,7 +566,7 @@ const steps = [
     num: "01",
     title: "Book your assessment",
     body: "A 30-minute telehealth visit with our clinical team. We review your GLP-1 history, assess risk factors, and order baseline labs and a DEXA scan.",
-    tag: "$149 one-time",
+    tag: "Coming soon",
   },
   {
     num: "02",
@@ -710,7 +710,7 @@ function CostSection() {
           transition={{ duration: 0.7, ease }}
           className="text-center mb-16"
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/50 mb-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/75 mb-4">
             The cost of inaction
           </p>
           <h2
@@ -719,7 +719,7 @@ function CostSection() {
           >
             Prevention costs a fraction of treatment
           </h2>
-          <p className="text-lg text-white/55 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg text-white/80 max-w-xl mx-auto leading-relaxed">
             The complications of unmonitored GLP-1 use are expensive, painful,
             and preventable.
           </p>
@@ -889,7 +889,7 @@ function FinalCTASection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease }}
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/50 mb-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/75 mb-6">
             One assessment. Total clarity.
           </p>
 
@@ -904,7 +904,7 @@ function FinalCTASection() {
             </span>
           </h2>
 
-          <p className="text-lg text-white/60 max-w-2xl mx-auto leading-relaxed mb-14">
+          <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed mb-14">
             A 30-minute telehealth visit with a board-certified orthopedic
             surgeon. Baseline labs. A DEXA scan. A plan to protect your muscles,
             bones, and joints while the weight keeps coming off.
@@ -915,7 +915,7 @@ function FinalCTASection() {
               href="/book"
               className="inline-flex items-center justify-center px-10 py-4.5 text-base font-semibold rounded-[var(--radius-pill)] bg-white text-[var(--color-bg-dark)] hover:bg-white/90 shadow-[0_0_60px_rgba(255,255,255,0.1)] transition-all duration-300 tracking-[-0.01em]"
             >
-              Book Your Assessment &mdash; $149
+              Join the waitlist
             </a>
             <a
               href="/assessment"
@@ -925,7 +925,7 @@ function FinalCTASection() {
             </a>
           </div>
 
-          <p className="text-sm text-white/40">
+          <p className="text-sm text-white/70">
             No insurance needed &middot; Results within 48 hours &middot;
             Licensed in 43 states
           </p>
@@ -943,28 +943,28 @@ function BottomBar() {
     <footer className="bg-[var(--color-bg-darkest)] py-8 border-t border-white/5">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 text-white/50">
+          <div className="flex items-center gap-2.5 text-white/75">
             <Logo size={24} />
             <span className="text-sm">
               &copy; {new Date().getFullYear()} MetaOrthopedics
             </span>
           </div>
 
-          <div className="flex items-center gap-6 text-xs text-white/35">
-            <Link href="/about" className="hover:text-white/60 transition-colors">
+          <div className="flex items-center gap-6 text-xs text-white/70">
+            <Link href="/about" className="hover:text-white transition-colors">
               About
             </Link>
-            <Link href="/" className="hover:text-white/60 transition-colors">
+            <Link href="/" className="hover:text-white transition-colors">
               Full Site
             </Link>
-            <Link href="/faq" className="hover:text-white/60 transition-colors">
+            <Link href="/faq" className="hover:text-white transition-colors">
               FAQ
             </Link>
             <span>HIPAA Compliant</span>
           </div>
         </div>
 
-        <p className="text-[11px] text-white/20 mt-6 leading-relaxed max-w-4xl">
+        <p className="text-[11px] text-white/75 mt-6 leading-relaxed max-w-4xl">
           MetaOrthopedics provides telehealth consultations for musculoskeletal
           health monitoring. This site is for informational purposes and does not
           constitute medical advice. Always consult your healthcare provider
@@ -980,7 +980,7 @@ function BottomBar() {
 --------------------------------------------------------------- */
 export default function LandingPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <TopBar />
       <HeroSection />
       <ProblemSection />

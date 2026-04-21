@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import BookContent from "./BookContent";
 
 export const metadata: Metadata = {
-  title: "Book Your MSK Assessment",
+  title: "Join the Waitlist",
   description:
-    "Schedule your comprehensive musculoskeletal assessment with MetaOrtho. Virtual visits with a board-certified orthopedic surgeon. Available in 43 states.",
+    "MetaOrtho is opening soon. Join the waitlist to be first when we begin accepting new patients in your state. Telehealth MSK care from a board-certified orthopedic surgeon, licensed in 43 states.",
 };
 
 export default function BookPage() {

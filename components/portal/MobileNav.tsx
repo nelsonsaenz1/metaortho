@@ -57,7 +57,8 @@ export default function MobileNav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-col items-center justify-center gap-0.5 px-3 py-2 rounded-[var(--radius-md)] transition-colors ${
+              aria-current={active ? "page" : undefined}
+              className={`flex flex-col items-center justify-center gap-0.5 px-3 py-2 rounded-[var(--radius-md)] transition-[color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.92] motion-reduce:active:scale-100 ${
                 active
                   ? "text-[var(--color-accent-primary)]"
                   : "text-[var(--color-text-tertiary)]"
