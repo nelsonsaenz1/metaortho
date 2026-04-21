@@ -72,6 +72,17 @@ export default function Sidebar() {
 
       {/* Nav */}
       <nav className="flex-1 px-3 py-6 space-y-1">
+        {/* Return to main site */}
+        <Link
+          href="/"
+          className="flex items-center gap-3 px-3 py-2 mb-3 rounded-[var(--radius-md)] text-[12px] font-medium text-[var(--color-text-tertiary)] hover:text-[var(--color-text-heading)] hover:bg-[var(--color-bg-cream)] transition-colors"
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Return to main site
+        </Link>
+
         {navItems.map((item) => {
           const active =
             item.href === "/portal"

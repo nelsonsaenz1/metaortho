@@ -339,7 +339,7 @@ export default function LandingPage() {
     <>
       <TopBar />
       <SlideDots />
-      <main className="snap-y snap-mandatory h-screen overflow-y-scroll scroll-smooth">
+      <main className="snap-y snap-proximity h-screen overflow-y-scroll scroll-smooth [scroll-padding-top:0]">
         <Slide1Hero />
         <Slide2Cost />
         <Slide3CTA />
