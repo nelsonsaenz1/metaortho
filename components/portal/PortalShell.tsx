@@ -83,7 +83,7 @@ export default function PortalShell({
               </span>
             </Link>
             <Link
-              href="/"
+              href="/home"
               className="inline-flex items-center gap-1 text-[12px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-heading)] transition-colors"
             >
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

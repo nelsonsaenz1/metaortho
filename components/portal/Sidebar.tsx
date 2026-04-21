@@ -74,7 +74,7 @@ export default function Sidebar() {
       <nav className="flex-1 px-3 py-6 space-y-1">
         {/* Return to main site */}
         <Link
-          href="/"
+          href="/home"
           className="flex items-center gap-3 px-3 py-2 mb-3 rounded-[var(--radius-md)] text-[12px] font-medium text-[var(--color-text-tertiary)] hover:text-[var(--color-text-heading)] hover:bg-[var(--color-bg-cream)] transition-colors"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

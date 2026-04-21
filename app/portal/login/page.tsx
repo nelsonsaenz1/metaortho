@@ -36,14 +36,14 @@ export default function PortalLoginPage() {
       {/* Top bar */}
       <header className="border-b border-[var(--color-border)] bg-white">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5 text-[var(--color-bg-dark)]">
+          <Link href="/home" className="flex items-center gap-2.5 text-[var(--color-bg-dark)]">
             <Logo size={28} />
             <span className="text-[17px] font-semibold tracking-[-0.03em] text-[var(--color-text-heading)]">
               MetaOrtho
             </span>
           </Link>
           <Link
-            href="/"
+            href="/home"
             className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-heading)] transition-colors"
           >
             ← Back to site
