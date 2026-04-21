@@ -69,6 +69,12 @@ export default function Navbar() {
 
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center gap-3">
+              <Link
+                href="/portal/login"
+                className="text-[14px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-heading)] transition-colors px-3 py-2"
+              >
+                Log in
+              </Link>
               <Button href="/book" size="sm" variant="dark">
                 Get Started
               </Button>
@@ -108,7 +114,14 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <div className="pt-4">
+            <div className="pt-4 space-y-2">
+              <Link
+                href="/portal/login"
+                onClick={() => setMobileOpen(false)}
+                className="block text-center px-4 py-3 text-base font-medium text-[var(--color-text-primary)] hover:text-[var(--color-accent-primary)] hover:bg-[var(--color-bg-cream)] rounded-[var(--radius-md)] transition-colors border border-[var(--color-border)]"
+              >
+                Log in
+              </Link>
               <Button href="/book" className="w-full" variant="dark">
                 Get Started
               </Button>

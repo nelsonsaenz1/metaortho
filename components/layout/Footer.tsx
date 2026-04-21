@@ -75,6 +75,7 @@ export default function Footer() {
               {[
                 { label: "About Dr. Saenz", href: "/about" },
                 { label: "How It Works", href: "/home#how-it-works" },
+                { label: "Patient Login", href: "/portal/login" },
                 { label: "Contact", href: "mailto:info@metaortho.com" },
               ].map((link) => (
                 <li key={link.label}>
