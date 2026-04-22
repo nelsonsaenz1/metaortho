@@ -1,9 +1,14 @@
 /**
  * MetaOrtho waitlist welcome email.
  *
- * Tone: calm, clinical, short. Mirrors the brand voice on the site —
- * direct language, no exclamation marks, no marketing puffery.
- * Warm without being precious.
+ * Design principles (Emil · Impeccable · Taste):
+ *   — No card container. Cream (#FBF8F5) flows edge-to-edge.
+ *   — Typography does the work: DM Serif Display / DM Sans in a strict
+ *     scale, navy-tinted grays, hairline dividers (no shadows or glows).
+ *   — Rhythm over ornament: 8/16/24/32px spacing, 560px content column,
+ *     body lines cap near 65ch.
+ *   — One accent (blue #2A6F97) reserved for the link CTA.
+ *   — Tone: calm, clinical, direct. No exclamation marks, no hype.
  *
  * Env placeholders (set in .env.local and Vercel):
  *   WAITLIST_FROM_NAME      e.g. "Dr. Jay Saenz"
@@ -40,6 +45,7 @@ export function welcomeEmailText({ email, unsubscribeUrl }: TemplateInputs): str
 
   return [
     `METAORTHO`,
+    `────────────`,
     ``,
     `You're in.`,
     ``,
@@ -52,17 +58,19 @@ export function welcomeEmailText({ email, unsubscribeUrl }: TemplateInputs): str
     `That's what we're excited to do with you — DEXA scans, targeted labs,`,
     `and a protocol matched to your risk. No filler. No guesswork.`,
     ``,
-    `What to expect from this list:`,
-    `- 1 to 2 short emails a month until we open our doors.`,
-    `- No hype. No fake urgency.`,
-    `- First word when we start taking patients in your state.`,
+    `WHAT TO EXPECT`,
     ``,
-    `Already on a GLP-1 and want care now? Book an initial assessment at ${site}/book.`,
+    `  01   A short note from us, 1 to 2 times a month.`,
+    `  02   No hype. No fake urgency.`,
+    `  03   First word when we open in your state.`,
+    ``,
+    `Already on a GLP-1?`,
+    `Book your initial assessment → ${site}/book`,
     ``,
     `— ${name}`,
     `  MetaOrtho`,
     ``,
-    `---`,
+    `────────────`,
     `You're receiving this because ${email} joined the MetaOrtho waitlist.`,
     `Unsubscribe: ${unsubscribeUrl}`,
     ``,
@@ -76,38 +84,51 @@ export function welcomeEmailHtml({ email, unsubscribeUrl }: TemplateInputs): str
   const site = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.org";
   const name = process.env.WAITLIST_FROM_NAME || "Dr. Jay Saenz";
   const logoUrl = `${site}/images/mo-logo.png`;
+  const bookUrl = `${site}/book`;
 
-  // Inline styles only — most email clients strip <style>.
+  // Palette — hex values computed from navy (#0A2633) alpha-composited
+  // against cream (#FBF8F5), so gray tones carry the brand's navy cast
+  // in clients that don't honor rgba().
+  const c = {
+    cream: "#FBF8F5",
+    ink: "#0A2633",      // headings
+    body: "#475157",     // navy @ 72% on cream
+    muted: "#87939A",    // navy @ 48%
+    faint: "#BFC6CB",    // navy @ 28%
+    hair: "#E4E1D9",     // hairline rule
+    accent: "#2A6F97",   // links, single accent
+  };
+
+  // Inline styles only — most email clients strip <style> blocks.
   const t = {
-    body: "margin:0;padding:0;background:#FBF8F5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#3A3A3A;-webkit-font-smoothing:antialiased;",
+    body: `margin:0;padding:0;background:${c.cream};font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:${c.body};-webkit-font-smoothing:antialiased;`,
     preheader:
       "display:none;visibility:hidden;opacity:0;color:transparent;height:0;width:0;max-height:0;max-width:0;overflow:hidden;mso-hide:all;",
-    wrap: "max-width:560px;margin:0 auto;padding:32px 24px;",
-    card: "background:#FFFFFF;border:1px solid #EDE7DB;border-radius:12px;padding:40px 32px;",
+    wrap: "max-width:560px;margin:0 auto;padding:48px 28px 40px;",
     header: "text-align:center;padding:0 0 32px;",
-    headerLogo: "display:block;margin:0 auto 10px;height:36px;width:auto;",
-    wordmark:
-      "display:block;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:14px;letter-spacing:0.24em;color:#0A2633;font-weight:400;",
-    h1:
-      "margin:0 0 20px;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:28px;line-height:1.2;font-weight:400;letter-spacing:-0.01em;color:#0A2633;",
-    pLead: "margin:0 0 20px;font-size:16px;line-height:1.6;color:#0A2633;",
-    p: "margin:0 0 16px;font-size:15px;line-height:1.65;color:#3A3A3A;",
-    small: "margin:0 0 8px;font-size:12px;line-height:1.5;color:#888;",
-    hr: "border:none;border-top:1px solid #EDE7DB;margin:32px 0 24px;",
-    label:
-      "margin:20px 0 10px;font-size:12px;line-height:1.4;font-weight:600;color:#0A2633;letter-spacing:0.08em;text-transform:uppercase;",
-    ul: "margin:0 0 20px 0;padding:0 0 0 20px;font-size:15px;line-height:1.7;color:#3A3A3A;",
-    li: "margin-bottom:4px;",
-    link: "color:#2A6F97;text-decoration:underline;",
-    strong: "color:#0A2633;font-weight:600;",
-    signature:
-      "margin:28px 0 0;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;color:#0A2633;",
-    sigSub:
-      "display:block;margin-top:4px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;color:#888;letter-spacing:0.12em;text-transform:uppercase;",
-    footer: "text-align:center;padding:28px 0 0;",
-    footerLogo: "display:block;margin:0 auto 8px;height:22px;width:auto;opacity:0.55;",
-    footerWordmark:
-      "display:block;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:10px;letter-spacing:0.3em;color:#888;font-weight:400;margin-bottom:14px;",
+    headerLogo: "display:block;margin:0 auto 12px;height:36px;width:auto;",
+    wordmark: `display:block;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:11px;letter-spacing:0.32em;color:${c.ink};font-weight:400;`,
+    hr: `border:none;border-top:1px solid ${c.hair};margin:0;`,
+    section: "padding:40px 4px 0;",
+    eyebrow: `margin:0 0 18px;font-size:10px;line-height:1;font-weight:600;color:${c.muted};letter-spacing:0.22em;text-transform:uppercase;`,
+    h1: `margin:0 0 28px;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:44px;line-height:1.05;font-weight:400;letter-spacing:-0.03em;color:${c.ink};`,
+    pLead: `margin:0 0 24px;font-size:17px;line-height:1.55;color:${c.ink};letter-spacing:-0.005em;`,
+    p: `margin:0 0 18px;font-size:15px;line-height:1.65;color:${c.body};letter-spacing:-0.003em;`,
+    strong: `color:${c.ink};font-weight:600;`,
+    stepsTable:
+      "width:100%;border-collapse:collapse;margin:0 0 8px;border-left:1px solid #E4E1D9;",
+    stepNum: `padding:10px 20px 10px 18px;vertical-align:top;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:15px;line-height:1.5;color:${c.muted};letter-spacing:0.06em;width:32px;`,
+    stepText: `padding:10px 0;vertical-align:top;font-size:15px;line-height:1.55;color:${c.body};`,
+    cta: `margin:36px 0 0;font-size:17px;line-height:1.5;color:${c.ink};letter-spacing:-0.005em;`,
+    ctaLink: `color:${c.accent};text-decoration:none;border-bottom:1px solid ${c.accent};font-weight:500;`,
+    ctaQuestion: `display:block;margin-bottom:6px;color:${c.body};font-size:15px;line-height:1.5;`,
+    signature: `margin:44px 0 0;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:17px;line-height:1.4;color:${c.ink};`,
+    signatureSub: `display:block;margin-top:4px;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:11px;color:${c.muted};letter-spacing:0.18em;text-transform:uppercase;font-weight:500;`,
+    footer: "padding:40px 4px 0;text-align:center;",
+    footerLogo: "display:block;margin:0 auto 10px;height:20px;width:auto;opacity:0.42;",
+    footerWordmark: `display:block;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:9px;letter-spacing:0.36em;color:${c.muted};font-weight:400;margin-bottom:22px;`,
+    small: `margin:0 0 6px;font-size:11px;line-height:1.6;color:${c.muted};`,
+    footerLink: `color:${c.muted};text-decoration:underline;`,
   };
 
   return `<!doctype html>
@@ -122,52 +143,69 @@ export function welcomeEmailHtml({ email, unsubscribeUrl }: TemplateInputs): str
   <body style="${t.body}">
     <div style="${t.preheader}">${PREHEADER}</div>
     <div style="${t.wrap}">
-      <div style="${t.card}">
-        <div style="${t.header}">
-          <img src="${logoUrl}" width="64" height="36" alt="MetaOrtho" style="${t.headerLogo}" />
-          <span style="${t.wordmark}">METAORTHO</span>
-        </div>
 
-        <h1 style="${t.h1}">You're in.</h1>
+      <div style="${t.header}">
+        <img src="${logoUrl}" width="64" height="36" alt="MetaOrtho" style="${t.headerLogo}" />
+        <span style="${t.wordmark}">METAORTHO</span>
+      </div>
 
-        <p style="${t.pLead}">Thanks for joining the MetaOrtho waitlist — we're genuinely glad you're here.</p>
+      <hr style="${t.hr}" />
+
+      <div style="${t.section}">
+        <p style="${t.eyebrow}">Welcome</p>
+        <h1 style="${t.h1}">You&rsquo;re in.</h1>
+
+        <p style="${t.pLead}">Thanks for joining the MetaOrtho waitlist &mdash; we&rsquo;re genuinely glad you&rsquo;re here.</p>
 
         <p style="${t.p}">
           We built this practice around one idea: GLP-1s work, but up to
           <span style="${t.strong}">40% of the weight you lose can be lean tissue</span>,
-          and bone density often follows. You've spent years building your strength. You deserve care that protects it.
+          and bone density often follows. You&rsquo;ve spent years building your strength. You deserve care that protects it.
         </p>
 
         <p style="${t.p}">
-          That's what we're excited to do with you — DEXA scans, targeted labs, and a protocol matched to your risk. No filler. No guesswork.
+          That&rsquo;s what we&rsquo;re excited to do with you &mdash; DEXA scans, targeted labs, and a protocol matched to your risk. No filler. No guesswork.
         </p>
-
-        <p style="${t.label}">What to expect from this list</p>
-        <ul style="${t.ul}">
-          <li style="${t.li}">1 to 2 short emails a month until we open our doors.</li>
-          <li style="${t.li}">No hype. No fake urgency.</li>
-          <li style="${t.li}">First word when we start taking patients in your state.</li>
-        </ul>
-
-        <p style="${t.p}">
-          Already on a GLP-1 and want care now? Book an initial assessment at
-          <a href="${site}/book" style="${t.link}">${site.replace(/^https?:\/\//, "")}/book</a>.
-        </p>
-
-        <p style="${t.signature}">— ${name}<span style="${t.sigSub}">MetaOrtho</span></p>
-
-        <hr style="${t.hr}" />
-
-        <div style="${t.footer}">
-          <img src="${logoUrl}" width="40" height="22" alt="" style="${t.footerLogo}" />
-          <span style="${t.footerWordmark}">METAORTHO</span>
-          <p style="${t.small}">You're receiving this because ${escapeHtml(email)} joined the MetaOrtho waitlist.</p>
-          <p style="${t.small}">
-            <a href="${unsubscribeUrl}" style="${t.link}">Unsubscribe</a>
-          </p>
-          <p style="${t.small}">${escapeHtml(addr)}</p>
-        </div>
       </div>
+
+      <div style="${t.section}">
+        <p style="${t.eyebrow}">What to expect</p>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="${t.stepsTable}">
+          <tr>
+            <td style="${t.stepNum}">01</td>
+            <td style="${t.stepText}">A short note from us, 1 to 2 times a month.</td>
+          </tr>
+          <tr>
+            <td style="${t.stepNum}">02</td>
+            <td style="${t.stepText}">No hype. No fake urgency.</td>
+          </tr>
+          <tr>
+            <td style="${t.stepNum}">03</td>
+            <td style="${t.stepText}">First word when we open in your state.</td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="${t.section}">
+        <p style="${t.cta}">
+          <span style="${t.ctaQuestion}">Already on a GLP-1 and want care now?</span>
+          <a href="${bookUrl}" style="${t.ctaLink}">Book your initial assessment &rarr;</a>
+        </p>
+
+        <p style="${t.signature}">&mdash; ${name}<span style="${t.signatureSub}">MetaOrtho</span></p>
+      </div>
+
+      <div style="padding-top:48px;">
+        <hr style="${t.hr}" />
+      </div>
+
+      <div style="${t.footer}">
+        <img src="${logoUrl}" width="36" height="20" alt="" style="${t.footerLogo}" />
+        <span style="${t.footerWordmark}">METAORTHO</span>
+        <p style="${t.small}">You&rsquo;re receiving this because ${escapeHtml(email)} joined the MetaOrtho waitlist.</p>
+        <p style="${t.small}"><a href="${unsubscribeUrl}" style="${t.footerLink}">Unsubscribe</a> &nbsp;&middot;&nbsp; ${escapeHtml(addr)}</p>
+      </div>
+
     </div>
   </body>
 </html>`;
