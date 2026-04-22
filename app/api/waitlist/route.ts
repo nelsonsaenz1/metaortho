@@ -42,7 +42,7 @@ function getClientIp(req: Request): string {
 }
 
 function unsubscribeUrl(email: string): string {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.com";
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.org";
   return `${base}/api/waitlist/unsubscribe?email=${encodeURIComponent(email)}`;
 }
 

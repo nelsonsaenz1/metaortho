@@ -40,11 +40,11 @@ export const metadata: Metadata = {
     "MetaOrtho",
     "MetaOrthopedics",
   ],
-  metadataBase: new URL("https://metaortho.com"),
+  metadataBase: new URL("https://metaortho.org"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://metaortho.com",
+    url: "https://metaortho.org",
     siteName: "MetaOrthopedics",
     title: "MetaOrtho — Musculoskeletal Care for GLP-1 Patients",
     description:
@@ -64,7 +64,7 @@ export default function RootLayout({
     alternateName: "MetaOrtho",
     description:
       "Physician-led telemedicine practice providing musculoskeletal monitoring and care for patients on GLP-1 weight loss medications.",
-    url: "https://metaortho.com",
+    url: "https://metaortho.org",
     medicalSpecialty: "Orthopedic",
     availableService: [
       {

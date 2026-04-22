@@ -95,7 +95,7 @@ create policy "deny authenticated"
 -- ----------------------------------------------------------------------------
 -- Comments (helpful in Studio)
 -- ----------------------------------------------------------------------------
-comment on table  public.waitlist                   is 'MetaOrtho waitlist signups (public.metaortho.com).';
+comment on table  public.waitlist                   is 'MetaOrtho waitlist signups (public.metaortho.org).';
 comment on column public.waitlist.status            is 'pending | confirmed | unsubscribed | bounced';
 comment on column public.waitlist.source_component  is 'hero | inline | sticky_footer';
 comment on column public.waitlist.consent_marketing is 'User opted in to marketing emails.';

@@ -59,11 +59,11 @@ See [`.env.example`](.env.example) for the full list. Copy to `.env.local` and f
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | public | Anon key; RLS enforces access |
 | `SUPABASE_SERVICE_ROLE_KEY` | **server only** | Bypasses RLS. Never expose to the browser. |
 | `RESEND_API_KEY` | server only | Resend API key for welcome emails |
-| `WAITLIST_FROM_EMAIL` | server | e.g. `hello@metaortho.com` (must be on verified domain) |
+| `WAITLIST_FROM_EMAIL` | server | e.g. `hello@metaortho.org` (must be on verified domain) |
 | `WAITLIST_FROM_NAME` | server | e.g. `Dr. Nelson Saenz` |
 | `WAITLIST_MAILING_ADDR` | server | Physical address (CAN-SPAM) |
 | `SLACK_WEBHOOK_URL` | Supabase Edge Function env | Slack incoming webhook URL |
-| `NEXT_PUBLIC_SITE_URL` | public | e.g. `https://metaortho.com` |
+| `NEXT_PUBLIC_SITE_URL` | public | e.g. `https://metaortho.org` |
 
 On Vercel, set these in **Project Settings → Environment Variables** for **Production** and (with test values) **Preview**.
 
@@ -81,10 +81,10 @@ and paste the contents of `supabase/migrations/0001_waitlist.sql`, then click **
 
 This creates the table, indexes, and Row Level Security policies. Only the service role can read/write.
 
-### 2. Resend: verify the metaortho.com domain
+### 2. Resend: verify the metaortho.org domain
 
 1. Sign in at https://resend.com.
-2. **Domains → Add Domain → metaortho.com**.
+2. **Domains → Add Domain → metaortho.org**.
 3. Resend shows DNS records to add. They'll look roughly like:
 
    | Type | Host | Value |
@@ -96,7 +96,7 @@ This creates the table, indexes, and Row Level Security policies. Only the servi
 
    **The exact values come from Resend's UI — use those, not the table above.**
 
-4. Add each record at your DNS host (wherever you manage `metaortho.com`).
+4. Add each record at your DNS host (wherever you manage `metaortho.org`).
 5. Click **Verify** in Resend. Propagation is usually minutes; can take up to 24h.
 6. Once the domain is green, create an API key at **API Keys → Create API Key** and paste into `RESEND_API_KEY`.
 

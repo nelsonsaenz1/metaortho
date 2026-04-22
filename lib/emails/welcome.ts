@@ -6,9 +6,9 @@
  *
  * Env placeholders (set in .env.local and Vercel):
  *   WAITLIST_FROM_NAME      e.g. "Dr. Nelson Saenz"
- *   WAITLIST_FROM_EMAIL     e.g. "hello@metaortho.com"  (must be on verified domain in Resend)
+ *   WAITLIST_FROM_EMAIL     e.g. "hello@metaortho.org"  (must be on verified domain in Resend)
  *   WAITLIST_MAILING_ADDR   Physical business address, required by CAN-SPAM
- *   NEXT_PUBLIC_SITE_URL    e.g. "https://metaortho.com"
+ *   NEXT_PUBLIC_SITE_URL    e.g. "https://metaortho.org"
  */
 
 type TemplateInputs = {
@@ -22,17 +22,17 @@ export function welcomeEmailSubject() {
 
 export function welcomeEmailFrom() {
   const name = process.env.WAITLIST_FROM_NAME || "Dr. [Surgeon Name]";
-  const address = process.env.WAITLIST_FROM_EMAIL || "hello@metaortho.com";
+  const address = process.env.WAITLIST_FROM_EMAIL || "hello@metaortho.org";
   return `${name} <${address}>`;
 }
 
 export function welcomeEmailReplyTo() {
-  return process.env.WAITLIST_FROM_EMAIL || "hello@metaortho.com";
+  return process.env.WAITLIST_FROM_EMAIL || "hello@metaortho.org";
 }
 
 export function welcomeEmailText({ email, unsubscribeUrl }: TemplateInputs): string {
   const addr = process.env.WAITLIST_MAILING_ADDR || "[Mailing address placeholder]";
-  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.com";
+  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.org";
   const name = process.env.WAITLIST_FROM_NAME || "Dr. [Surgeon Name]";
 
   return [
@@ -68,7 +68,7 @@ export function welcomeEmailText({ email, unsubscribeUrl }: TemplateInputs): str
 
 export function welcomeEmailHtml({ email, unsubscribeUrl }: TemplateInputs): string {
   const addr = process.env.WAITLIST_MAILING_ADDR || "[Mailing address placeholder]";
-  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.com";
+  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.org";
   const name = process.env.WAITLIST_FROM_NAME || "Dr. [Surgeon Name]";
 
   // Inline styles only — most email clients strip <style>.

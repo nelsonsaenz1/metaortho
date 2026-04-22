@@ -53,7 +53,7 @@ export default async function BlogPost({
     publisher: {
       "@type": "Organization",
       name: "MetaOrthopedics",
-      url: "https://metaortho.com",
+      url: "https://metaortho.org",
     },
   };
 

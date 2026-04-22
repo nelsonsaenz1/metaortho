@@ -84,7 +84,7 @@ export default function Footer() {
                 { label: "About Dr. Saenz", href: "/about" },
                 { label: "How It Works", href: "/home#how-it-works" },
                 { label: "Patient Login", href: "/portal/login" },
-                { label: "Contact", href: "mailto:info@metaortho.com" },
+                { label: "Contact", href: "mailto:info@metaortho.org" },
               ].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-[14px] text-white/90 hover:text-white transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]">
@@ -101,8 +101,8 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-[14px] text-white/80">
               <li>
-                <a href="mailto:info@metaortho.com" className="hover:text-white transition-colors">
-                  info@metaortho.com
+                <a href="mailto:info@metaortho.org" className="hover:text-white transition-colors">
+                  info@metaortho.org
                 </a>
               </li>
               <li>Licensed in 43 states</li>
