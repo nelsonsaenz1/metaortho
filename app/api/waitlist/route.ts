@@ -21,7 +21,16 @@ export const dynamic = "force-dynamic";
 // Strict-but-pragmatic email regex — RFC 5322 is overkill for waitlist gate.
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-const ALLOWED_COMPONENTS = new Set(["hero", "inline", "sticky_footer"]);
+const ALLOWED_COMPONENTS = new Set([
+  "hero",
+  "hero-primary",
+  "inline",
+  "sticky_footer",
+  "modal",
+  "final-cta",
+  "landing-slide-3",
+  "book-page",
+]);
 
 type Payload = {
   email?: unknown;
