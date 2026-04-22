@@ -15,12 +15,15 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Skip password check for the login page itself, static assets, and API routes
+  // Skip password check for the login page itself, static assets, and API routes.
+  // /images is whitelisted so public brand assets (e.g. logo used in
+  // transactional emails) are reachable without auth.
   const { pathname } = request.nextUrl;
   if (
     pathname === "/login" ||
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
+    pathname.startsWith("/images") ||
     pathname === "/favicon.ico"
   ) {
     return NextResponse.next();
