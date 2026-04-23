@@ -20,6 +20,12 @@ import {
   styles,
 } from "./template";
 
+/**
+ * Recipient-specific context for transactional sends. Omit when rendering
+ * for a Resend Broadcast — the Broadcast footer is auto-generated per
+ * subscriber and the per-recipient "you're receiving this because" line
+ * doesn't fit the bulk context.
+ */
 type TemplateInputs = {
   email: string;
   unsubscribeUrl: string;
@@ -43,10 +49,25 @@ export function welcomeEmailReplyTo() {
   return process.env.WAITLIST_FROM_EMAIL || "hello@metaortho.org";
 }
 
-export function welcomeEmailText({ email, unsubscribeUrl }: TemplateInputs): string {
+export function welcomeEmailText(inputs?: TemplateInputs): string {
   const addr = process.env.WAITLIST_MAILING_ADDR || "[Mailing address placeholder]";
   const site = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.org";
   const name = process.env.WAITLIST_FROM_NAME || "Dr. Jay Saenz";
+
+  const recipientFooter = inputs
+    ? [
+        `────────────`,
+        `You're receiving this because ${inputs.email} joined the MetaOrtho waitlist.`,
+        `Unsubscribe: ${inputs.unsubscribeUrl}`,
+        ``,
+        `MetaOrtho`,
+        `${addr}`,
+      ]
+    : [
+        `────────────`,
+        `MetaOrtho`,
+        `${addr}`,
+      ];
 
   return [
     `METAORTHO`,
@@ -75,16 +96,11 @@ export function welcomeEmailText({ email, unsubscribeUrl }: TemplateInputs): str
     `— ${name}`,
     `  MetaOrtho`,
     ``,
-    `────────────`,
-    `You're receiving this because ${email} joined the MetaOrtho waitlist.`,
-    `Unsubscribe: ${unsubscribeUrl}`,
-    ``,
-    `MetaOrtho`,
-    `${addr}`,
+    ...recipientFooter,
   ].join("\n");
 }
 
-export function welcomeEmailHtml({ email, unsubscribeUrl }: TemplateInputs): string {
+export function welcomeEmailHtml(inputs?: TemplateInputs): string {
   const site = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.org";
   const name = process.env.WAITLIST_FROM_NAME || "Dr. Jay Saenz";
   const bookUrl = `${site}/book`;
@@ -126,6 +142,8 @@ ${renderSignature({ name, subtitle: "MetaOrtho" })}`;
     eyebrow: "Welcome",
     heading: "You&rsquo;re in.",
     body,
-    footer: { recipientEmail: email, unsubscribeUrl },
+    footer: inputs
+      ? { recipientEmail: inputs.email, unsubscribeUrl: inputs.unsubscribeUrl }
+      : undefined,
   });
 }
