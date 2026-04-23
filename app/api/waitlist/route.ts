@@ -162,12 +162,17 @@ export async function POST(req: Request) {
     );
   }
 
-  // ---- 5. Send welcome email (best-effort; do not fail the signup) ---------
+  // ---- 5. Resend side-effects (welcome email + audience sync) ---------------
+  // Both are best-effort: the signup is already recorded in Supabase, so we
+  // never fail the request if Resend is down.
   const resendKey = process.env.RESEND_API_KEY;
+  const audienceId = process.env.RESEND_AUDIENCE_ID;
   if (resendKey) {
+    const resend = new Resend(resendKey);
+    const unsub = unsubscribeUrl(email);
+
+    // 5a. Welcome email.
     try {
-      const resend = new Resend(resendKey);
-      const unsub = unsubscribeUrl(email);
       await resend.emails.send({
         from: welcomeEmailFrom(),
         replyTo: welcomeEmailReplyTo(),
@@ -183,9 +188,27 @@ export async function POST(req: Request) {
     } catch (err) {
       console.error("[waitlist] Resend send failed (signup still recorded):", err);
     }
+
+    // 5b. Mirror the contact into the Resend audience so broadcasts can
+    // reach them. Supabase stays the source of truth; this is a projection.
+    if (audienceId) {
+      try {
+        await resend.contacts.create({
+          audienceId,
+          email,
+          unsubscribed: !consentMarketing,
+        });
+      } catch (err) {
+        console.error("[waitlist] Resend audience sync failed:", err);
+      }
+    } else {
+      console.warn(
+        "[waitlist] RESEND_AUDIENCE_ID not set — audience sync skipped.",
+      );
+    }
   } else {
     console.warn(
-      "[waitlist] RESEND_API_KEY not set — welcome email skipped.",
+      "[waitlist] RESEND_API_KEY not set — welcome email + audience sync skipped.",
     );
   }
 
