@@ -1,0 +1,23 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "metaortho.org" }],
+      "destination": "https://metaortho.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.metaortho.org" }],
+      "destination": "https://metaortho.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.metaortho.com" }],
+      "destination": "https://metaortho.com/$1",
+      "permanent": true
+    }
+  ]
+}
