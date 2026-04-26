@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "https://metaortho.org/sitemap.xml",
+    sitemap: "https://metaortho.com/sitemap.xml",
   };
 }

@@ -1,15 +1,16 @@
 /**
- * MetaOrtho waitlist welcome email.
+ * MetaOrtho welcome email — Email 1 of 3 in the waitlist welcome series.
  *
- * Composes the shared branded template in `./template` with content
- * specific to the first-touch welcome flow. Tone is calm, clinical,
- * direct — no exclamation marks, no hype.
+ * Fires immediately on signup (transactional from /api/waitlist; Emails 2 and 3
+ * land via the Resend Automation triggered by audience-add). Opens the
+ * four-pillar framing (muscle / bone / joint / nutrition) that Emails 2 and 3
+ * develop further.
  *
  * Env:
  *   WAITLIST_FROM_NAME      e.g. "Dr. Jay Saenz"
  *   WAITLIST_FROM_EMAIL     must be on a verified Resend domain
  *   WAITLIST_MAILING_ADDR   CAN-SPAM physical address
- *   NEXT_PUBLIC_SITE_URL    e.g. "https://metaortho.org"
+ *   NEXT_PUBLIC_SITE_URL    e.g. "https://metaortho.com"
  */
 
 import {
@@ -17,42 +18,44 @@ import {
   renderSteps,
   renderCta,
   renderSignature,
+  renderPillarRow,
+  renderPortrait,
+  renderSectionBreak,
+  fromAddress,
+  replyToAddress,
+  ICONS,
   styles,
 } from "./template";
 
-/**
- * Recipient-specific context for transactional sends. Omit when rendering
- * for a Resend Broadcast — the Broadcast footer is auto-generated per
- * subscriber and the per-recipient "you're receiving this because" line
- * doesn't fit the bulk context.
- */
 type TemplateInputs = {
   email: string;
   unsubscribeUrl: string;
 };
 
-const SUBJECT = "You're in — here's what we'll do together.";
+const SUBJECT = "GLP-1 Care: You're in — here's what we'll do together";
 const PREHEADER =
-  "Protecting muscle, bone, and joint strength while the scale comes down.";
+  "The part of GLP-1 weight loss most programs don't protect.";
 
-export function welcomeEmailSubject() {
+export function welcomeEmailSubject(): string {
   return SUBJECT;
 }
 
-export function welcomeEmailFrom() {
-  const name = process.env.WAITLIST_FROM_NAME || "Dr. Jay Saenz";
-  const address = process.env.WAITLIST_FROM_EMAIL || "hello@metaortho.org";
-  return `${name} <${address}>`;
+export function welcomeEmailFrom(): string {
+  return fromAddress();
 }
 
-export function welcomeEmailReplyTo() {
-  return process.env.WAITLIST_FROM_EMAIL || "hello@metaortho.org";
+export function welcomeEmailReplyTo(): string {
+  return replyToAddress();
 }
 
 export function welcomeEmailText(inputs?: TemplateInputs): string {
-  const addr = process.env.WAITLIST_MAILING_ADDR || "[Mailing address placeholder]";
-  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.org";
-  const name = process.env.WAITLIST_FROM_NAME || "Dr. Jay Saenz";
+  const addr =
+    process.env.WAITLIST_MAILING_ADDR || "[Mailing address placeholder]";
+  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.com";
+  // Body signature is always the physician. The From-header brand name lives
+  // in WAITLIST_FROM_NAME (currently "MetaOrtho") so the inbox label reads as
+  // a brand while the letter reads as a person.
+  const name = "Dr. Jay Saenz";
 
   const recipientFooter = inputs
     ? [
@@ -60,12 +63,16 @@ export function welcomeEmailText(inputs?: TemplateInputs): string {
         `You're receiving this because ${inputs.email} joined the MetaOrtho waitlist.`,
         `Unsubscribe: ${inputs.unsubscribeUrl}`,
         ``,
-        `MetaOrtho`,
+        `MetaOrtho is a physician-led telemedicine practice,`,
+        `currently serving [43 states — pending operations confirmation].`,
+        `Full list: ${site}/states`,
+        `Privacy: ${site}/privacy`,
         `${addr}`,
       ]
     : [
         `────────────`,
-        `MetaOrtho`,
+        `MetaOrtho is a physician-led telemedicine practice,`,
+        `currently serving [43 states — pending operations confirmation].`,
         `${addr}`,
       ];
 
@@ -75,14 +82,20 @@ export function welcomeEmailText(inputs?: TemplateInputs): string {
     ``,
     `You're in.`,
     ``,
-    `Thanks for joining the MetaOrtho waitlist — we're genuinely glad you're here.`,
+    `Thanks for joining the MetaOrtho waitlist — I'm glad you're here.`,
     ``,
-    `We built this practice around one idea: GLP-1s work, but up to 40% of`,
-    `the weight you lose can be lean tissue, and bone density often follows.`,
+    `We built this practice around one idea: GLP-1s work, but as much as 40%`,
+    `of the weight you lose can be lean tissue, and bone density often follows.`,
     `You've spent years building your strength. You deserve care that protects it.`,
     ``,
-    `That's what we're excited to do with you — DEXA scans, targeted labs,`,
-    `and a protocol matched to your risk. No filler. No guesswork.`,
+    `That's what we do — across four areas your prescriber usually isn't measuring:`,
+    ``,
+    `   MUSCLE   ·   BONE   ·   JOINT   ·   NUTRITION`,
+    ``,
+    `A DEXA scan, targeted labs, a 30-minute visit, and a protocol matched to`,
+    `your risk. No filler, no guesswork.`,
+    ``,
+    `────────────`,
     ``,
     `WHAT TO EXPECT`,
     ``,
@@ -90,51 +103,91 @@ export function welcomeEmailText(inputs?: TemplateInputs): string {
     `  02   No hype. No fake urgency.`,
     `  03   First word when we open in your state.`,
     ``,
-    `Already on a GLP-1?`,
-    `Book your initial assessment → ${site}/book`,
+    `────────────`,
+    ``,
+    `Already on a GLP-1 and in a state we serve?`,
+    `  →  Book your $149 initial assessment: ${site}/book`,
+    `  →  Or take our free 5-minute risk quiz: ${site}/quiz`,
+    ``,
+    `────────────`,
     ``,
     `— ${name}`,
-    `  MetaOrtho`,
+    `  [Orthopedic surgeon, board-certified]`,
+    `  Medical Director, MetaOrtho`,
     ``,
     ...recipientFooter,
   ].join("\n");
 }
 
 export function welcomeEmailHtml(inputs?: TemplateInputs): string {
-  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.org";
-  const name = process.env.WAITLIST_FROM_NAME || "Dr. Jay Saenz";
-  const bookUrl = `${site}/book`;
+  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.com";
+  // Body signature is always the physician. The From-header brand name lives
+  // in WAITLIST_FROM_NAME (currently "MetaOrtho") so the inbox label reads as
+  // a brand while the letter reads as a person.
+  const name = "Dr. Jay Saenz";
+  // TODO: confirm URL — directive suggests /assessment; current live route is /book.
+  const assessmentUrl = `${site}/book`;
+  // TODO: confirm /quiz route exists.
+  const quizUrl = `${site}/quiz`;
+  const portraitUrl = `${site}/images/dr-saenz.jpg`;
 
-  const body = `        <p style="${styles.pLead}">Thanks for joining the MetaOrtho waitlist &mdash; we&rsquo;re genuinely glad you&rsquo;re here.</p>
+  const body = `        <p style="${styles.pLead}">Thanks for joining the MetaOrtho waitlist &mdash; I&rsquo;m glad you&rsquo;re here.</p>
 
         <p style="${styles.p}">
-          We built this practice around one idea: GLP-1s work, but up to
-          <span style="${styles.strong}">40% of the weight you lose can be lean tissue</span>,
+          We built this practice around one idea: GLP-1s work, but
+          <span style="${styles.strong}">as much as 40% of the weight you lose can be lean tissue</span>,
           and bone density often follows. You&rsquo;ve spent years building your strength. You deserve care that protects it.
         </p>
 
         <p style="${styles.p}">
-          That&rsquo;s what we&rsquo;re excited to do with you &mdash; DEXA scans, targeted labs, and a protocol matched to your risk. No filler. No guesswork.
+          That&rsquo;s what we do &mdash; across four areas your prescriber usually isn&rsquo;t measuring:
         </p>
-      </div>
 
-      <div style="${styles.section}">
+${renderPillarRow([
+  { icon: ICONS.muscle, label: "Muscle" },
+  { icon: ICONS.bone, label: "Bone" },
+  { icon: ICONS.joint, label: "Joint" },
+  { icon: ICONS.nutrition, label: "Nutrition" },
+])}
+
+        <p style="${styles.p}">
+          A DEXA scan, targeted labs, a 30-minute visit, and a protocol matched to your risk. No filler, no guesswork.
+        </p>
+${renderSectionBreak()}
         <p style="${styles.eyebrow}">What to expect</p>
 ${renderSteps([
   "A short note from us, 1 to 2 times a month.",
   "No hype. No fake urgency.",
   "First word when we open in your state.",
 ])}
-      </div>
-
-      <div style="${styles.section}">
+${renderSectionBreak()}
 ${renderCta({
-  question: "Already on a GLP-1 and want care now?",
-  href: bookUrl,
-  label: "Book your initial assessment",
+  question: "Already on a GLP-1 and in a state we serve?",
+  href: assessmentUrl,
+  label: "Book your $149 initial assessment",
 })}
-
-${renderSignature({ name, subtitle: "MetaOrtho" })}`;
+${renderCta({
+  href: quizUrl,
+  label: "Or take our free 5-minute risk quiz",
+  tight: true,
+})}
+${renderSectionBreak()}
+${renderSignature({
+  name,
+  // NOTE: brackets on the credentials line are visible on purpose during review —
+  // directive: "leave the brackets and the TODO comment; the user will confirm".
+  // Strip the brackets once the exact credentials wording is approved.
+  // TODO: confirm credentials line
+  subtitle: [
+    "[Orthopedic surgeon, board-certified]",
+    "Medical Director, MetaOrtho",
+  ],
+})}
+${renderPortrait({
+  src: portraitUrl,
+  alt: "Dr. Jay Saenz, Medical Director of MetaOrtho",
+  size: 80,
+})}`;
 
   return renderEmail({
     subject: SUBJECT,
