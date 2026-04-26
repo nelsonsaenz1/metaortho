@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | MetaOrtho",
   },
   description:
-    "Physician-led telehealth practice protecting your bones, muscles, and joints while you lose weight on Ozempic, Wegovy, Mounjaro, or Zepbound. Board-certified orthopedic surgeon. 43 states.",
+    "Physician-led telehealth practice protecting your bones, muscles, and joints while you lose weight on Ozempic, Wegovy, Mounjaro, or Zepbound. Board-certified orthopedic surgeon.",
   keywords: [
     "GLP-1 muscle loss",
     "Ozempic bone density",

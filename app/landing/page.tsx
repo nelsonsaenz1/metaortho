@@ -70,7 +70,7 @@ function HeroSection() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius-pill)] border border-white/10 bg-white/5 backdrop-blur-sm text-sm text-white/80 mb-10"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-success)] animate-pulse" />
-            Now accepting patients in 43 states
+            Now accepting waitlist signups
           </motion.div>
 
           {/* Main headline */}
@@ -657,7 +657,6 @@ function TrustStrip() {
         <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 text-sm text-[var(--color-text-secondary)]">
           {[
             { icon: "⚕\uFE0F", text: "Board-certified orthopedic surgeon" },
-            { icon: "\uD83C\uDFE5", text: "Licensed in 43 states" },
             { icon: "\uD83D\uDD12", text: "HIPAA-compliant telehealth" },
             { icon: "\uD83D\uDCCA", text: "DEXA + lab-verified tracking" },
             { icon: "\uD83D\uDCAA", text: "No controlled substances" },
@@ -926,8 +925,11 @@ function FinalCTASection() {
           </div>
 
           <p className="text-sm text-white/70">
-            No insurance needed &middot; Results within 48 hours &middot;
-            Licensed in 43 states
+            No insurance needed &middot; Results within 48 hours
+          </p>
+          <p className="mt-3 text-[13px] text-white/70 max-w-md mx-auto leading-relaxed">
+            Join the waitlist and you&apos;ll also receive our weekly newsletter
+            on GLP-1 side effects, new research, and counteraction protocols.
           </p>
         </motion.div>
       </div>

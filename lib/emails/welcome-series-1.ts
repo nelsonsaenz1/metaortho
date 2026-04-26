@@ -59,16 +59,15 @@ export function seriesOneText(inputs?: TemplateInputs): string {
         `You're receiving this because ${inputs.email} joined the MetaOrtho waitlist.`,
         `Unsubscribe: ${inputs.unsubscribeUrl}`,
         ``,
-        `MetaOrtho is a physician-led telemedicine practice,`,
-        `currently serving [43 states — pending operations confirmation].`,
-        `Full list: ${site}/states`,
+        `MetaOrtho is a physician-led telemedicine practice`,
+        `protecting bone, muscle, joint, and nutrition health for GLP-1 patients.`,
         `Privacy: ${site}/privacy`,
         `${addr}`,
       ]
     : [
         `────────────`,
-        `MetaOrtho is a physician-led telemedicine practice,`,
-        `currently serving [43 states — pending operations confirmation].`,
+        `MetaOrtho is a physician-led telemedicine practice`,
+        `protecting bone, muscle, joint, and nutrition health for GLP-1 patients.`,
         `${addr}`,
       ];
 

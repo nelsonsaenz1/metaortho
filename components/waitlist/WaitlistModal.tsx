@@ -191,7 +191,7 @@ export function WaitlistProvider({ children }: { children: ReactNode }) {
               </h2>
               <p className="text-[14px] text-[var(--color-text-secondary)] leading-relaxed mb-6">
                 {opts.subcopy ??
-                  "A short monthly update on GLP-1 musculoskeletal science, and the first notice the day we begin accepting patients in your state."}
+                  "Joining the waitlist subscribes you to our weekly newsletter on GLP-1 side effects, new research, and counteraction protocols — plus first notice the day we begin accepting patients in your state."}
               </p>
 
               {/* Form */}
@@ -260,8 +260,6 @@ export function WaitlistProvider({ children }: { children: ReactNode }) {
               {/* Mini trust row */}
               <div className="mt-6 pt-5 border-t border-[var(--color-border)] flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-[var(--color-text-tertiary)]">
                 <span>Orthopedic surgeon-led</span>
-                <span className="opacity-40">·</span>
-                <span>Licensed in 43 states</span>
                 <span className="opacity-40">·</span>
                 <span>HIPAA-compliant</span>
               </div>

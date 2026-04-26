@@ -117,9 +117,6 @@ function ProviderCard() {
           <p className="text-[13px] text-[var(--color-text-secondary)]">
             Founder · Board-certified orthopedic surgeon
           </p>
-          <p className="text-[12px] text-[var(--color-text-tertiary)] mt-1">
-            Licensed in 43 states
-          </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <button className="px-3 py-1.5 text-[12px] font-medium rounded-[var(--radius-pill)] bg-[var(--color-bg-dark)] text-white hover:bg-[var(--color-bg-darkest)] transition-colors cursor-pointer">
               Send message

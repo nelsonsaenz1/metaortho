@@ -186,12 +186,12 @@ export default function AboutContent() {
         </div>
       </SectionWrapper>
 
-      {/* Licensure + CTA */}
+      {/* Telehealth + CTA */}
       <SectionWrapper bg="cream">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-normal tracking-[-0.02em] mb-6">Licensed in 43 states</h2>
+          <h2 className="text-3xl font-normal tracking-[-0.02em] mb-6">Care that comes to you.</h2>
           <p className="text-lg text-[var(--color-text-secondary)] mb-10 leading-relaxed">
-            MetaOrtho provides telehealth services across nearly the entire United States. Dr. Saenz holds active medical licenses in 43 states, ensuring you can receive care wherever you are.
+            MetaOrtho is fully telehealth — every visit, every protocol update, every follow-up happens from wherever you are. No travel, no waiting rooms, no compromises on the depth of care.
           </p>
           <WaitlistCTA
             variant="dark"

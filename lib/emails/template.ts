@@ -302,16 +302,9 @@ export function renderEmail(inputs: EmailInputs): string {
     ? `        <p style="${styles.eyebrow}">${inputs.eyebrow}</p>\n`
     : "";
 
-  // Mission + state-count + privacy + mailing address appear on every email in
-  // the series. `stateCount` is pending ops verification; the literal value is
-  // tracked in one place here so future count changes stay in sync across emails.
-  // NOTE: square brackets visible on purpose during the review phase — directive
-  // says "leave this phrasing exactly and flag for ops verification". Strip the
-  // brackets + "pending operations confirmation" once ops signs off.
-  const stateCount = 43; // TODO: confirm current licensed-state count with ops
-  const stateListUrl = `${site}/states`; // TODO: confirm /states route exists
+  // Mission + privacy + mailing address appear on every email in the series.
   const privacyUrl = `${site}/privacy`; // TODO: confirm /privacy page exists
-  const missionLine = `        <p style="${styles.missionSmall}">MetaOrtho is a physician-led telemedicine practice, currently serving [${stateCount} states &mdash; pending operations confirmation]. <a href="${stateListUrl}" style="${styles.footerLink}">See full list &rarr;</a></p>\n`;
+  const missionLine = `        <p style="${styles.missionSmall}">MetaOrtho is a physician-led telemedicine practice protecting bone, muscle, joint, and nutrition health for GLP-1 patients.</p>\n`;
   const recipientLine = inputs.footer
     ? `        <p style="${styles.small}">You&rsquo;re receiving this because ${escapeHtml(inputs.footer.recipientEmail)} joined the MetaOrtho waitlist.</p>\n`
     : "";

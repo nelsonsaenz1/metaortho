@@ -45,7 +45,7 @@ const logisticalFAQs = [
   {
     question: "What states does MetaOrtho serve?",
     answer:
-      "Dr. Saenz holds active medical licenses in 43 states, providing near-national telehealth coverage. When you book, our system will confirm your state is covered. We're actively pursuing licensure in additional states.",
+      "MetaOrtho is rolling out telehealth services state by state. Join the waitlist with your email and we'll notify you the moment we begin accepting patients in your state.",
   },
   {
     question: "Does MetaOrtho accept insurance?",

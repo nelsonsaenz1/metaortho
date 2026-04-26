@@ -5,6 +5,7 @@ import Services from "@/components/home/Services";
 import DoctorPreview from "@/components/home/DoctorPreview";
 import PortalPreview from "@/components/home/PortalPreview";
 import Supplements from "@/components/home/Supplements";
+import CostComparison from "@/components/home/CostComparison";
 import FinalCTA from "@/components/home/FinalCTA";
 
 export const metadata = {
@@ -19,6 +20,7 @@ export default function HomePage() {
       <IsThisYou />
       <HowItWorks />
       <Services />
+      <CostComparison />
       <Supplements />
       <FinalCTA />
       <DoctorPreview />

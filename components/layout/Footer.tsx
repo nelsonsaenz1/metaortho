@@ -105,7 +105,6 @@ export default function Footer() {
                   info@metaortho.com
                 </a>
               </li>
-              <li>Licensed in 43 states</li>
               <li>Telehealth only</li>
             </ul>
           </div>

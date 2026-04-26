@@ -157,7 +157,11 @@ export default function BookContent() {
                   )}
                 </form>
                 <p className="mt-4 text-[12px] text-white/70">
-                  Free · Unsubscribe anytime · No spam · Licensed in 43 states
+                  Free · Unsubscribe anytime · No spam
+                </p>
+                <p className="mt-2 text-[12px] text-white/70 leading-relaxed max-w-sm mx-auto">
+                  Includes our weekly newsletter on GLP-1 side effects, new
+                  research, and counteraction protocols.
                 </p>
               </>
             )}

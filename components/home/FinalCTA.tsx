@@ -133,9 +133,11 @@ export default function FinalCTA() {
             <span>Unsubscribe anytime</span>
             <span>·</span>
             <span>No spam</span>
-            <span>·</span>
-            <span>Licensed in 43 states</span>
           </div>
+          <p className="mt-4 text-[12px] text-white/70 max-w-md mx-auto leading-relaxed">
+            Plus our weekly newsletter on GLP-1 side effects, new research, and
+            how to counteract them.
+          </p>
         </motion.div>
       </div>
     </section>

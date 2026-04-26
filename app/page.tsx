@@ -91,7 +91,7 @@ function Slide1Hero() {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-success)]" />
           </span>
           <span className="text-[13px]">
-            Accepting waitlist signups · 43 states
+            Accepting waitlist signups
           </span>
         </motion.div>
 
@@ -440,6 +440,10 @@ function Slide3Portal() {
                 )}
                 <p className="mt-3 text-[12px] text-white/70">
                   Free · Unsubscribe anytime · No spam
+                </p>
+                <p className="mt-2 text-[12px] text-white/70 leading-relaxed">
+                  Includes our weekly newsletter on GLP-1 side effects, new
+                  research, and counteraction protocols.
                 </p>
               </form>
             )}

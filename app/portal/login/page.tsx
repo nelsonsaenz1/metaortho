@@ -150,7 +150,7 @@ export default function PortalLoginPage() {
           </div>
 
           <p className="mt-6 text-center text-[11px] text-[var(--color-text-tertiary)] leading-relaxed">
-            MetaOrtho portal · HIPAA-compliant · Licensed in 43 states
+            MetaOrtho portal · HIPAA-compliant
           </p>
         </motion.div>
       </main>
