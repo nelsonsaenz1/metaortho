@@ -212,6 +212,82 @@ export async function POST(req: Request) {
     );
   }
 
+  // ---- 6. Customer.io side-effects (identify + waitlist event) -------------
+  // Mirrors the Resend block: best-effort, never fails the request. Identify
+  // is keyed by email and idempotent, so retries from a transient error leave
+  // the same record. The "Waitlist · subscribed" segment in Customer.io picks
+  // up people where `subscribed=true`, firing the onboarding campaign.
+  const cioSiteId = process.env.CUSTOMER_IO_SITE_ID;
+  const cioTrackKey = process.env.CUSTOMER_IO_TRACK_API_KEY;
+  if (cioSiteId && cioTrackKey) {
+    const cioBase =
+      process.env.CUSTOMER_IO_REGION === "eu"
+        ? "https://track-eu.customer.io"
+        : "https://track.customer.io";
+    const cioAuth =
+      "Basic " +
+      Buffer.from(`${cioSiteId}:${cioTrackKey}`).toString("base64");
+    const cioId = encodeURIComponent(email);
+    const nowEpoch = Math.floor(Date.now() / 1000);
+
+    // 6a. Identify the person.
+    try {
+      const idResp = await fetch(`${cioBase}/api/v1/customers/${cioId}`, {
+        method: "PUT",
+        headers: {
+          Authorization: cioAuth,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          created_at: nowEpoch,
+          source_page: sourcePage,
+          source_component: component || null,
+          utm_source: utms.utm_source,
+          utm_medium: utms.utm_medium,
+          utm_campaign: utms.utm_campaign,
+          utm_content: utms.utm_content,
+          utm_term: utms.utm_term,
+          consent_marketing: consentMarketing,
+          subscribed: consentMarketing,
+          joined_via: "waitlist",
+        }),
+      });
+      if (!idResp.ok) {
+        console.error(
+          `[waitlist] Customer.io identify failed: HTTP ${idResp.status}`,
+        );
+      }
+    } catch (err) {
+      console.error("[waitlist] Customer.io identify failed:", err);
+    }
+
+    // 6b. Track the signup event so future automations can trigger off it.
+    try {
+      await fetch(`${cioBase}/api/v1/customers/${cioId}/events`, {
+        method: "POST",
+        headers: {
+          Authorization: cioAuth,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: "waitlist_signed_up",
+          timestamp: nowEpoch,
+          data: {
+            source_page: sourcePage,
+            source_component: component || null,
+          },
+        }),
+      });
+    } catch (err) {
+      console.error("[waitlist] Customer.io event failed:", err);
+    }
+  } else {
+    console.warn(
+      "[waitlist] Customer.io env vars missing — sync skipped.",
+    );
+  }
+
   return NextResponse.json({
     success: true,
     message: "You're in. We'll be in touch.",
