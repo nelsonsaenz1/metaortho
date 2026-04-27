@@ -12,7 +12,7 @@ const credentials = [
   "UAMS — Doctor of Medicine",
   "University of Tennessee–Campbell Clinic — Ortho Residency",
   "AAOS Member",
-  "43 State Licenses",
+  "Multi-State Licensed",
   "Board Certified",
 ];
 

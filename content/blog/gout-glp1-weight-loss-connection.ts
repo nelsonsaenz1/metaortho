@@ -30,7 +30,7 @@ Here's the irony: long-term, weight loss actually *lowers* gout risk because adi
 
 ## The Numbers
 
-The 2026 AAOS research found a **12% increased risk of gout** among GLP-1 users versus matched controls. This risk is highest in:
+A study presented at the 2026 AAOS Annual Meeting (Wajahath et al., Michigan State University) found a **12% increased relative risk of gout** among GLP-1 users versus matched controls — 4.7% versus 4.2% over five years (RR 1.12, p<0.001), drawn from 73,483 matched pairs of adults with Type 2 diabetes and obesity. This risk is highest in:
 - The first 3-6 months of therapy (when weight loss is most rapid)
 - Patients losing more than 2-3 lbs per week
 - Patients with pre-existing elevated uric acid levels
@@ -79,6 +79,10 @@ GLP-1 medications are incredible tools for weight loss. But rapid weight loss cr
 If you're on Ozempic, Wegovy, Mounjaro, or Zepbound and you experience sudden joint pain — especially in your big toe — don't suffer through it. Get diagnosed, get treated, and get monitored for the broader musculoskeletal effects of your weight-loss journey.
 
 ---
+
+## References
+
+1. Wajahath M, Horneff JG, et al. *GLP Receptor Agonist Use is Associated with Increased Risk of Osteoporosis, Gout and Osteomalacia in Adults with Type 2 Diabetes and Obesity.* Presented at: AAOS 2026 Annual Meeting; March 2-6, 2026; New Orleans, LA.
 
 *Dr. Jay M. Saenz is a board-certified orthopedic surgeon and founder of MetaOrthopedics. MetaOrtho provides comprehensive musculoskeletal care for GLP-1 patients via telehealth.*
   `.trim(),

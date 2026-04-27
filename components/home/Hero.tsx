@@ -192,7 +192,7 @@ export default function Hero() {
                       AAOS 2026 Research
                     </p>
                     <span className="text-[10px] font-mono text-[var(--color-text-tertiary)] tabular-nums">
-                      n = 2,431
+                      AAOS 2026 · Two studies
                     </span>
                   </div>
 
