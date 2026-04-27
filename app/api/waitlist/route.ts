@@ -14,6 +14,20 @@ import {
   welcomeEmailHtml,
   welcomeEmailText,
 } from "@/lib/emails/welcome";
+import {
+  seriesOneFrom,
+  seriesOneHtml,
+  seriesOneReplyTo,
+  seriesOneSubject,
+  seriesOneText,
+} from "@/lib/emails/welcome-series-1";
+import {
+  seriesTwoFrom,
+  seriesTwoHtml,
+  seriesTwoReplyTo,
+  seriesTwoSubject,
+  seriesTwoText,
+} from "@/lib/emails/welcome-series-2";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -205,6 +219,66 @@ export async function POST(req: Request) {
       console.warn(
         "[waitlist] RESEND_AUDIENCE_ID not set — audience sync skipped.",
       );
+    }
+
+    // 5c. Schedule the rest of the welcome series. E2 fires +2 days, E3 fires
+    // +4 days. We capture each scheduled email's ID so the unsubscribe route
+    // can cancel them if the contact opts out before they're delivered.
+    let scheduledE2Id: string | null = null;
+    let scheduledE3Id: string | null = null;
+
+    try {
+      const e2 = await resend.emails.send({
+        from: seriesOneFrom(),
+        replyTo: seriesOneReplyTo(),
+        to: [email],
+        subject: seriesOneSubject(),
+        html: seriesOneHtml({ email, unsubscribeUrl: unsub }),
+        text: seriesOneText({ email, unsubscribeUrl: unsub }),
+        headers: {
+          "List-Unsubscribe": `<${unsub}>`,
+          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+        },
+        scheduledAt: "in 2 days",
+      });
+      scheduledE2Id = e2.data?.id ?? null;
+    } catch (err) {
+      console.error("[waitlist] Resend schedule E2 failed:", err);
+    }
+
+    try {
+      const e3 = await resend.emails.send({
+        from: seriesTwoFrom(),
+        replyTo: seriesTwoReplyTo(),
+        to: [email],
+        subject: seriesTwoSubject(),
+        html: seriesTwoHtml({ email, unsubscribeUrl: unsub }),
+        text: seriesTwoText({ email, unsubscribeUrl: unsub }),
+        headers: {
+          "List-Unsubscribe": `<${unsub}>`,
+          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+        },
+        scheduledAt: "in 4 days",
+      });
+      scheduledE3Id = e3.data?.id ?? null;
+    } catch (err) {
+      console.error("[waitlist] Resend schedule E3 failed:", err);
+    }
+
+    if (scheduledE2Id || scheduledE3Id) {
+      const { error: updErr } = await supabase
+        .from("waitlist")
+        .update({
+          scheduled_e2_id: scheduledE2Id,
+          scheduled_e3_id: scheduledE3Id,
+        })
+        .eq("email", email);
+      if (updErr) {
+        console.error(
+          "[waitlist] Failed to persist scheduled email IDs:",
+          updErr,
+        );
+      }
     }
   } else {
     console.warn(

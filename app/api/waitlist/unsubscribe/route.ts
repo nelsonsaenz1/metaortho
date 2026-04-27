@@ -120,6 +120,45 @@ async function unsubscribeFromResend(email: string): Promise<void> {
   }
 }
 
+async function cancelScheduledWelcomeSeries(email: string): Promise<void> {
+  const supabase = getSupabaseServiceClient();
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!supabase || !apiKey) {
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from("waitlist")
+    .select("scheduled_e2_id, scheduled_e3_id")
+    .eq("email", email)
+    .maybeSingle();
+
+  if (error) {
+    console.error(
+      "[unsubscribe] Failed to fetch scheduled email IDs:",
+      error,
+    );
+    return;
+  }
+  if (!data) return;
+
+  const ids = [data.scheduled_e2_id, data.scheduled_e3_id].filter(
+    (id): id is string => typeof id === "string" && id.length > 0,
+  );
+  if (ids.length === 0) return;
+
+  const resend = new Resend(apiKey);
+  await Promise.allSettled(
+    ids.map(async (id) => {
+      try {
+        await resend.emails.cancel(id);
+      } catch (err) {
+        console.error(`[unsubscribe] Resend cancel(${id}) failed:`, err);
+      }
+    }),
+  );
+}
+
 async function unsubscribeFromCustomerIo(email: string): Promise<void> {
   const siteId = process.env.CUSTOMER_IO_SITE_ID;
   const trackKey = process.env.CUSTOMER_IO_TRACK_API_KEY;
@@ -189,6 +228,7 @@ export async function GET(req: Request): Promise<Response> {
   // a partial failure on a downstream system shouldn't make the user think
   // their request was rejected.
   await Promise.allSettled([
+    cancelScheduledWelcomeSeries(email),
     unsubscribeFromSupabase(email),
     unsubscribeFromResend(email),
     unsubscribeFromCustomerIo(email),
@@ -229,6 +269,7 @@ export async function POST(req: Request): Promise<Response> {
   }
 
   await Promise.allSettled([
+    cancelScheduledWelcomeSeries(email),
     unsubscribeFromSupabase(email),
     unsubscribeFromResend(email),
     unsubscribeFromCustomerIo(email),
