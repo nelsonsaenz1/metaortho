@@ -10,12 +10,12 @@
   Mirrors lib/emails/template.ts — same palette (cream/navy), same
   type system (DM Serif Display + DM Sans), same hairline rules.
 
-  Required Liquid variables (provided by Customer.io automatically):
+  Liquid variables / tags Customer.io provides:
     {{ content }}                   the per-email body
     {{ customer.email }}            recipient's email
-    {{ output.unsubscribe_url }}    one-click unsubscribe (one-click compliant)
-    {{ workspace.address_line }}    physical mailing address (CAN-SPAM)
-                                    set in Workspace Settings → Email → Sender info
+    {% unsubscribe_url %}           Liquid tag for one-click unsubscribe
+  Physical mailing address is hardcoded below (Customer.io has no
+  workspace.address variable — they expect it in the layout HTML).
 -->
 <!doctype html>
 <html lang="en">
@@ -53,11 +53,11 @@
         <p style="max-width:400px;margin:0 auto 14px;font-size:11px;line-height:1.6;color:#87939A;">MetaOrtho is a physician-led telemedicine practice protecting bone, muscle, joint, and nutrition health for GLP-1 patients.</p>
         <p style="margin:0 0 6px;font-size:11px;line-height:1.6;color:#87939A;">You&rsquo;re receiving this because {{ customer.email }} joined the MetaOrtho waitlist.</p>
         <p style="max-width:420px;margin:0 auto;font-size:11px;line-height:1.6;color:#87939A;">
-          <a href="{{ output.unsubscribe_url }}" style="color:#87939A;text-decoration:underline;">Unsubscribe</a>
+          <a href="{% unsubscribe_url %}" style="color:#87939A;text-decoration:underline;">Unsubscribe</a>
           &nbsp;&middot;&nbsp;
           <a href="https://metaortho.com/privacy" style="color:#87939A;text-decoration:underline;">Privacy</a>
           &nbsp;&middot;&nbsp;
-          {{ workspace.address_line }}
+          3096 Chapel Woods Cove, Germantown, TN 38139
         </p>
       </div>
 

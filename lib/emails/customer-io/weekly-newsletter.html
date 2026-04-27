@@ -1,115 +1,130 @@
 <!--
-  Customer.io Broadcast — Weekly Newsletter
-  ------------------------------------------------------------------
-  Use this template for the recurring weekly newsletter on GLP-1
-  side effects, new research, and counteraction protocols.
+  MetaOrtho — Weekly Newsletter (HTML body)
+  ==================================================================
+  Workflow each week:
+    1. Customer.io → Broadcasts → duplicate the template broadcast
+    2. Open it → Email step → HTML / Code editor
+    3. Find the EDIT THIS WEEK markers below and change the text
+    4. Add/remove ARTICLE BLOCKs by copying everything between
+       <!-- ===== ARTICLE BLOCK ===== --> and <!-- ===== END ARTICLE BLOCK ===== -->
+    5. Subject + preheader at the top of the broadcast
+    6. Send (or schedule)
 
-  Audience:       all waitlist subscribers (segment: "Waitlist · subscribed")
-  Cadence:        weekly (suggested: Wednesday morning)
-  Layout:         MetaOrtho — Standard
-  Subject:        GLP-1 Care Weekly · {{ trigger.edition_label }}
-  Preheader:      {{ trigger.lead.title }} — and 3 more this week.
-
-  Send the broadcast with this trigger payload (Customer.io: "Broadcast →
-  Trigger data" or via Broadcasts API). Adjust per edition:
-
-  {
-    "edition_label": "Apr 30, 2026",
-    "lead": {
-      "tag": "Side effect",
-      "title": "Why bone density drops in months 3–6 on a GLP-1",
-      "summary": "Two paragraphs of plain-English summary that orient the reader. The lead is the most important article of the week.",
-      "url": "https://metaortho.com/blog/bone-density-glp1"
-    },
-    "articles": [
-      {
-        "tag": "New research",
-        "title": "AAOS 2026: lean-mass loss at 12 months",
-        "summary": "1–2 sentence summary of what the study found and why a GLP-1 patient should care.",
-        "url": "https://metaortho.com/blog/aaos-2026-lean-mass"
-      },
-      {
-        "tag": "Counteraction",
-        "title": "Resistance training prescriptions for GLP-1 patients",
-        "summary": "1–2 sentence summary of the protocol covered.",
-        "url": "https://metaortho.com/blog/resistance-glp1"
-      },
-      {
-        "tag": "Q&A",
-        "title": "Reader asked: should I take vitamin D and how much?",
-        "summary": "1–2 sentence summary of the answer.",
-        "url": "https://metaortho.com/blog/vitamin-d-glp1"
-      }
-    ],
-    "closing_note": "Optional one-liner from the editor. Leave empty to skip."
-  }
-
-  Liquid handles missing fields gracefully — the closing note section
-  only renders when {{ trigger.closing_note }} is non-empty.
+  No JSON. No Liquid variables. Just HTML — change the words and links.
+  Layout (header / footer / brand wrapper / unsubscribe) is handled by
+  the "MetaOrtho — Standard" layout you already saved.
 -->
 
-<p style="margin:0 0 18px;font-size:10px;line-height:1;font-weight:600;color:#87939A;letter-spacing:0.22em;text-transform:uppercase;">GLP-1 Care Weekly &middot; {{ trigger.edition_label }}</p>
 
-<h1 style="margin:0 0 28px;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:40px;line-height:1.05;font-weight:400;letter-spacing:-0.03em;color:#0A2633;">This week in GLP-1 musculoskeletal research.</h1>
+<!-- ============ EDIT THIS WEEK: edition label + main heading ============ -->
 
-<p style="margin:0 0 24px;font-size:15px;line-height:1.65;color:#475157;letter-spacing:-0.003em;">
-  Four reads to keep your bones, muscle, joints, and nutrition on track while you lose weight. No hype. No fake urgency.
+<p style="margin:0 0 18px;font-size:10px;line-height:1;font-weight:600;color:#87939A;letter-spacing:0.22em;text-transform:uppercase;">
+  GLP-1 Care Weekly &middot; April 30, 2026
 </p>
 
-<div style="padding-top:32px;"><hr style="border:none;border-top:1px solid #E4E1D9;margin:0;" /></div>
-<div style="padding:36px 4px 0;">
+<h1 style="margin:0 0 28px;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:40px;line-height:1.05;font-weight:400;letter-spacing:-0.03em;color:#0A2633;">
+  Why bone density drops in months 3&ndash;6 on a GLP-1.
+</h1>
 
-<p style="margin:0 0 12px;font-size:11px;line-height:1.2;font-weight:600;color:#0A2633;letter-spacing:0.22em;text-transform:uppercase;">{{ trigger.lead.tag }} &middot; This week&rsquo;s lead</p>
-
-<h2 style="margin:0 0 16px;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:26px;line-height:1.15;font-weight:400;letter-spacing:-0.02em;color:#0A2633;">
-  <a href="{{ trigger.lead.url }}" style="color:#0A2633;text-decoration:none;">{{ trigger.lead.title }}</a>
-</h2>
-
-<p style="margin:0 0 18px;font-size:15px;line-height:1.65;color:#475157;letter-spacing:-0.003em;">{{ trigger.lead.summary }}</p>
-
-<p style="margin:14px 0 0;font-size:15px;line-height:1.5;color:#0A2633;letter-spacing:-0.005em;">
-  <a href="{{ trigger.lead.url }}" style="color:#2A6F97;text-decoration:none;border-bottom:1px solid #2A6F97;font-weight:500;">Read the full piece &rarr;</a>
+<p style="margin:0 0 24px;font-size:17px;line-height:1.55;color:#0A2633;letter-spacing:-0.005em;">
+  Three reads this week, plus a note on what we&rsquo;re watching for the AAOS publication next month.
 </p>
 
-</div>
-<div style="padding-top:36px;"><hr style="border:none;border-top:1px solid #E4E1D9;margin:0;" /></div>
-<div style="padding:36px 4px 0;">
 
-<p style="margin:0 0 24px;font-size:10px;line-height:1;font-weight:600;color:#87939A;letter-spacing:0.22em;text-transform:uppercase;">More this week</p>
-
-{% for article in trigger.articles %}
-<div style="margin:0 0 26px;">
-  <p style="margin:0 0 8px;font-size:10px;line-height:1.2;font-weight:600;color:#87939A;letter-spacing:0.18em;text-transform:uppercase;">{{ article.tag }}</p>
-  <h3 style="margin:0 0 8px;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:19px;line-height:1.2;font-weight:400;letter-spacing:-0.015em;color:#0A2633;">
-    <a href="{{ article.url }}" style="color:#0A2633;text-decoration:none;">{{ article.title }}</a>
-  </h3>
-  <p style="margin:0 0 8px;font-size:14px;line-height:1.6;color:#475157;letter-spacing:-0.003em;">{{ article.summary }}</p>
-  <a href="{{ article.url }}" style="font-size:13px;color:#2A6F97;text-decoration:none;border-bottom:1px solid #2A6F97;font-weight:500;letter-spacing:-0.003em;">Read &rarr;</a>
-</div>
-{% endfor %}
-
-</div>
-
-{% if trigger.closing_note and trigger.closing_note != "" %}
-<div style="padding-top:36px;"><hr style="border:none;border-top:1px solid #E4E1D9;margin:0;" /></div>
-<div style="padding:36px 4px 0;">
-<p style="margin:0;font-size:15px;line-height:1.65;color:#475157;letter-spacing:-0.003em;font-style:italic;">{{ trigger.closing_note }}</p>
-</div>
-{% endif %}
+<!-- ============ ARTICLE BLOCK ============ -->
+<!-- Duplicate this whole block (between the start and end markers) -->
+<!-- as many times as you have articles. Delete blocks for fewer.   -->
+<!-- ===== ARTICLE BLOCK ===== -->
 
 <div style="padding-top:36px;"><hr style="border:none;border-top:1px solid #E4E1D9;margin:0;" /></div>
 <div style="padding:36px 4px 0;">
 
-<p style="margin:0 0 18px;font-size:10px;line-height:1;font-weight:600;color:#87939A;letter-spacing:0.22em;text-transform:uppercase;">From the team</p>
+  <!-- Tag line: "Side effect" / "New research" / "Counteraction" / "Q&A" -->
+  <p style="margin:0 0 10px;font-size:10px;line-height:1.2;font-weight:600;color:#87939A;letter-spacing:0.22em;text-transform:uppercase;">
+    Side effect
+  </p>
 
-<p style="margin:0 0 18px;font-size:15px;line-height:1.65;color:#475157;letter-spacing:-0.003em;">
-  We send this newsletter because you joined the MetaOrtho waitlist. If you&rsquo;d rather not get research summaries every week, you can keep waitlist-only updates and skip the weekly by adjusting your preferences.
-</p>
+  <!-- Article title -->
+  <h2 style="margin:0 0 16px;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:24px;line-height:1.15;font-weight:400;letter-spacing:-0.02em;color:#0A2633;">
+    Why bone density drops in months 3&ndash;6 on a GLP-1
+  </h2>
 
-<p style="margin:14px 0 0;font-size:15px;line-height:1.5;color:#0A2633;letter-spacing:-0.005em;">
-  <a href="https://metaortho.com/preferences?email={{ customer.email | url_encode }}" style="color:#2A6F97;text-decoration:none;border-bottom:1px solid #2A6F97;font-weight:500;">Manage email preferences &rarr;</a>
-</p>
+  <!-- Article body — write as many <p> paragraphs as you want. -->
+  <p style="margin:0 0 16px;font-size:15px;line-height:1.65;color:#475157;letter-spacing:-0.003em;">
+    Rapid weight loss puts your skeleton through a measurable stress response. In the first few months on a GLP-1, your body is shedding weight faster than your bones can adapt &mdash; and bone mineral density follows the curve.
+  </p>
+  <p style="margin:0 0 16px;font-size:15px;line-height:1.65;color:#475157;letter-spacing:-0.003em;">
+    The good news: it&rsquo;s monitorable, and it&rsquo;s reversible if you catch it early. A baseline DEXA scan in months 1&ndash;2, repeated at month 6, gives you a real picture of what&rsquo;s changing under the scale.
+  </p>
 
-<p style="margin:32px 0 0;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:15px;line-height:1.4;color:#0A2633;">
-  &mdash; The MetaOrtho team
-</p>
+  <!-- Optional: link to a longer piece on metaortho.com or an external source -->
+  <!-- DELETE the <p> below if this article doesn't link out anywhere -->
+  <p style="margin:14px 0 0;font-size:15px;line-height:1.5;color:#0A2633;letter-spacing:-0.005em;">
+    <a href="https://metaortho.com/blog/bone-density-glp1" style="color:#2A6F97;text-decoration:none;border-bottom:1px solid #2A6F97;font-weight:500;">Read the full article on MetaOrtho &rarr;</a>
+  </p>
+
+</div>
+<!-- ===== END ARTICLE BLOCK ===== -->
+
+
+<!-- ===== ARTICLE BLOCK ===== -->
+
+<div style="padding-top:36px;"><hr style="border:none;border-top:1px solid #E4E1D9;margin:0;" /></div>
+<div style="padding:36px 4px 0;">
+
+  <p style="margin:0 0 10px;font-size:10px;line-height:1.2;font-weight:600;color:#87939A;letter-spacing:0.22em;text-transform:uppercase;">
+    New research
+  </p>
+
+  <h2 style="margin:0 0 16px;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:24px;line-height:1.15;font-weight:400;letter-spacing:-0.02em;color:#0A2633;">
+    AAOS 2026: lean-mass loss at 12 months
+  </h2>
+
+  <p style="margin:0 0 16px;font-size:15px;line-height:1.65;color:#475157;letter-spacing:-0.003em;">
+    A short summary of the study &mdash; what they measured, who was in the cohort, and the headline number that matters for any GLP-1 patient.
+  </p>
+
+  <p style="margin:14px 0 0;font-size:15px;line-height:1.5;color:#0A2633;letter-spacing:-0.005em;">
+    <a href="https://example.com/study" style="color:#2A6F97;text-decoration:none;border-bottom:1px solid #2A6F97;font-weight:500;">Read the study &rarr;</a>
+  </p>
+
+</div>
+<!-- ===== END ARTICLE BLOCK ===== -->
+
+
+<!-- ===== ARTICLE BLOCK ===== -->
+
+<div style="padding-top:36px;"><hr style="border:none;border-top:1px solid #E4E1D9;margin:0;" /></div>
+<div style="padding:36px 4px 0;">
+
+  <p style="margin:0 0 10px;font-size:10px;line-height:1.2;font-weight:600;color:#87939A;letter-spacing:0.22em;text-transform:uppercase;">
+    Counteraction
+  </p>
+
+  <h2 style="margin:0 0 16px;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:24px;line-height:1.15;font-weight:400;letter-spacing:-0.02em;color:#0A2633;">
+    Resistance training prescriptions for GLP-1 patients
+  </h2>
+
+  <p style="margin:0 0 16px;font-size:15px;line-height:1.65;color:#475157;letter-spacing:-0.003em;">
+    Three short paragraphs on the protocol &mdash; sets, reps, frequency, and what to do if you have a joint flare. Keep this practical.
+  </p>
+
+</div>
+<!-- ===== END ARTICLE BLOCK ===== -->
+
+
+<!-- ============ CLOSING SIGNATURE ============ -->
+
+<div style="padding-top:36px;"><hr style="border:none;border-top:1px solid #E4E1D9;margin:0;" /></div>
+<div style="padding:36px 4px 0;">
+
+  <p style="margin:0 0 18px;font-size:15px;line-height:1.65;color:#475157;letter-spacing:-0.003em;">
+    Reply to this email if there&rsquo;s a side effect or a study you&rsquo;d like us to dig into next week.
+  </p>
+
+  <p style="margin:32px 0 0;font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-size:17px;line-height:1.4;color:#0A2633;">
+    &mdash; Dr. Jay Saenz
+    <span style="display:block;margin-top:4px;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:11px;color:#87939A;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;">Medical Director, MetaOrtho</span>
+  </p>
+
+</div>
