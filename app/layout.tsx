@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, DM_Serif_Display } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -7,6 +8,8 @@ import MobileCTA from "@/components/layout/MobileCTA";
 import CookieConsent from "@/components/layout/CookieConsent";
 import WaitlistStickyFooter from "@/components/WaitlistStickyFooter";
 import { WaitlistProvider } from "@/components/waitlist/WaitlistModal";
+
+const GOOGLE_ADS_TAG_ID = "AW-18123956048";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -113,6 +116,16 @@ export default function RootLayout({
           <WaitlistStickyFooter />
         </WaitlistProvider>
       </body>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_TAG_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="gtag-init" strategy="afterInteractive">
+        {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GOOGLE_ADS_TAG_ID}');`}
+      </Script>
     </html>
   );
 }
