@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import { LICENSED_STATES } from "@/lib/states";
+import { licensedStatesCopy } from "@/lib/states";
 
 export const metadata: Metadata = {
   title: "Grievances &amp; Complaints",
@@ -80,9 +80,9 @@ export default function GrievancesPage() {
             </a>
           </p>
           <p className={paraClass}>
-            MetaOrtho is currently licensed in {LICENSED_STATES.length}{" "}
-            U.S. states. Your residential state board is the appropriate
-            board for clinical complaints involving your care.
+            MetaOrtho is currently licensed in {licensedStatesCopy()}.
+            Your residential state board is the appropriate board for
+            clinical complaints involving your care.
           </p>
 
           <h2 className={headingClass}>

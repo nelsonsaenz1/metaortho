@@ -5,12 +5,13 @@ import {
   LICENSED_STATES,
   PENDING_STATES,
   LICENSED_COUNT,
+  licensedStatesCopy,
 } from "@/lib/states";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
 export const metadata: Metadata = {
   title: "Licensed States",
-  description: `MetaOrtho is a physician-led telemedicine practice currently licensed in ${LICENSED_COUNT} U.S. states. See the full list and our coverage policy.`,
+  description: `MetaOrtho is a physician-led telemedicine practice currently licensed in ${licensedStatesCopy()}. See the full list and our coverage policy.`,
 };
 
 export default function LicensedStatesPage() {
@@ -27,8 +28,8 @@ export default function LicensedStatesPage() {
           <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed">
             MetaOrtho is a telemedicine practice. Care is provided only by
             clinicians licensed in your state. We are currently licensed in{" "}
-            <strong>{LICENSED_COUNT} U.S. states</strong> with several
-            additional states pending.
+            <strong>{licensedStatesCopy()}</strong> with additional states
+            pending.
           </p>
         </div>
       </section>

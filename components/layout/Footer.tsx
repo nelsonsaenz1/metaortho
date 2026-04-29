@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
 import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
-import { LICENSED_COUNT } from "@/lib/states";
+import { licensedStatesCopy } from "@/lib/states";
 
 function openCookieSettings() {
   if (typeof window === "undefined") return;
@@ -49,7 +49,7 @@ export default function Footer() {
             <p className="text-[15px] text-white/90 leading-relaxed mb-3">
               <strong className="text-white">MetaOrtho</strong> is a
               physician-led telemedicine practice. Currently licensed in{" "}
-              <strong>{LICENSED_COUNT} U.S. states</strong>. Care is
+              <strong>{licensedStatesCopy()}</strong>. Care is
               provided only by clinicians licensed in your state.
             </p>
             <p className="text-[13px] text-white/70 leading-relaxed mb-3">
