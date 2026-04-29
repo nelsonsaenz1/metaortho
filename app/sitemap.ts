@@ -3,23 +3,47 @@ import { getAllSlugs } from "@/content/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://metaortho.com";
+  const now = new Date();
 
   const blogPosts = getAllSlugs().map((slug) => ({
     url: `${base}/blog/${slug}`,
-    lastModified: new Date(),
+    lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
-  return [
-    { url: base, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
-    { url: `${base}/home`, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
-    { url: `${base}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/pricing`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
-    { url: `${base}/faq`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/book`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
-    { url: `${base}/assessment`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    ...blogPosts,
-  ];
+  const marketing = [
+    { url: base, priority: 1.0, changeFrequency: "weekly" as const },
+    { url: `${base}/home`, priority: 1.0, changeFrequency: "weekly" as const },
+    { url: `${base}/about`, priority: 0.8, changeFrequency: "monthly" as const },
+    { url: `${base}/about/medical-team`, priority: 0.8, changeFrequency: "monthly" as const },
+    { url: `${base}/about/contact`, priority: 0.7, changeFrequency: "monthly" as const },
+    { url: `${base}/pricing`, priority: 0.9, changeFrequency: "weekly" as const },
+    { url: `${base}/faq`, priority: 0.7, changeFrequency: "monthly" as const },
+    { url: `${base}/book`, priority: 0.9, changeFrequency: "weekly" as const },
+    { url: `${base}/assessment`, priority: 0.8, changeFrequency: "monthly" as const },
+    { url: `${base}/blog`, priority: 0.8, changeFrequency: "weekly" as const },
+  ].map((p) => ({ ...p, lastModified: now }));
+
+  const legal = [
+    `${base}/legal/privacy-policy`,
+    `${base}/legal/notice-of-privacy-practices`,
+    `${base}/legal/terms-of-service`,
+    `${base}/legal/telehealth-informed-consent`,
+    `${base}/legal/licensed-states`,
+    `${base}/legal/pharmacy-partners`,
+    `${base}/legal/sources`,
+    `${base}/legal/affiliate-disclosure`,
+    `${base}/legal/refund-policy`,
+    `${base}/legal/accessibility-statement`,
+    `${base}/legal/grievances`,
+    `${base}/legal/cookie-policy`,
+  ].map((url) => ({
+    url,
+    lastModified: now,
+    changeFrequency: "yearly" as const,
+    priority: 0.4,
+  }));
+
+  return [...marketing, ...legal, ...blogPosts];
 }

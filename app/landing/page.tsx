@@ -103,6 +103,20 @@ function HeroSection() {
             the first physician-led practice built to protect what the scale
             can&apos;t measure.
           </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.45, ease }}
+            className="text-[11px] text-white/45 mb-10 tracking-[0.04em]"
+          >
+            Source: AAOS 2026 ·{" "}
+            <a
+              href="/legal/sources"
+              className="underline underline-offset-2 hover:text-white/70"
+            >
+              full citations
+            </a>
+          </motion.p>
 
           {/* CTAs */}
           <motion.div
@@ -780,7 +794,7 @@ const faqs = [
   },
   {
     q: "Is this covered by insurance?",
-    a: "The MetaOrtho consultation is a cash-pay service ($149). However, labs and DEXA scans ordered through the visit are typically covered by insurance when processed through Quest Diagnostics or Labcorp.",
+    a: "The MetaOrtho consultation is a cash-pay service ($149). Labs and DEXA scans ordered through the visit are typically covered by insurance when processed through Quest Diagnostics or Labcorp. Coverage varies by plan; confirm with your insurer.",
   },
 ];
 

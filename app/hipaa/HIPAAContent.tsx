@@ -63,15 +63,24 @@ export default function HIPAAContent() {
             To support our business activities, including quality improvement, staff training, compliance audits, and business planning.
           </p>
 
-          <h3 className={subheadingClass}>As required by law</h3>
+          <h3 className={subheadingClass}>Special situations permitted by the Privacy Rule</h3>
           <p className={paraClass}>
-            When required by federal, state, or local law, including public health reporting, abuse/neglect reporting, and responses to court orders.
+            HIPAA also permits us to use or disclose your PHI without your authorization in the following circumstances:
           </p>
-
-          <h3 className={subheadingClass}>Health and safety</h3>
-          <p className={paraClass}>
-            To prevent or lessen a serious and imminent threat to your health or safety or the health or safety of the public.
-          </p>
+          <ul className={listClass}>
+            <li>As required by federal, state, or local law (including responses to court orders, subpoenas, and warrants)</li>
+            <li>For public health activities (disease reporting, FDA-related adverse event reports, exposure notifications)</li>
+            <li>To report suspected abuse, neglect, or domestic violence to the appropriate authorities</li>
+            <li>For health oversight activities (audits, investigations, licensure actions)</li>
+            <li>For judicial and administrative proceedings (in response to a valid order)</li>
+            <li>For law enforcement purposes when required or permitted by law</li>
+            <li>To coroners, medical examiners, and funeral directors regarding decedents</li>
+            <li>For organ, eye, or tissue donation</li>
+            <li>For research that has been approved by an institutional review board or privacy board with appropriate protections</li>
+            <li>To prevent or lessen a serious and imminent threat to your health or safety or the health or safety of the public</li>
+            <li>For specialized government functions (military, veterans, national security, protective services)</li>
+            <li>For workers&rsquo; compensation programs</li>
+          </ul>
 
           <h2 className={headingClass}>Uses and disclosures requiring your authorization</h2>
           <p className={paraClass}>
@@ -131,6 +140,11 @@ export default function HIPAAContent() {
             You have the right to be notified if there is a breach of your unsecured PHI.
           </p>
 
+          <h3 className={subheadingClass}>Right to file a complaint</h3>
+          <p className={paraClass}>
+            You have the right to file a complaint with MetaOrtho or with the U.S. Department of Health and Human Services Office for Civil Rights if you believe your privacy rights have been violated. We will not retaliate against you for filing a complaint. See the &ldquo;Complaints&rdquo; section below for contact information.
+          </p>
+
           <h2 className={headingClass}>Our responsibilities</h2>
           <p className={paraClass}>We are required to:</p>
           <ul className={listClass}>
@@ -138,9 +152,15 @@ export default function HIPAAContent() {
             <li>Provide you with this Notice of our legal duties and privacy practices</li>
             <li>Follow the terms of the Notice currently in effect</li>
             <li>Notify you if we cannot accommodate a requested restriction or amendment</li>
+            <li>Notify you following a breach of your unsecured PHI, as required by 45 CFR §§ 164.400-414</li>
           </ul>
           <p className={paraClass}>
             We will not use or disclose your PHI without your authorization except as described in this Notice.
+          </p>
+
+          <h2 className={headingClass}>How you receive this notice</h2>
+          <p className={paraClass}>
+            Because MetaOrtho is a telehealth practice, we provide this Notice electronically. You will be presented with the current Notice during your initial intake and asked to acknowledge receipt before your first visit. The most recent version of the Notice is always posted on this page. If you would prefer to receive a paper copy of the Notice, you may request one at any time by emailing us at the address below — we will mail one at no charge.
           </p>
 
           <h2 className={headingClass}>Complaints</h2>

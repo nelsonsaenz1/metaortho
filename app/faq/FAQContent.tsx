@@ -22,7 +22,7 @@ const clinicalFAQs = [
   {
     question: "Can GLP-1 drugs cause gout?",
     answer:
-      "Yes. Rapid weight loss on GLP-1 medications causes uric acid spikes that can trigger acute gout attacks. The 2026 AAOS data showed a 12% increased risk of gout in GLP-1 users. When you lose weight quickly, your body breaks down cells that release purines, which convert to uric acid. MetaOrtho can diagnose gout, treat acute flares (colchicine, NSAIDs), and provide ongoing prevention through diet and medication management.",
+      "Yes. Rapid weight loss on GLP-1 medications causes uric acid spikes that can trigger acute gout attacks. The 2026 AAOS data showed a 12% increased risk of gout in GLP-1 users. When you lose weight quickly, your body breaks down cells that release purines, which convert to uric acid. MetaOrtho can diagnose gout, treat acute flares (colchicine, NSAIDs), and help reduce the risk of recurrence through diet and medication management.",
   },
   {
     question: "What labs and imaging does MetaOrtho order?",

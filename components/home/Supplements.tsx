@@ -8,14 +8,14 @@ import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
 const ease = [0.23, 1, 0.32, 1] as const;
 
 const supplements = [
-  { name: "High-Quality Protein", purpose: "Prevent muscle wasting", dose: "140 g/day" },
-  { name: "Vitamin D3 + K2", purpose: "Protect bone density", dose: "5,000 IU + 180 mcg" },
-  { name: "Calcium Citrate", purpose: "Bone strength", dose: "1,200 mg/day" },
-  { name: "Creatine Monohydrate", purpose: "Muscle preservation", dose: "5 g/day" },
-  { name: "HMB", purpose: "Reduce protein breakdown", dose: "3 g/day" },
-  { name: "Vitamin B12", purpose: "Energy & nerve health", dose: "1,000 mcg" },
-  { name: "Magnesium Glycinate", purpose: "Muscle & sleep", dose: "400 mg" },
-  { name: "Omega-3 (EPA/DHA)", purpose: "Joint & anti-inflammatory", dose: "2 g EPA+DHA" },
+  { name: "High-Quality Protein", purpose: "Supports muscle preservation", dose: "140 g/day" },
+  { name: "Vitamin D3 + K2", purpose: "Supports bone health", dose: "5,000 IU + 180 mcg" },
+  { name: "Calcium Citrate", purpose: "Supports bone strength", dose: "1,200 mg/day" },
+  { name: "Creatine Monohydrate", purpose: "Supports lean muscle", dose: "5 g/day" },
+  { name: "HMB", purpose: "Supports muscle preservation", dose: "3 g/day" },
+  { name: "Vitamin B12", purpose: "Supports energy & nerve health", dose: "1,000 mcg" },
+  { name: "Magnesium Glycinate", purpose: "Supports muscle recovery & sleep", dose: "400 mg" },
+  { name: "Omega-3 (EPA/DHA)", purpose: "Supports joint comfort", dose: "2 g EPA+DHA" },
 ];
 
 function SupplementPill({
@@ -97,6 +97,11 @@ export default function Supplements() {
               Est. $59–$89
             </p>
           </div>
+          <p className="mt-6 text-[11px] text-[var(--color-text-tertiary)] leading-relaxed max-w-md">
+            These statements have not been evaluated by the Food and Drug
+            Administration. These products are not intended to diagnose,
+            treat, cure, or prevent any disease.
+          </p>
         </motion.div>
 
         {/* Marquee of supplement pills */}

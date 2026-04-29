@@ -106,12 +106,21 @@ export default function Hero() {
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-[var(--color-text-secondary)] leading-[1.55] mb-5 max-w-lg tracking-[-0.01em]">
+            <p className="text-lg md:text-xl text-[var(--color-text-secondary)] leading-[1.55] mb-2 max-w-lg tracking-[-0.01em]">
               Up to{" "}
               <strong className="text-[var(--color-text-heading)] font-semibold">
                 40% of weight lost on GLP-1 drugs
               </strong>{" "}
               like Ozempic and Mounjaro may be muscle and bone — not fat.
+            </p>
+            <p className="text-[11px] text-[var(--color-text-tertiary)] mb-5 tracking-[0.03em]">
+              Source: AAOS 2026 ·{" "}
+              <a
+                href="/legal/sources"
+                className="underline underline-offset-2 hover:text-[var(--color-accent-primary)]"
+              >
+                full citations
+              </a>
             </p>
 
             <p className="text-base text-[var(--color-text-secondary)] leading-[1.6] mb-10 max-w-lg tracking-[-0.01em]">

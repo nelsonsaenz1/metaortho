@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import { DM_Sans, DM_Serif_Display } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import MobileCTA from "@/components/layout/MobileCTA";
 import CookieConsent from "@/components/layout/CookieConsent";
 import WaitlistStickyFooter from "@/components/WaitlistStickyFooter";
+import Analytics from "@/components/Analytics";
 import { WaitlistProvider } from "@/components/waitlist/WaitlistModal";
-
-const GOOGLE_ADS_TAG_ID = "AW-18123956048";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -77,7 +75,7 @@ export default function RootLayout({
       },
       {
         "@type": "MedicalProcedure",
-        name: "Sarcopenia Prevention Protocol",
+        name: "Sarcopenia Risk-Reduction Protocol",
         procedureType: "Therapeutic",
       },
       {
@@ -107,25 +105,24 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[var(--color-bg-darkest)] focus:text-white focus:rounded-[var(--radius-md)] focus:outline focus:outline-2 focus:outline-[var(--color-accent-primary)]"
+        >
+          Skip to main content
+        </a>
         <WaitlistProvider>
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main id="main-content" tabIndex={-1} className="flex-1">
+            {children}
+          </main>
           <Footer />
           <MobileCTA />
           <CookieConsent />
           <WaitlistStickyFooter />
         </WaitlistProvider>
+        <Analytics />
       </body>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_TAG_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="gtag-init" strategy="afterInteractive">
-        {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GOOGLE_ADS_TAG_ID}');`}
-      </Script>
     </html>
   );
 }

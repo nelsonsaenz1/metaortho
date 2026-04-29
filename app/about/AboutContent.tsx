@@ -48,7 +48,7 @@ export default function AboutContent() {
                   Dr. Saenz is a board-certified orthopedic surgeon who founded MetaOrthopedics to address one of the most significant unmet needs in modern medicine: the musculoskeletal consequences of GLP-1 weight loss medications.
                 </p>
                 <p>
-                  With millions of Americans on Ozempic, Wegovy, Mounjaro, and Zepbound, patients are losing weight rapidly — but up to 40% of that loss is lean mass. Their prescribing physicians focus on metabolic markers. Nobody is monitoring what the weight loss is doing to their bodies structurally.
+                  With millions of Americans on Ozempic, Wegovy, Mounjaro, and Zepbound, patients are losing weight rapidly — but up to 40% of that loss is lean mass.<sup className="text-[11px] text-[var(--color-text-tertiary)] ml-0.5"><a href="/legal/sources" className="underline underline-offset-2 hover:text-[var(--color-accent-primary)]">[1]</a></sup> Their prescribing physicians focus on metabolic markers. Nobody is monitoring what the weight loss is doing to their bodies structurally.
                 </p>
                 <p>
                   <strong className="text-[var(--color-text-heading)]">MetaOrtho was created to fill that gap.</strong>

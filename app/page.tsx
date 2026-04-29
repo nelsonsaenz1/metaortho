@@ -123,6 +123,20 @@ function Slide1Hero() {
           the first physician-led practice built to protect what the scale
           can&apos;t measure.
         </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.45, ease }}
+          className="text-[11px] text-white/45 mb-10 tracking-[0.04em]"
+        >
+          Source: AAOS 2026 ·{" "}
+          <Link
+            href="/legal/sources"
+            className="underline underline-offset-2 hover:text-white/70"
+          >
+            full citations
+          </Link>
+        </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
