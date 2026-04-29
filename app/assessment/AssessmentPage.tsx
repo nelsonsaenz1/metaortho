@@ -6,8 +6,17 @@ import { questions, calculateResult, type AssessmentResult } from "@/lib/assessm
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
+import StateGate from "@/components/intake/StateGate";
 
 export default function AssessmentPage() {
+  return (
+    <StateGate intakeName="Risk assessment">
+      <AssessmentBody />
+    </StateGate>
+  );
+}
+
+function AssessmentBody() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [result, setResult] = useState<AssessmentResult | null>(null);

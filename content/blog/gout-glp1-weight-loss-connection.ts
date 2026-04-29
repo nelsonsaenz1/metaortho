@@ -2,7 +2,7 @@ export const post = {
   slug: "gout-glp1-weight-loss-connection",
   title: "Why GLP-1 Weight Loss Drugs Can Trigger Gout Attacks",
   excerpt:
-    "Rapid weight loss on Ozempic, Wegovy, or Mounjaro can spike your uric acid levels and trigger painful gout attacks. Here's the science behind the connection and how to prevent it.",
+    "Rapid weight loss on Ozempic, Wegovy, or Mounjaro can spike your uric acid levels and trigger painful gout attacks. Here's the science behind the connection and how to reduce your risk.",
   author: "Dr. Jay M. Saenz, MD",
   date: "2026-03-28",
   readTime: "7 min read",
