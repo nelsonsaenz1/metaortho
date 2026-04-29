@@ -1,0 +1,41 @@
+url,exact_quote,file_path_line,claim_type,substantiation_source_or_NONE,action
+/,"The weight is coming off. So are your muscles.",app/page.tsx (hero H1),outcome,NONE,keep (positioning, not a clinical claim)
+/,"Up to 40% of weight lost on GLP-1 drugs is muscle and bone — not fat",app/page.tsx:118-124,statistic,"AAOS 2026 (cited in /blog and Hero subhead, but not next to this instance)",rewrite (add inline citation or link to /legal/sources)
+/,"HIPAA-compliant telehealth",app/page.tsx:280,brand_mention,NONE,keep (factual, infrastructure-level)
+/home,"Up to 40% of weight lost on GLP-1 drugs like Ozempic and Mounjaro may be muscle and bone — not fat",components/home/Hero.tsx:110-114,statistic,"AAOS 2026 (cited in blog, not at this instance)",rewrite (add inline citation)
+/home,"Board-certified orthopedic surgeon",components/home/Hero.tsx:53,brand_mention,Dr. Saenz credential,keep (verify on /about/medical-team with license #s)
+/home,"No controlled substances",components/home/Hero.tsx:69,brand_mention,Operational fact,keep (also add to /legal/pharmacy-partners memo)
+/home,"MetaOrtho monitors your bones, muscles, and joints while you lose weight — led by a board-certified orthopedic surgeon, all via telehealth",components/home/Hero.tsx:118-120,clinical,Operational description,keep
+/landing,"The weight is coming off. So are your muscles.",app/landing/page.tsx (hero),outcome,NONE,keep (positioning)
+/landing,"Research shows up to 40% of weight lost on GLP-1 drugs like Ozempic and Mounjaro is muscle and bone — not fat",app/landing/page.tsx:98-104,statistic,"AAOS 2026 (cited downstream, not inline)",rewrite (add inline citation/footnote)
+/landing,"the first physician-led practice built to protect what the scale can't measure",app/landing/page.tsx:122-124,clinical,Operational positioning,review (verify ""first"" — superlative claim risk; consider ""a physician-led practice…"")
+/landing,"+30% Osteoporosis Risk / After 5 years on GLP-1 medications",app/landing/page.tsx:155-157,statistic,"Wajahath et al. AAOS 2026",keep (citation strong; ensure cited on-page or linked)
+/landing,"+150% Bone Softening Risk / Osteomalacia incidence vs. controls",app/landing/page.tsx:161-163,statistic,"Wajahath et al. AAOS 2026 (small sample — claims-library Tier-2 caution)",rewrite (qualify; per claims-library, do not use 150% in ad without full citation alongside)
+/landing,"40% Weight Lost Is Muscle / Not fat — lean tissue, bone & connective tissue",app/landing/page.tsx:167-169,statistic,"AAOS 2026 / Jensen 2024 (cited in blog)",keep (add inline source attribution)
+/landing,"+12% Gout Risk Increase / From rapid uric acid fluctuations",app/landing/page.tsx:173-175,statistic,"Wajahath et al. AAOS 2026",keep (add inline citation)
+/landing,"You're on Ozempic, Wegovy, Mounjaro, or Zepbound",app/landing/page.tsx:277-278,brand_mention,Descriptive,keep (compliant per guardrails — describes audience, no endorsement)
+/landing,"20+ lbs gone — but you're not resistance training. Up to 40% of what you lost is lean tissue, not fat. You feel weaker. Your prescriber says ""that's normal.""",app/landing/page.tsx:290,statistic,"AAOS 2026 / Jensen 2024",rewrite (citation needed; ""your prescriber says that's normal"" comparison framing borderline disparaging — soften)
+/landing,"Your weight loss doctor manages the scale. Who's managing everything else?",app/landing/page.tsx:257-260,comparison,Positioning,review (per guardrails §1.4 — verifiable comparisons OK; this is rhetorical and may be acceptable)
+/landing,"Physician-led telemedicine practice",app/landing/page.tsx:970,brand_mention,Factual,keep
+/landing,"Your scale says you lost 40 lbs. How much was muscle?",components/home/Hero.tsx:246-250,clinical,Rhetorical hook,keep (no claim asserted)
+/landing,"HIPAA-compliant telehealth",app/landing/page.tsx:660,brand_mention,Operational,keep
+/landing,"Board-certified orthopedic surgeon",app/landing/page.tsx:659,brand_mention,Dr. Saenz credential,keep
+/landing/FAQ,"Labs and DEXA scans ordered through the visit are typically covered by insurance",app/landing/page.tsx:783,clinical,NONE,rewrite (add ""coverage varies by plan; confirm with your insurer"" qualifier)
+/about,"With millions of Americans on Ozempic, Wegovy, Mounjaro, and Zepbound, patients are losing weight rapidly — but up to 40% of that loss is lean mass.",app/about/AboutContent.tsx:51,statistic,"AAOS 2026",rewrite (add inline citation)
+/faq,"Research presented at the 2026 AAOS Annual Meeting found that 15-40% of total weight lost on GLP-1s is lean mass: muscle, bone, and connective tissue.",app/faq/FAQContent.tsx:10,statistic,"AAOS 2026 (cited inline — good)",keep
+/faq,"GLP-1 users face a 30% increased risk of osteoporosis over 5 years and an over 150% increased risk of osteomalacia",app/faq/FAQContent.tsx:20,statistic,"AAOS 2026 (cited)",keep (verify exact AAOS citation in /legal/sources)
+/faq,"MetaOrtho orders and monitors DEXA scans, optimizes bone-protective nutrition, and prescribes bisphosphonates when indicated.",app/faq/FAQContent.tsx:20,outcome,Operational,keep (specific clinical intervention; ensure clinician scope-of-practice language)
+/faq,"The 2026 AAOS data showed a 12% increased risk of gout in GLP-1 users.",app/faq/FAQContent.tsx:25,statistic,"AAOS 2026",keep
+/faq,"MetaOrtho can diagnose gout, treat acute flares (colchicine, NSAIDs), and provide ongoing prevention through diet and medication management.",app/faq/FAQContent.tsx:25,outcome,Operational,review (""prevention"" applied to disease — guardrails ban; rewrite to ""reduce risk of recurrence"")
+/portal/protocol,"Without mechanical loading, GLP-1 weight loss drives disproportionate muscle and bone loss",app/portal/protocol/page.tsx:30,clinical,"AAOS 2026 / Cava et al. 2017",keep
+/portal/protocol,"Supports muscle preservation",app/portal/protocol/page.tsx:74 (HMB description),outcome,Stokes et al. / Morton et al. (claims-library Tier-1),keep (low risk; safe phrasing)
+/home (Supplements),"Prevent muscle wasting",components/home/Supplements.tsx:11,outcome,NONE,REWRITE (banned ""prevent"" + outcome promise on a supplement → swap to ""Designed to support muscle preservation"")
+/blog/glp1-muscle-loss,"roughly 15-40% of total weight lost on calorically-restricted weight loss is lean tissue",content/blog/glp1-muscle-loss-what-you-need-to-know.ts:15,statistic,"Jensen et al. 2024 (cited)",keep
+/blog/glp1-muscle-loss,"29% higher osteoporosis risk",content/blog/glp1-muscle-loss-what-you-need-to-know.ts:25,statistic,"Wajahath et al. AAOS 2026",keep
+/blog/glp1-muscle-loss,"2.55x higher osteomalacia risk",content/blog/glp1-muscle-loss-what-you-need-to-know.ts:26,statistic,"Wajahath et al. AAOS 2026",keep
+/blog/glp1-muscle-loss,"12% higher gout risk",content/blog/glp1-muscle-loss-what-you-need-to-know.ts:27,statistic,"Wajahath et al. AAOS 2026",keep
+/blog/glp1-muscle-loss,"~50% higher relative risk of major tendon ruptures",content/blog/glp1-muscle-loss-what-you-need-to-know.ts:31,statistic,"Lawand et al. AAOS 2026",keep
+/blog/gout-glp1,"Rapid weight loss on Ozempic, Wegovy, or Mounjaro can spike your uric acid levels and trigger painful gout attacks. Here's the science behind the connection and how to prevent it.",content/blog/gout-glp1-weight-loss-connection.ts:5,clinical,Educational + claims-library,review (""how to prevent it"" applied to gout — soften to ""reduce your risk"" per guardrails)
+/privacy,"cannot guarantee absolute security",app/privacy/PrivacyContent.tsx:170,guarantee,Standard security disclaimer,keep (acceptable in security disclaimer context; not an outcome-guarantee claim)
+JSON-LD,"Sarcopenia Prevention Protocol" (availableService),app/layout.tsx:80,outcome,Operational name,REWRITE (banned ""Prevention"" word in service name; rename to ""Sarcopenia Risk-Reduction Protocol"" or ""Lean-Mass Preservation Protocol"")
+TESTIMONIALS,"(none observed in source review)",—,testimonial,—,confirm (verify no testimonials appear in any client-rendered component, slider, or CMS content not statically importable)
