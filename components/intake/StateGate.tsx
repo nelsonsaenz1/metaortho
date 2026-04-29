@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { STATES, isLicensed, getStateByCode, LICENSED_COUNT } from "@/lib/states";
+import { STATES, isLicensed, getStateByCode, licensedStatesCopy } from "@/lib/states";
 import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
 
 type Phase = "ask" | "out-of-state";
@@ -79,7 +79,7 @@ export default function StateGate({
             </button>
           </div>
           <p className="mt-10 text-xs text-[var(--color-text-tertiary)]">
-            Currently licensed in {LICENSED_COUNT} U.S. states. See the full
+            Currently licensed in {licensedStatesCopy()}. See the full
             list on our{" "}
             <Link
               href="/legal/licensed-states"
@@ -138,7 +138,7 @@ export default function StateGate({
           </button>
         </form>
         <p className="mt-6 text-xs text-[var(--color-text-tertiary)]">
-          Currently licensed in {LICENSED_COUNT} U.S. states. We never ask
+          Currently licensed in {licensedStatesCopy()}. We never ask
           health questions before confirming we serve you.
         </p>
       </div>

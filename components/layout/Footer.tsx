@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
 import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
-import { LICENSED_COUNT } from "@/lib/states";
+import { licensedStatesCopy } from "@/lib/states";
 
 function openCookieSettings() {
   if (typeof window === "undefined") return;
@@ -49,7 +49,7 @@ export default function Footer() {
             <p className="text-[15px] text-white/90 leading-relaxed mb-3">
               <strong className="text-white">MetaOrtho</strong> is a
               physician-led telemedicine practice. Currently licensed in{" "}
-              <strong>{LICENSED_COUNT} U.S. states</strong>. Care is
+              <strong>{licensedStatesCopy()}</strong>. Care is
               provided only by clinicians licensed in your state.
             </p>
             <p className="text-[13px] text-white/70 leading-relaxed mb-3">
@@ -69,7 +69,7 @@ export default function Footer() {
               Medical Director: Jay M. Saenz, MD &mdash; Board-Certified
               Orthopedic Surgeon
               <br />
-              NPI: <span className="font-mono text-[12px]">[pending]</span>
+              NPI: <span className="font-mono text-[12px]">1235140211</span>
             </p>
           </div>
           <div className="rounded-[var(--radius-md)] border border-red-500/30 bg-red-500/5 p-4 text-[13px] text-red-100/90 leading-relaxed">
