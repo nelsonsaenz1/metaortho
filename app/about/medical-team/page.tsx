@@ -49,9 +49,7 @@ export default function MedicalTeamPage() {
                   NPI
                 </dt>
                 <dd>
-                  <span className="font-mono text-[13px]">
-                    [TO BE PUBLISHED — PENDING OPS CONFIRMATION]
-                  </span>
+                  <span className="font-mono text-[13px]">1235140211</span>
                 </dd>
               </div>
               <div className="flex flex-col sm:flex-row sm:gap-3">
@@ -59,10 +57,17 @@ export default function MedicalTeamPage() {
                   State licenses
                 </dt>
                 <dd>
-                  <span className="font-mono text-[13px]">
-                    [TO BE PUBLISHED — license numbers and per-state coverage
-                    pending operational confirmation]
-                  </span>
+                  <ul className="space-y-1">
+                    <li>
+                      Tennessee &mdash; License No.{" "}
+                      <span className="font-mono text-[13px]">39775</span>{" "}
+                      (Orthopaedic Surgery; valid through July 31, 2027)
+                    </li>
+                    <li className="text-[var(--color-text-tertiary)] text-[13px]">
+                      Additional state licenses will be listed here as each is
+                      verified by operations.
+                    </li>
+                  </ul>
                 </dd>
               </div>
             </dl>

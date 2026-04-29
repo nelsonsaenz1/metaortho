@@ -69,7 +69,7 @@ export default function Footer() {
               Medical Director: Jay M. Saenz, MD &mdash; Board-Certified
               Orthopedic Surgeon
               <br />
-              NPI: <span className="font-mono text-[12px]">[pending]</span>
+              NPI: <span className="font-mono text-[12px]">1235140211</span>
             </p>
           </div>
           <div className="rounded-[var(--radius-md)] border border-red-500/30 bg-red-500/5 p-4 text-[13px] text-red-100/90 leading-relaxed">
