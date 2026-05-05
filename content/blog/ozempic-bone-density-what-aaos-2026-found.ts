@@ -76,7 +76,7 @@ This is orthopedic medicine. And that's precisely why MetaOrtho exists.
 
 GLP-1 medications are genuinely revolutionary drugs. They're saving lives, reducing cardiovascular events, and helping millions of people achieve weight loss that was previously impossible.
 
-But like all powerful medications, they have side effects. The musculoskeletal effects are real, they're measurable, and they're preventable with proper monitoring and intervention.
+But like all powerful medications, they have side effects. The musculoskeletal effects are real and measurable, and proactive monitoring and intervention can meaningfully reduce their impact.
 
 The question isn't whether to take GLP-1s. The question is: **who is watching your bones, joints, and tendons while you lose weight?**
 

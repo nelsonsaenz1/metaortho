@@ -13,7 +13,6 @@ type Props = {
   className?: string;
   /** Label for analytics. */
   source?: string;
-  sourcePage?: string;
   /** Override modal copy. */
   eyebrow?: string;
   headline?: ReactNode;
@@ -50,7 +49,6 @@ export default function WaitlistCTA({
   size = "md",
   className = "",
   source,
-  sourcePage,
   eyebrow,
   headline,
   subcopy,
@@ -59,7 +57,7 @@ export default function WaitlistCTA({
   return (
     <button
       type="button"
-      onClick={() => open({ source, sourcePage, eyebrow, headline, subcopy })}
+      onClick={() => open({ source, eyebrow, headline, subcopy })}
       className={`inline-flex items-center justify-center font-semibold rounded-[var(--radius-pill)] cursor-pointer tracking-[-0.01em] transition-[background-color,color,box-shadow,transform,border-color] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] active:duration-[var(--dur-press)] motion-reduce:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2 ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
     >
       {children}

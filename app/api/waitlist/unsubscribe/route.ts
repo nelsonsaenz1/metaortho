@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getSupabaseServiceClient } from "@/lib/supabase/server";
+import { verifyUnsubscribeToken } from "@/lib/unsubscribe-token";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -198,6 +199,7 @@ async function unsubscribeFromCustomerIo(email: string): Promise<void> {
 export async function GET(req: Request): Promise<Response> {
   const url = new URL(req.url);
   const rawEmail = url.searchParams.get("email");
+  const token = url.searchParams.get("token") ?? "";
 
   if (!rawEmail) {
     return htmlResponse(
@@ -218,6 +220,20 @@ export async function GET(req: Request): Promise<Response> {
         title: "Invalid link",
         message:
           "This unsubscribe link doesn't look right. Please use the link from one of our emails.",
+      }),
+      400,
+    );
+  }
+
+  // HMAC token guards against an outsider unsubscribing someone whose
+  // email they happen to know. The token is generated when the link is
+  // built (lib/unsubscribe-token.ts). Old, token-less links are rejected.
+  if (!verifyUnsubscribeToken(email, token)) {
+    return htmlResponse(
+      renderConfirmationPage({
+        title: "Link expired or invalid",
+        message:
+          "This unsubscribe link can't be verified. If you'd like to be removed, reply to any of our emails and we'll handle it manually.",
       }),
       400,
     );
@@ -245,9 +261,12 @@ export async function GET(req: Request): Promise<Response> {
 
 // CAN-SPAM and List-Unsubscribe one-click (RFC 8058) require a POST endpoint
 // at the same URL that performs the unsubscribe without further user action.
+// The token query parameter MUST be preserved by the mail client when it
+// POSTs back; both Gmail and Apple Mail honor the full URL including query.
 export async function POST(req: Request): Promise<Response> {
   const url = new URL(req.url);
   let email = url.searchParams.get("email")?.trim().toLowerCase() ?? "";
+  let token = url.searchParams.get("token") ?? "";
 
   if (!email) {
     try {
@@ -255,6 +274,10 @@ export async function POST(req: Request): Promise<Response> {
       const candidate = form.get("email");
       if (typeof candidate === "string") {
         email = candidate.trim().toLowerCase();
+      }
+      const tokenCandidate = form.get("token");
+      if (typeof tokenCandidate === "string") {
+        token = tokenCandidate;
       }
     } catch {
       // No form body — fall through.
@@ -264,6 +287,13 @@ export async function POST(req: Request): Promise<Response> {
   if (!email || !EMAIL_RE.test(email) || email.length > 254) {
     return NextResponse.json(
       { success: false, message: "Missing or invalid email." },
+      { status: 400 },
+    );
+  }
+
+  if (!verifyUnsubscribeToken(email, token)) {
+    return NextResponse.json(
+      { success: false, message: "Invalid or missing token." },
       { status: 400 },
     );
   }

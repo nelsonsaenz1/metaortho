@@ -9,9 +9,11 @@ type Status = "idle" | "loading" | "success" | "error";
 
 export default function FinalCTA() {
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(true);
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState<string | null>(null);
   const emailId = useId();
+  const consentId = useId();
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -25,7 +27,7 @@ export default function FinalCTA() {
         body: JSON.stringify({
           email: email.trim().toLowerCase(),
           source_component: "final-cta",
-          consent_marketing: true,
+          consent_marketing: consent,
         }),
       });
       const data: { success: boolean; message?: string } = await res
@@ -127,17 +129,30 @@ export default function FinalCTA() {
             </form>
           )}
 
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[12px] text-white/70">
+          <label
+            htmlFor={consentId}
+            className="mt-4 flex items-start gap-2.5 text-[12px] text-white/75 max-w-md mx-auto leading-relaxed text-left cursor-pointer"
+          >
+            <input
+              id={consentId}
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              className="mt-0.5 accent-[var(--color-accent-primary)]"
+            />
+            <span>
+              Send me launch updates and the weekly newsletter on GLP-1 side
+              effects, new research, and counteraction protocols. Unsubscribe
+              anytime.
+            </span>
+          </label>
+          <div className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[12px] text-white/70">
             <span>Free to join</span>
             <span>·</span>
             <span>Unsubscribe anytime</span>
             <span>·</span>
             <span>No spam</span>
           </div>
-          <p className="mt-4 text-[12px] text-white/70 max-w-md mx-auto leading-relaxed">
-            Plus our weekly newsletter on GLP-1 side effects, new research, and
-            how to counteract them.
-          </p>
         </motion.div>
       </div>
     </section>

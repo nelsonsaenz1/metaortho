@@ -20,8 +20,6 @@ type OpenOptions = {
   subcopy?: ReactNode;
   /** Button label. */
   buttonText?: string;
-  /** Overrides the source_page value sent to the API. */
-  sourcePage?: string;
   /** What triggered the open — captured as source_component. */
   source?: string;
 };
@@ -91,7 +89,6 @@ export function WaitlistProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify({
           email: email.trim().toLowerCase(),
           source_component: opts.source ?? "modal",
-          source_page: opts.sourcePage,
           consent_marketing: consent,
         }),
       });

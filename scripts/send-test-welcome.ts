@@ -73,8 +73,8 @@ async function main() {
     welcomeEmailText,
   } = await import("../lib/emails/welcome");
 
-  const site = process.env.NEXT_PUBLIC_SITE_URL!;
-  const unsub = `${site}/api/waitlist/unsubscribe?email=${encodeURIComponent(recipient)}`;
+  const { unsubscribeUrl } = await import("../lib/unsubscribe-token");
+  const unsub = unsubscribeUrl(recipient);
 
   const resend = new Resend(process.env.RESEND_API_KEY);
 

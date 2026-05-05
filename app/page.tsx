@@ -225,13 +225,14 @@ function Slide2Cost() {
             className="text-[clamp(2rem,4.5vw,3.5rem)] font-normal tracking-[-0.025em] mb-5"
             style={{ color: "white", fontFamily: "var(--font-heading)" }}
           >
-            Prevention costs a fraction
+            Monitoring costs a fraction
             <br />
             of treatment.
           </h2>
           <p className="text-lg text-white/80 max-w-xl mx-auto leading-relaxed">
-            The complications of unmonitored GLP-1 use are expensive, painful,
-            and preventable.
+            The complications of unmonitored GLP-1 use are expensive and
+            painful &mdash; and easier to address when they&rsquo;re caught
+            early.
           </p>
         </motion.div>
 
@@ -305,7 +306,9 @@ type Status = "idle" | "loading" | "success" | "error";
 
 function Slide3Portal() {
   const emailId = useId();
+  const consentId = useId();
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(true);
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState<string | null>(null);
 
@@ -321,8 +324,7 @@ function Slide3Portal() {
         body: JSON.stringify({
           email: email.trim().toLowerCase(),
           source_component: "landing-slide-3",
-          source_page: "/",
-          consent_marketing: true,
+          consent_marketing: consent,
         }),
       });
       const data: { success: boolean; message?: string } = await res
@@ -452,12 +454,25 @@ function Slide3Portal() {
                     {message}
                   </p>
                 )}
+                <label
+                  htmlFor={consentId}
+                  className="mt-3 flex items-start gap-2.5 text-[12px] text-white/75 leading-relaxed cursor-pointer"
+                >
+                  <input
+                    id={consentId}
+                    type="checkbox"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    className="mt-0.5 accent-[var(--color-accent-primary)]"
+                  />
+                  <span>
+                    Send me launch updates and the weekly newsletter on GLP-1
+                    side effects, new research, and counteraction protocols.
+                    Unsubscribe anytime.
+                  </span>
+                </label>
                 <p className="mt-3 text-[12px] text-white/70">
                   Free · Unsubscribe anytime · No spam
-                </p>
-                <p className="mt-2 text-[12px] text-white/70 leading-relaxed">
-                  Includes our weekly newsletter on GLP-1 side effects, new
-                  research, and counteraction protocols.
                 </p>
               </form>
             )}

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getSupabaseServiceClient } from "@/lib/supabase/server";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { unsubscribeUrl } from "@/lib/unsubscribe-token";
 import {
   parseUtmsFromUrl,
   parsePathFromUrl,
@@ -60,11 +61,6 @@ function getClientIp(req: Request): string {
     req.headers.get("cf-connecting-ip") ||
     "unknown"
   );
-}
-
-function unsubscribeUrl(email: string): string {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://metaortho.com";
-  return `${base}/api/waitlist/unsubscribe?email=${encodeURIComponent(email)}`;
 }
 
 export async function POST(req: Request) {
@@ -157,51 +153,104 @@ export async function POST(req: Request) {
     });
 
   if (insertError) {
-    // Unique-violation on email — friendly duplicate handling.
-    // Postgres error code 23505 is unique_violation.
+    // Unique-violation on email — Postgres error code 23505.
     const code = (insertError as { code?: string }).code;
-    if (code === "23505") {
+    if (code !== "23505") {
+      console.error("[waitlist] insert error:", insertError);
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Something went sideways on our end. Please try again.",
+        },
+        { status: 500 },
+      );
+    }
+
+    // Look up the existing row so we can re-subscribe a previously
+    // unsubscribed contact. We only flip status back to "pending" when
+    // the row is currently "unsubscribed" — an active row stays as-is.
+    const { data: existing, error: selErr } = await supabase
+      .from("waitlist")
+      .select("status")
+      .eq("email", email)
+      .maybeSingle();
+
+    if (selErr) {
+      console.error("[waitlist] duplicate lookup failed:", selErr);
+      // Best-effort: respond friendly so we don't leak email-in-database.
+      return NextResponse.json({
+        success: true,
+        message: "You're on the list. We'll be in touch.",
+      });
+    }
+
+    if (existing?.status === "unsubscribed") {
+      const { error: updErr } = await supabase
+        .from("waitlist")
+        .update({
+          status: "pending",
+          consent_marketing: consentMarketing,
+          consent_timestamp: consentMarketing ? nowIso : null,
+          source_page: sourcePage,
+          source_component: component || null,
+          utm_source: utms.utm_source,
+          utm_medium: utms.utm_medium,
+          utm_campaign: utms.utm_campaign,
+          utm_content: utms.utm_content,
+          utm_term: utms.utm_term,
+          ip_address: ip,
+          user_agent: userAgent,
+        })
+        .eq("email", email);
+      if (updErr) {
+        console.error("[waitlist] re-subscribe update failed:", updErr);
+        return NextResponse.json({
+          success: true,
+          message: "You're on the list. We'll be in touch.",
+        });
+      }
+      // Fall through to send-welcome flow (gated by consentMarketing).
+    } else {
+      // Active row — friendly duplicate response, no resends.
       return NextResponse.json({
         success: true,
         message: "You're already on the list. We'll be in touch.",
       });
     }
-
-    console.error("[waitlist] insert error:", insertError);
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Something went sideways on our end. Please try again.",
-      },
-      { status: 500 },
-    );
   }
 
   // ---- 5. Resend side-effects (welcome email + audience sync) ---------------
   // Both are best-effort: the signup is already recorded in Supabase, so we
   // never fail the request if Resend is down.
+  //
+  // CRITICAL: We only send marketing emails (welcome E1 + scheduled E2/E3)
+  // when the user actually consented to marketing. Without consent, the row
+  // is recorded so we can notify them once at launch via a separate
+  // transactional path, but no welcome series goes out.
   const resendKey = process.env.RESEND_API_KEY;
   const audienceId = process.env.RESEND_AUDIENCE_ID;
   if (resendKey) {
     const resend = new Resend(resendKey);
     const unsub = unsubscribeUrl(email);
 
-    // 5a. Welcome email.
-    try {
-      await resend.emails.send({
-        from: welcomeEmailFrom(),
-        replyTo: welcomeEmailReplyTo(),
-        to: [email],
-        subject: welcomeEmailSubject(),
-        html: welcomeEmailHtml({ email, unsubscribeUrl: unsub }),
-        text: welcomeEmailText({ email, unsubscribeUrl: unsub }),
-        headers: {
-          "List-Unsubscribe": `<${unsub}>`,
-          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-        },
-      });
-    } catch (err) {
-      console.error("[waitlist] Resend send failed (signup still recorded):", err);
+    // 5a. Welcome email — only if the user consented to marketing.
+    if (consentMarketing) {
+      try {
+        await resend.emails.send({
+          from: welcomeEmailFrom(),
+          replyTo: welcomeEmailReplyTo(),
+          to: [email],
+          subject: welcomeEmailSubject(),
+          html: welcomeEmailHtml({ email, unsubscribeUrl: unsub }),
+          text: welcomeEmailText({ email, unsubscribeUrl: unsub }),
+          headers: {
+            "List-Unsubscribe": `<${unsub}>`,
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+          },
+        });
+      } catch (err) {
+        console.error("[waitlist] Resend send failed (signup still recorded):", err);
+      }
     }
 
     // 5b. Mirror the contact into the Resend audience so broadcasts can
@@ -222,63 +271,66 @@ export async function POST(req: Request) {
       );
     }
 
-    // 5c. Schedule the rest of the welcome series. E2 fires +2 days, E3 fires
-    // +4 days. We capture each scheduled email's ID so the unsubscribe route
-    // can cancel them if the contact opts out before they're delivered.
-    let scheduledE2Id: string | null = null;
-    let scheduledE3Id: string | null = null;
+    // 5c. Schedule the rest of the welcome series — only if the user
+    // consented to marketing. E2 fires +2 days, E3 fires +4 days. We
+    // capture each scheduled email's ID so the unsubscribe route can
+    // cancel them if the contact opts out before they're delivered.
+    if (consentMarketing) {
+      let scheduledE2Id: string | null = null;
+      let scheduledE3Id: string | null = null;
 
-    try {
-      const e2 = await resend.emails.send({
-        from: seriesOneFrom(),
-        replyTo: seriesOneReplyTo(),
-        to: [email],
-        subject: seriesOneSubject(),
-        html: seriesOneHtml({ email, unsubscribeUrl: unsub }),
-        text: seriesOneText({ email, unsubscribeUrl: unsub }),
-        headers: {
-          "List-Unsubscribe": `<${unsub}>`,
-          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-        },
-        scheduledAt: "in 2 days",
-      });
-      scheduledE2Id = e2.data?.id ?? null;
-    } catch (err) {
-      console.error("[waitlist] Resend schedule E2 failed:", err);
-    }
+      try {
+        const e2 = await resend.emails.send({
+          from: seriesOneFrom(),
+          replyTo: seriesOneReplyTo(),
+          to: [email],
+          subject: seriesOneSubject(),
+          html: seriesOneHtml({ email, unsubscribeUrl: unsub }),
+          text: seriesOneText({ email, unsubscribeUrl: unsub }),
+          headers: {
+            "List-Unsubscribe": `<${unsub}>`,
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+          },
+          scheduledAt: "in 2 days",
+        });
+        scheduledE2Id = e2.data?.id ?? null;
+      } catch (err) {
+        console.error("[waitlist] Resend schedule E2 failed:", err);
+      }
 
-    try {
-      const e3 = await resend.emails.send({
-        from: seriesTwoFrom(),
-        replyTo: seriesTwoReplyTo(),
-        to: [email],
-        subject: seriesTwoSubject(),
-        html: seriesTwoHtml({ email, unsubscribeUrl: unsub }),
-        text: seriesTwoText({ email, unsubscribeUrl: unsub }),
-        headers: {
-          "List-Unsubscribe": `<${unsub}>`,
-          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-        },
-        scheduledAt: "in 4 days",
-      });
-      scheduledE3Id = e3.data?.id ?? null;
-    } catch (err) {
-      console.error("[waitlist] Resend schedule E3 failed:", err);
-    }
+      try {
+        const e3 = await resend.emails.send({
+          from: seriesTwoFrom(),
+          replyTo: seriesTwoReplyTo(),
+          to: [email],
+          subject: seriesTwoSubject(),
+          html: seriesTwoHtml({ email, unsubscribeUrl: unsub }),
+          text: seriesTwoText({ email, unsubscribeUrl: unsub }),
+          headers: {
+            "List-Unsubscribe": `<${unsub}>`,
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+          },
+          scheduledAt: "in 4 days",
+        });
+        scheduledE3Id = e3.data?.id ?? null;
+      } catch (err) {
+        console.error("[waitlist] Resend schedule E3 failed:", err);
+      }
 
-    if (scheduledE2Id || scheduledE3Id) {
-      const { error: updErr } = await supabase
-        .from("waitlist")
-        .update({
-          scheduled_e2_id: scheduledE2Id,
-          scheduled_e3_id: scheduledE3Id,
-        })
-        .eq("email", email);
-      if (updErr) {
-        console.error(
-          "[waitlist] Failed to persist scheduled email IDs:",
-          updErr,
-        );
+      if (scheduledE2Id || scheduledE3Id) {
+        const { error: updErr } = await supabase
+          .from("waitlist")
+          .update({
+            scheduled_e2_id: scheduledE2Id,
+            scheduled_e3_id: scheduledE3Id,
+          })
+          .eq("email", email);
+        if (updErr) {
+          console.error(
+            "[waitlist] Failed to persist scheduled email IDs:",
+            updErr,
+          );
+        }
       }
     }
   } else {

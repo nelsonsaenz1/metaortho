@@ -12,7 +12,9 @@ type Status = "idle" | "loading" | "success" | "error";
 
 export default function BookContent() {
   const emailId = useId();
+  const consentId = useId();
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(true);
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState<string | null>(null);
 
@@ -28,8 +30,7 @@ export default function BookContent() {
         body: JSON.stringify({
           email: email.trim().toLowerCase(),
           source_component: "book-page",
-          source_page: "/book",
-          consent_marketing: true,
+          consent_marketing: consent,
         }),
       });
       const data: { success: boolean; message?: string } = await res
@@ -156,12 +157,25 @@ export default function BookContent() {
                     </p>
                   )}
                 </form>
-                <p className="mt-4 text-[12px] text-white/70">
+                <label
+                  htmlFor={consentId}
+                  className="mt-4 flex items-start gap-2.5 text-[12px] text-white/75 leading-relaxed max-w-sm mx-auto text-left cursor-pointer"
+                >
+                  <input
+                    id={consentId}
+                    type="checkbox"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    className="mt-0.5 accent-[var(--color-accent-primary)]"
+                  />
+                  <span>
+                    Send me launch updates and the weekly newsletter on GLP-1
+                    side effects, new research, and counteraction protocols.
+                    Unsubscribe anytime.
+                  </span>
+                </label>
+                <p className="mt-3 text-[12px] text-white/70">
                   Free · Unsubscribe anytime · No spam
-                </p>
-                <p className="mt-2 text-[12px] text-white/70 leading-relaxed max-w-sm mx-auto">
-                  Includes our weekly newsletter on GLP-1 side effects, new
-                  research, and counteraction protocols.
                 </p>
               </>
             )}

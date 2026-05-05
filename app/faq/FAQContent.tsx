@@ -12,7 +12,7 @@ const clinicalFAQs = [
   {
     question: "What is sarcopenia and why should I be worried about it?",
     answer:
-      "Sarcopenia is the progressive loss of muscle mass and function. On GLP-1 medications, the rapid weight loss can dramatically accelerate this process. Sarcopenia increases your risk of falls, fractures, metabolic dysfunction, and reduced quality of life. The dangerous part is that it's silent — you feel lighter on the scale but your muscles are wasting. MetaOrtho monitors muscle composition and provides evidence-based prevention protocols including resistance training prescriptions and protein/supplement optimization.",
+      "Sarcopenia is the progressive loss of muscle mass and function. On GLP-1 medications, rapid weight loss can accelerate this process. Sarcopenia is associated with higher rates of falls, fractures, metabolic dysfunction, and reduced quality of life. The hard part is that it's silent — you feel lighter on the scale but your muscles are wasting. MetaOrtho monitors muscle composition and uses evidence-based protocols — resistance training prescriptions and protein and supplement optimization — designed to slow lean-mass loss while you're on therapy.",
   },
   {
     question: "How does GLP-1 weight loss affect bone density?",
