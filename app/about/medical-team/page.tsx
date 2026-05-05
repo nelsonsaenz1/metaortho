@@ -65,6 +65,11 @@ export default function MedicalTeamPage() {
                       <span className="font-mono text-[13px]">39775</span>{" "}
                       (Orthopaedic Surgery; valid through July 31, 2027)
                     </li>
+                    <li>
+                      Arkansas &mdash; License No.{" "}
+                      <span className="font-mono text-[13px]">[pending publication]</span>{" "}
+                      (Orthopaedic Surgery; available on request)
+                    </li>
                     <li className="text-[var(--color-text-tertiary)] text-[13px]">
                       Additional state licenses will be listed here as each is
                       verified by operations.

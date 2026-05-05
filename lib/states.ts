@@ -3,13 +3,13 @@
 // intake gating) read from this file. To change the licensure footprint,
 // edit this file only.
 //
-// As of 2026-04-29, only Tennessee is documented as actively licensed.
-// Every other state is marked "pending" — these represent the intended
-// expansion footprint, not active licensure. Move a state to "licensed"
-// only when (a) the practice has the active license number on file and
-// (b) operations has confirmed the license is current. The /about/medical-team
-// page must add the per-state license number for any state moved to
-// "licensed" before that change is published.
+// As of 2026-05-05, Tennessee and Arkansas are documented as actively
+// licensed. Every other state is marked "pending" — these represent the
+// intended expansion footprint, not active licensure. Move a state to
+// "licensed" only when (a) the practice has the active license number on
+// file and (b) operations has confirmed the license is current. The
+// /about/medical-team page must add the per-state license number for any
+// state moved to "licensed" before that change is published.
 
 export type StateStatus = "licensed" | "pending" | "not-served";
 
@@ -23,7 +23,7 @@ export const STATES: StateEntry[] = [
   { code: "AL", name: "Alabama", status: "pending" },
   { code: "AK", name: "Alaska", status: "pending" },
   { code: "AZ", name: "Arizona", status: "pending" },
-  { code: "AR", name: "Arkansas", status: "pending" },
+  { code: "AR", name: "Arkansas", status: "licensed" },
   { code: "CA", name: "California", status: "pending" },
   { code: "CO", name: "Colorado", status: "pending" },
   { code: "CT", name: "Connecticut", status: "pending" },
