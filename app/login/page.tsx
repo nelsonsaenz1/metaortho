@@ -10,7 +10,16 @@ function LoginForm() {
   const [error, setError] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/";
+  // Reject anything that isn't a same-origin path. Blocks `?redirect=https://evil.com`
+  // and protocol-relative `?redirect=//evil.com`. Also blocks `\` which some browsers
+  // treat as a path separator after normalization.
+  const rawRedirect = searchParams.get("redirect") || "/";
+  const redirect =
+    rawRedirect.startsWith("/") &&
+    !rawRedirect.startsWith("//") &&
+    !rawRedirect.startsWith("/\\")
+      ? rawRedirect
+      : "/";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -50,7 +50,7 @@ const trustItems = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
-    text: "Board-certified orthopedic surgeon",
+    text: "Orthopedic + endocrine board-certified",
   },
   {
     icon: (
@@ -125,8 +125,9 @@ export default function Hero() {
 
             <p className="text-base text-[var(--color-text-secondary)] leading-[1.6] mb-10 max-w-lg tracking-[-0.01em]">
               MetaOrtho monitors your bones, muscles, and joints while you lose
-              weight — led by a board-certified orthopedic surgeon, all via
-              telehealth.
+              weight — led by a multi-specialty team of a board-certified
+              orthopedic surgeon and a board-certified endocrinologist, all
+              via telehealth.
             </p>
 
             <motion.div

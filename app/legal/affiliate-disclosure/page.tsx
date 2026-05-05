@@ -51,29 +51,30 @@ export default function AffiliateDisclosurePage() {
             otherwise affiliated with these companies.
           </p>
 
-          <h2 className={headingClass}>Compounding pharmacy partners</h2>
+          <h2 className={headingClass}>Pharmacies</h2>
           <p className={paraClass}>
-            MetaOrtho works with licensed compounding pharmacies to fulfill
-            compounded GLP-1 prescriptions when clinically appropriate.
-            MetaOrtho does not own these pharmacies. Pharmacy partners are
-            disclosed on our{" "}
+            MetaOrtho does <strong>not</strong> maintain preferred,
+            partner, or recommended pharmacies. Patients select the
+            licensed U.S. pharmacy where their prescription will be filled,
+            and MetaOrtho receives no payment, rebate, or referral fee from
+            any pharmacy. See our{" "}
             <a
-              href="/legal/pharmacy-partners"
+              href="/legal/pharmacy-selection"
               className="text-[var(--color-accent-primary)] underline hover:no-underline"
             >
-              pharmacy partners page
-            </a>
-            . The decision to use a compounded medication for a given
-            patient is made on clinical grounds; the pharmacy partner
-            relationship has no bearing on the clinical recommendation.
+              pharmacy selection
+            </a>{" "}
+            page for details. MetaOrtho does not prescribe compounded GLP-1
+            medications or controlled substances.
           </p>
 
-          <h2 className={headingClass}>Lab partners</h2>
+          <h2 className={headingClass}>Laboratories</h2>
           <p className={paraClass}>
-            MetaOrtho orders labs and DEXA scans through Quest Diagnostics
-            and Labcorp. MetaOrtho receives no markup or commission on the
-            labs or imaging fulfilled by these partners. Patients are
-            billed directly by the lab and/or their insurer.
+            Patients may use any in-network or accredited laboratory for
+            labs and DEXA scans ordered through MetaOrtho. Quest Diagnostics
+            and Labcorp are commonly chosen options. MetaOrtho receives no
+            markup or commission on labs or imaging. Patients are billed
+            directly by the lab and/or their insurer.
           </p>
 
           <h2 className={headingClass}>Supplement product</h2>

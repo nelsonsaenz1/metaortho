@@ -69,6 +69,35 @@ export default function ContactPage() {
             <span className="font-mono text-[13px]">
               [TO BE PUBLISHED — staffed phone line pending setup]
             </span>
+            <br />
+            <span className="text-[13px] text-[var(--color-text-tertiary)]">
+              Until the staffed line is live, the fastest way to reach us is
+              by email at{" "}
+              <a
+                href="mailto:info@metaortho.com"
+                className="text-[var(--color-accent-primary)] underline hover:no-underline"
+              >
+                info@metaortho.com
+              </a>
+              .
+            </span>
+          </p>
+
+          <h2 className="text-2xl font-normal tracking-[-0.01em] text-[var(--color-text-heading)] mb-4">
+            Hours of operation
+          </h2>
+          <p className="text-[var(--color-text-secondary)] leading-relaxed mb-2 text-[15px]">
+            Administrative hours (email and phone, once live):
+          </p>
+          <p className="text-[var(--color-text-secondary)] leading-relaxed mb-2 text-[15px]">
+            Monday &ndash; Friday, 9:00 AM &ndash; 5:00 PM Central Time
+          </p>
+          <p className="text-[var(--color-text-secondary)] leading-relaxed mb-8 text-[14px]">
+            Closed Saturdays, Sundays, and federal holidays. Clinical visits
+            are by appointment; you can request a visit through your patient
+            portal at any time and we&rsquo;ll respond on the next business
+            day. MetaOrtho does not provide emergency care &mdash; if you
+            are experiencing a medical emergency, call 911.
           </p>
 
           <h2 className="text-2xl font-normal tracking-[-0.01em] text-[var(--color-text-heading)] mb-4">

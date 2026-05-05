@@ -98,27 +98,33 @@ export default function DoctorPreview() {
             transition={{ duration: 0.7, delay: 0.1, ease }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-accent-primary)] mb-4 font-[var(--font-body)]">
-              Your physician
+              Your physician team
             </p>
 
             <h2 className="text-[clamp(2rem,4vw,3rem)] font-normal tracking-[-0.02em] mb-2">
               Dr. Jay M. Saenz, MD
             </h2>
             <p className="text-lg text-[var(--color-accent-primary)] mb-8 tracking-[-0.01em]">
-              Board-Certified Orthopedic Surgeon
+              Board-Certified Orthopedic Surgeon · Founder &amp; Medical
+              Director
             </p>
 
-            <div className="space-y-4 text-[var(--color-text-secondary)] leading-relaxed mb-8">
+            <div className="space-y-4 text-[var(--color-text-secondary)] leading-relaxed mb-6">
               <p>
                 Dr. Saenz founded MetaOrtho to address one of the most significant
                 unmet needs in modern medicine: the musculoskeletal consequences of
                 GLP-1 weight loss medications.
               </p>
               <p>
-                As an orthopedic surgeon, Dr. Saenz brings the exact clinical
-                credentialing needed to monitor bone density, muscle mass, joint
-                health, and structural integrity during rapid weight loss —
-                expertise no other GLP-1 telehealth platform offers.
+                He leads the practice alongside{" "}
+                <strong className="text-[var(--color-text-heading)]">
+                  Dr. Kashif Latif, MD
+                </strong>
+                , a board-certified endocrinologist with 24+ years of
+                experience and multi-year DEXA-scan research on GLP-1 effects
+                on muscle and bone. The pairing &mdash; orthopedic surgeon and
+                endocrinologist co-leading the protocol &mdash; is the
+                clinical combination GLP-1 monitoring actually requires.
               </p>
             </div>
 
@@ -154,10 +160,10 @@ export default function DoctorPreview() {
             </div>
 
             <a
-              href="/about"
+              href="/about/medical-team"
               className="inline-flex items-center gap-2 px-6 py-3 text-[14px] font-semibold rounded-[var(--radius-pill)] border-2 border-[var(--color-text-heading)] text-[var(--color-text-heading)] hover:bg-[var(--color-text-heading)] hover:text-white transition-[background-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] active:duration-[var(--dur-press)] motion-reduce:active:scale-100 tracking-[-0.01em]"
             >
-              Full bio &amp; credentials
+              Meet the medical team
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>

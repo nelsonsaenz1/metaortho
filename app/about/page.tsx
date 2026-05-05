@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import AboutContent from "./AboutContent";
 
 export const metadata: Metadata = {
-  title: "About Dr. Jay M. Saenz, MD",
+  title: "Our Physicians",
   description:
-    "Meet the board-certified orthopedic surgeon leading MetaOrtho. Dr. Saenz specializes in musculoskeletal care for GLP-1 weight loss patients.",
+    "Meet the physicians who lead MetaOrtho — Dr. Jay M. Saenz (board-certified orthopedic surgeon) and Dr. Kashif Latif (board-certified endocrinologist).",
 };
 
 export default function AboutPage() {

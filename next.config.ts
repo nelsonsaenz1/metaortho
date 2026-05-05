@@ -26,6 +26,22 @@ const nextConfig: NextConfig = {
         destination: "/legal/notice-of-privacy-practices",
         permanent: true,
       },
+      // Welcome-series emails (E1, E2, E3) link to /quiz as the "free 5-minute
+      // risk quiz" CTA, but the live route is /assessment. Permanent redirect
+      // future-proofs the link.
+      {
+        source: "/quiz",
+        destination: "/assessment",
+        permanent: true,
+      },
+      // Old "pharmacy-partners" slug implied a commercial relationship that
+      // doesn't exist; the page is now /legal/pharmacy-selection with a
+      // patient-directed framing.
+      {
+        source: "/legal/pharmacy-partners",
+        destination: "/legal/pharmacy-selection",
+        permanent: true,
+      },
     ];
   },
 };

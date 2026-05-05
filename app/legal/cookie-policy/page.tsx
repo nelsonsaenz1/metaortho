@@ -29,8 +29,8 @@ const cookies = [
   },
   {
     name: "_ga / _gid / _gat (and gtag-set ad cookies)",
-    vendor: "Google (Google Ads conversion tracking)",
-    purpose: "Used to attribute visits and conversions to Google Ads campaigns. Loaded only on public marketing pages and only if you accept analytics &amp; marketing cookies.",
+    vendor: "Google (Google Ads conversion tracking, tag ID AW-18123956048)",
+    purpose: "Used to attribute visits and conversions to Google Ads campaigns. Loaded only on public marketing pages and only if you accept analytics &amp; marketing cookies. We do not pass any health information, identifiers, or page parameters that contain health questions to Google.",
     expiry: "Up to 2 years",
     category: "Marketing",
   },
@@ -86,7 +86,9 @@ export default function CookiePolicyPage() {
             <li>
               <strong>Marketing</strong> &mdash; used to measure
               advertising performance and tailor messaging. We use Google
-              Ads conversion tracking on public marketing pages only.
+              Ads conversion tracking (tag ID{" "}
+              <code className="text-[13px]">AW-18123956048</code>) on
+              public marketing pages only.
             </li>
           </ul>
 

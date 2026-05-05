@@ -132,24 +132,26 @@ export default function GrievancesPage() {
           </p>
 
           <h2 className={headingClass}>
-            5. State pharmacy boards (compounded medications)
+            5. State pharmacy boards (dispensing concerns)
           </h2>
           <p className={paraClass}>
-            If your concern is specifically about a compounded medication
-            you received through MetaOrtho, your state board of pharmacy
-            regulates the compounding pharmacy that prepared it. Start
-            with the compounding pharmacy disclosed on our{" "}
+            If your concern is specifically about how a medication was
+            dispensed by the pharmacy you selected, the state board of
+            pharmacy in that pharmacy&rsquo;s state regulates dispensing
+            and pharmacist conduct. See our{" "}
             <a
-              href="/legal/pharmacy-partners"
+              href="/legal/pharmacy-selection"
               className="text-[var(--color-accent-primary)] underline hover:no-underline"
             >
-              pharmacy partners page
-            </a>
-            ; the partner&rsquo;s state of licensure is listed there.
+              pharmacy selection
+            </a>{" "}
+            page for context on how MetaOrtho prescribes (we do not
+            prescribe compounded GLP-1 medications or controlled
+            substances).
           </p>
 
           <p className="text-xs text-[var(--color-text-tertiary)] mt-12">
-            Updated 2026-04-29.
+            Updated 2026-05-05.
           </p>
         </div>
       </SectionWrapper>

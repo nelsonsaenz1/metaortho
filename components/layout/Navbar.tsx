@@ -28,7 +28,7 @@ export default function Navbar() {
     <div data-site-navbar>
       {/* Top announcement bar */}
       <div className="bg-[var(--color-bg-dark)] text-center py-2.5 px-4 text-sm text-white tracking-[-0.01em] relative z-50">
-        <span>Orthopedic surgeon-led telehealth</span>
+        <span>Multi-specialty telehealth · Orthopedic + Endocrine</span>
         <span className="mx-2 text-white/75">|</span>
         <Link href="/assessment" className="underline underline-offset-2 font-semibold hover:opacity-100 transition-opacity duration-[var(--dur-hover)] ease-[var(--ease-out)]">
           Free risk assessment →

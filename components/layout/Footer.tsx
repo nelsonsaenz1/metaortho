@@ -53,6 +53,12 @@ export default function Footer() {
               provided only by clinicians licensed in your state.
             </p>
             <p className="text-[13px] text-white/70 leading-relaxed mb-3">
+              Information on this site is for educational purposes and is
+              not a substitute for individualized medical advice. Consult
+              a licensed clinician before starting, stopping, or changing
+              any medication. Individual results vary.
+            </p>
+            <p className="text-[13px] text-white/70 leading-relaxed mb-3">
               MetaOrthopedics, PLLC &middot; 3096 Chapel Woods Cove,
               Germantown, TN 38139
               <br />
@@ -65,11 +71,17 @@ export default function Footer() {
               &middot; Phone:{" "}
               <span className="font-mono text-[12px]">[pending]</span>
             </p>
-            <p className="text-[13px] text-white/70 leading-relaxed">
+            <p className="text-[13px] text-white/70 leading-relaxed mb-3">
               Medical Director: Jay M. Saenz, MD &mdash; Board-Certified
               Orthopedic Surgeon
               <br />
               NPI: <span className="font-mono text-[12px]">1235140211</span>
+            </p>
+            <p className="text-[11px] text-white/55 leading-relaxed italic">
+              Wegovy, Ozempic, Mounjaro, and Zepbound are registered
+              trademarks of their respective manufacturers. MetaOrtho is
+              not affiliated with, endorsed by, or sponsored by the
+              manufacturers of these medications.
             </p>
           </div>
           <div className="rounded-[var(--radius-md)] border border-red-500/30 bg-red-500/5 p-4 text-[13px] text-red-100/90 leading-relaxed">
@@ -136,7 +148,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               {[
-                { label: "About Dr. Saenz", href: "/about" },
+                { label: "Our Physicians", href: "/about" },
                 { label: "Medical Team", href: "/about/medical-team" },
                 { label: "Contact", href: "/about/contact" },
                 { label: "Licensed States", href: "/legal/licensed-states" },
@@ -171,8 +183,8 @@ export default function Footer() {
                   href: "/legal/telehealth-informed-consent",
                 },
                 {
-                  label: "Pharmacy Partners",
-                  href: "/legal/pharmacy-partners",
+                  label: "Pharmacy Selection",
+                  href: "/legal/pharmacy-selection",
                 },
                 {
                   label: "Affiliate Disclosure",

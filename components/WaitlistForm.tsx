@@ -152,7 +152,7 @@ export default function WaitlistForm(props: WaitlistFormProps) {
     </button>
   );
 
-  const Status = (
+  const StatusNode = (
     <>
       {status === "success" && message && (
         <p
@@ -249,7 +249,7 @@ export default function WaitlistForm(props: WaitlistFormProps) {
 
             <div className="mt-4 flex justify-center">{Consent}</div>
 
-            <div className="mt-3 min-h-[18px]">{Status}</div>
+            <div className="mt-3 min-h-[18px]">{StatusNode}</div>
           </form>
         </div>
       </section>
@@ -287,7 +287,7 @@ export default function WaitlistForm(props: WaitlistFormProps) {
             </button>
           </div>
           <div className="mt-3">{Consent}</div>
-          <div className="mt-2 min-h-[18px]">{Status}</div>
+          <div className="mt-2 min-h-[18px]">{StatusNode}</div>
         </form>
       </div>
     );

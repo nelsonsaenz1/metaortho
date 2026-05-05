@@ -35,16 +35,14 @@ export const dynamic = "force-dynamic";
 // Strict-but-pragmatic email regex — RFC 5322 is overkill for waitlist gate.
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-const ALLOWED_COMPONENTS = new Set([
-  "hero",
-  "hero-primary",
-  "inline",
-  "sticky_footer",
-  "modal",
-  "final-cta",
-  "landing-slide-3",
-  "book-page",
-]);
+// Source-component values are an analytics tag, not a security boundary —
+// they're stored as text on the row and used to attribute signups to a CTA.
+// We accept any short kebab/snake-case slug rather than maintaining a strict
+// allow-list, because callers include dynamic values like
+// `assessment-result-${level}` and `pricing-${plan}`. Charset + length cap
+// is enough — there's nothing to inject into a Postgres text column.
+const COMPONENT_RE = /^[a-z0-9][a-z0-9_-]*$/;
+const COMPONENT_MAX = 64;
 
 type Payload = {
   email?: unknown;
@@ -108,7 +106,10 @@ export async function POST(req: Request) {
     );
   }
 
-  if (component && !ALLOWED_COMPONENTS.has(component)) {
+  if (
+    component &&
+    (component.length > COMPONENT_MAX || !COMPONENT_RE.test(component))
+  ) {
     return NextResponse.json(
       { success: false, message: "Invalid form source." },
       { status: 400 },

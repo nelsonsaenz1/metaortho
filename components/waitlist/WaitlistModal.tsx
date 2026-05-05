@@ -259,7 +259,7 @@ export function WaitlistProvider({ children }: { children: ReactNode }) {
 
               {/* Mini trust row */}
               <div className="mt-6 pt-5 border-t border-[var(--color-border)] flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-[var(--color-text-tertiary)]">
-                <span>Orthopedic surgeon-led</span>
+                <span>Orthopedic + Endocrine led</span>
                 <span className="opacity-40">·</span>
                 <span>HIPAA-compliant</span>
               </div>

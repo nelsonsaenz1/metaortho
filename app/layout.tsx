@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | MetaOrtho",
   },
   description:
-    "Physician-led telehealth practice protecting your bones, muscles, and joints while you lose weight on Ozempic, Wegovy, Mounjaro, or Zepbound. Board-certified orthopedic surgeon.",
+    "Multi-specialty telehealth practice — board-certified orthopedic surgeon and endocrinologist — protecting your bones, muscles, and joints while you lose weight on Ozempic, Wegovy, Mounjaro, or Zepbound.",
   keywords: [
     "GLP-1 muscle loss",
     "Ozempic bone density",
@@ -64,9 +64,9 @@ export default function RootLayout({
     name: "MetaOrthopedics",
     alternateName: "MetaOrtho",
     description:
-      "Physician-led telemedicine practice providing musculoskeletal monitoring and care for patients on GLP-1 weight loss medications.",
+      "Multi-specialty telemedicine practice led by a board-certified orthopedic surgeon and a board-certified endocrinologist, providing musculoskeletal and metabolic monitoring for patients on GLP-1 weight loss medications.",
     url: "https://metaortho.com",
-    medicalSpecialty: "Orthopedic",
+    medicalSpecialty: ["Orthopedic", "Endocrine"],
     availableService: [
       {
         "@type": "MedicalProcedure",

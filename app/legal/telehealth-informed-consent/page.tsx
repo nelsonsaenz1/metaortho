@@ -61,9 +61,9 @@ export default function TelehealthInformedConsentPage() {
           </p>
           <ul className={listClass}>
             <li>Conduct comprehensive musculoskeletal risk assessments</li>
-            <li>Order labs and DEXA scans through partner laboratories</li>
+            <li>Order labs and DEXA scans through accredited laboratories you select</li>
             <li>Build personalized monitoring and protection protocols</li>
-            <li>Prescribe medications when clinically appropriate (including, in some cases, compounded GLP-1 medications &mdash; see our <a href="/legal/pharmacy-partners" className="text-[var(--color-accent-primary)] underline hover:no-underline">pharmacy partners</a>)</li>
+            <li>Prescribe FDA-approved branded GLP-1 medications and other medications when clinically appropriate, transmitted to the licensed U.S. pharmacy you choose &mdash; see our <a href="/legal/pharmacy-selection" className="text-[var(--color-accent-primary)] underline hover:no-underline">pharmacy selection</a> page. We do not prescribe compounded GLP-1 medications or controlled substances.</li>
             <li>Manage gout, fracture risk, and related musculoskeletal conditions associated with rapid weight loss</li>
           </ul>
 

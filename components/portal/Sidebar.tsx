@@ -112,14 +112,14 @@ export default function Sidebar() {
       <div className="px-3 py-4 border-t border-[var(--color-border)]">
         <div className="px-3 py-2 flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-[var(--color-accent-primary)] text-white flex items-center justify-center text-sm font-semibold">
-            JS
+            DP
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-[13px] font-medium text-[var(--color-text-heading)] truncate">
-              Jay Saenz
+              Demo Patient
             </p>
             <p className="text-[11px] text-[var(--color-text-tertiary)] truncate">
-              jaysaenz99@yahoo.com
+              demo.patient@metaortho.com
             </p>
           </div>
         </div>
