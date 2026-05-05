@@ -8,7 +8,7 @@ import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
 const navLinks = [
   { label: "How It Works", href: "/home#how-it-works" },
   { label: "Services", href: "/pricing" },
-  { label: "About", href: "/about" },
+  { label: "Our Team", href: "/about" },
   { label: "Risk Assessment", href: "/assessment" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },

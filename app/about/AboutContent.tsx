@@ -49,16 +49,18 @@ export default function AboutContent() {
         <MeshBackground variant="light" className="opacity-40" />
         <div className="relative max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-accent-primary)] mb-4 font-[var(--font-body)]">
-            Our Physicians
+            Our Medical Team
           </p>
           <h1 className="text-[clamp(2.5rem,5vw,3.75rem)] font-normal tracking-[-0.03em] mb-6">
             The physicians who lead your care.
           </h1>
           <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed">
-            MetaOrtho is led by two board-certified physicians &mdash; an
-            orthopedic surgeon and an endocrinologist &mdash; who co-design
-            every protocol so patients get coordinated care across both
-            systems GLP-1 medications affect.
+            GLP-1 therapy doesn&rsquo;t just change your weight &mdash; it
+            reshapes metabolism, muscle, bone, and nutrient balance all at
+            once. MetaOrtho is led by two board-certified physicians, an
+            orthopedic surgeon and an endocrinologist, who co-design every
+            protocol so the systems most affected are each watched by the
+            specialist trained for them.
           </p>
         </div>
       </section>
@@ -155,10 +157,12 @@ export default function AboutContent() {
             Why a multi-specialty team for GLP-1 care?
           </h2>
           <p className="text-lg text-white/70 mb-16 max-w-2xl mx-auto">
-            GLP-1 medications work at the intersection of two systems &mdash;
-            metabolic and musculoskeletal. MetaOrtho pairs a board-certified
-            orthopedic surgeon with a board-certified endocrinologist so both
-            sides are covered by the right specialist.
+            GLP-1 medications reach further than the scale shows. They
+            reshape metabolism, muscle, bone, and nutrient balance at the
+            same time &mdash; and most weight-loss programs only watch one
+            of those. MetaOrtho pairs a board-certified orthopedic surgeon
+            with a board-certified endocrinologist so the systems most
+            affected are each watched by the specialist trained for them.
           </p>
 
           <div className="grid md:grid-cols-3 gap-6">

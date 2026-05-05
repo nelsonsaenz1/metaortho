@@ -148,7 +148,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               {[
-                { label: "Our Physicians", href: "/about" },
+                { label: "Our Medical Team", href: "/about" },
                 { label: "Medical Team", href: "/about/medical-team" },
                 { label: "Contact", href: "/about/contact" },
                 { label: "Licensed States", href: "/legal/licensed-states" },

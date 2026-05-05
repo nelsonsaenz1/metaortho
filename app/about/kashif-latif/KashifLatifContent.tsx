@@ -26,7 +26,7 @@ export default function KashifLatifContent() {
                 href="/about"
                 className="hover:text-[var(--color-text-heading)] underline-offset-2 hover:underline"
               >
-                Our Physicians
+                Our Medical Team
               </Link>
             </li>
             <li aria-hidden>›</li>
@@ -276,7 +276,7 @@ export default function KashifLatifContent() {
               href="/about"
               className="underline underline-offset-2 hover:text-[var(--color-text-heading)]"
             >
-              ← Back to Our Physicians
+              ← Back to our medical team
             </Link>
           </p>
           <h2 className="text-3xl font-normal tracking-[-0.02em] mb-6">
