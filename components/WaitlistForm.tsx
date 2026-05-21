@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useId, useState } from "react";
 import { usePathname } from "next/navigation";
 
 export type WaitlistVariant = "hero" | "inline" | "sticky_footer";
@@ -127,30 +127,6 @@ export default function WaitlistForm(props: WaitlistFormProps) {
       error: "text-[#ff8a7b]",
     },
   }[tone];
-
-  const SharedInput = (
-    <input
-      id={emailId}
-      type="email"
-      autoComplete="email"
-      required
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-      placeholder={placeholder}
-      aria-label="Email address"
-      className={`flex-1 min-w-0 px-4 text-[15px] rounded-[var(--radius-pill)] border focus:outline-none transition-colors ${palette.input}`}
-    />
-  );
-
-  const SharedButton = (
-    <button
-      type="submit"
-      disabled={status === "loading"}
-      className={`px-6 text-[14px] font-semibold rounded-[var(--radius-pill)] transition-[background-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] active:duration-[var(--dur-press)] motion-reduce:active:scale-100 tracking-[-0.01em] disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2 ${palette.button}`}
-    >
-      {status === "loading" ? "…" : buttonText}
-    </button>
-  );
 
   const StatusNode = (
     <>

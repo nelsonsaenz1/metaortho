@@ -1,6 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Pin the workspace root to this project directory. Without this, Next.js
+  // infers the root from the nearest lockfile and was selecting a parent
+  // directory because stray package-lock.json files exist above the repo
+  // (~/package-lock.json and ~/Mission Control/package-lock.json). Pinning it
+  // keeps Turbopack file tracing and module resolution scoped to this app.
+  turbopack: {
+    root: __dirname,
+  },
   images: {
     remotePatterns: [
       {

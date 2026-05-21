@@ -121,7 +121,7 @@ export function renderCta(opts: {
   const q = opts.question
     ? `<span style="${styles.ctaQuestion}">${opts.question}</span>`
     : "";
-  return `        <p style="${wrapper}">${q}<a href="${opts.href}" style="${styles.ctaLink}">${opts.label} &rarr;</a></p>`;
+  return `        <p style="${wrapper}">${q}<a href="${escapeHtml(opts.href)}" style="${styles.ctaLink}">${opts.label} &rarr;</a></p>`;
 }
 
 /**
@@ -212,7 +212,7 @@ export function renderPortrait(opts: {
 }): string {
   const size = opts.size ?? 80;
   return `        <div style="${styles.portraitWrap}">
-          <img src="${opts.src}" width="${size}" height="${size}" alt="${escapeHtml(opts.alt)}" style="${styles.portraitImg}" />
+          <img src="${escapeHtml(opts.src)}" width="${size}" height="${size}" alt="${escapeHtml(opts.alt)}" style="${styles.portraitImg}" />
         </div>`;
 }
 
@@ -312,7 +312,7 @@ export function renderEmail(inputs: EmailInputs): string {
   // sends fall back to Resend's `{{{RESEND_UNSUBSCRIBE_URL}}}` placeholder, which
   // Resend substitutes at delivery time (one-click unsubscribe compliant).
   const unsubUrl = inputs.footer?.unsubscribeUrl || "{{{RESEND_UNSUBSCRIBE_URL}}}";
-  const utilsLine = `        <p style="${styles.utilsSmall}"><a href="${unsubUrl}" style="${styles.footerLink}">Unsubscribe</a> &nbsp;&middot;&nbsp; <a href="${privacyUrl}" style="${styles.footerLink}">Privacy</a> &nbsp;&middot;&nbsp; ${escapeHtml(addr)}</p>\n`;
+  const utilsLine = `        <p style="${styles.utilsSmall}"><a href="${escapeHtml(unsubUrl)}" style="${styles.footerLink}">Unsubscribe</a> &nbsp;&middot;&nbsp; <a href="${escapeHtml(privacyUrl)}" style="${styles.footerLink}">Privacy</a> &nbsp;&middot;&nbsp; ${escapeHtml(addr)}</p>\n`;
 
   return `<!doctype html>
 <html lang="en">
