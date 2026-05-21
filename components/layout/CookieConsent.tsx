@@ -55,9 +55,14 @@ export default function CookieConsent() {
       const t = setTimeout(() => setOpen(true), 1500);
       return () => clearTimeout(t);
     }
+    // Hydrate the toggles from previously-saved consent. Reading localStorage
+    // during render would cause an SSR/client mismatch, so this is the correct
+    // place; the set-state-in-effect rule is a false positive here.
+    /* eslint-disable react-hooks/set-state-in-effect */
     setFunctional(existing.functional);
     setAnalytics(existing.analytics);
     setMarketing(existing.marketing);
+    /* eslint-enable react-hooks/set-state-in-effect */
     function onOpenRequest() {
       const cur = readConsent();
       if (cur) {

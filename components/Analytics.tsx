@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 const GOOGLE_ADS_TAG_ID = "AW-18123956048";
 
@@ -32,22 +32,26 @@ function readMarketingConsent(): boolean {
   }
 }
 
+/** Subscribe to consent changes — same tab via custom event, other tabs via storage. */
+function subscribeConsent(onChange: () => void): () => void {
+  window.addEventListener("metaortho:consent-changed", onChange);
+  window.addEventListener("storage", onChange);
+  return () => {
+    window.removeEventListener("metaortho:consent-changed", onChange);
+    window.removeEventListener("storage", onChange);
+  };
+}
+
 export default function Analytics() {
   const pathname = usePathname();
-  const [marketingConsented, setMarketingConsented] = useState(false);
-
-  useEffect(() => {
-    setMarketingConsented(readMarketingConsent());
-    function onChange() {
-      setMarketingConsented(readMarketingConsent());
-    }
-    window.addEventListener("metaortho:consent-changed", onChange);
-    window.addEventListener("storage", onChange);
-    return () => {
-      window.removeEventListener("metaortho:consent-changed", onChange);
-      window.removeEventListener("storage", onChange);
-    };
-  }, []);
+  // Marketing consent lives in localStorage + a custom event — i.e. an external
+  // store. useSyncExternalStore reads it without a setState-in-effect and
+  // returns false during SSR so gtag never renders on the server.
+  const marketingConsented = useSyncExternalStore(
+    subscribeConsent,
+    readMarketingConsent,
+    () => false,
+  );
 
   if (!isAllowedPath(pathname)) return null;
   if (!marketingConsented) return null;

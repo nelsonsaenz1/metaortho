@@ -6,6 +6,11 @@
  *
  * Environment variables (set in the Supabase dashboard → Edge Functions → Settings):
  *   SLACK_WEBHOOK_URL            — Incoming webhook URL
+ *   WAITLIST_NOTIFY_SECRET       — Shared secret to authenticate the webhook
+ *                                  (recommended). Send the same value as an
+ *                                  `X-Webhook-Secret` header from the webhook
+ *                                  config. If unset, the function falls back to
+ *                                  verifying `Authorization: Bearer <SERVICE_ROLE_KEY>`.
  *   SUPABASE_URL                 — Provided automatically by Supabase (do not set)
  *   SUPABASE_SERVICE_ROLE_KEY    — Provided automatically by Supabase (do not set)
  *
@@ -24,6 +29,7 @@
  *     Method: POST
  *     URL: https://<project-ref>.supabase.co/functions/v1/waitlist-notify
  *     HTTP Headers: Authorization: Bearer <SERVICE_ROLE_KEY>
+ *                   X-Webhook-Secret: <WAITLIST_NOTIFY_SECRET>   (recommended)
  *
  * Important: this function never throws out of the HTTP handler — if Slack is
  * down, we log and return 200 so the database INSERT is never rolled back.
@@ -50,12 +56,49 @@ const DENO_ENV: Record<string, string | undefined> = (globalThis as any).Deno
 const SLACK_WEBHOOK_URL = DENO_ENV.SLACK_WEBHOOK_URL;
 const SUPABASE_URL = DENO_ENV.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = DENO_ENV.SUPABASE_SERVICE_ROLE_KEY;
+const WAITLIST_NOTIFY_SECRET = DENO_ENV.WAITLIST_NOTIFY_SECRET;
+
+/** Constant-time string compare. The length check leaks length, which is fine here. */
+function safeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  let mismatch = 0;
+  for (let i = 0; i < a.length; i++) {
+    mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return mismatch === 0;
+}
+
+/**
+ * Verify the request actually came from our Supabase Database Webhook.
+ * Without this, anyone who learns the function URL can forge Slack
+ * notifications and probe the database via the count query.
+ *
+ * Preferred: a dedicated WAITLIST_NOTIFY_SECRET sent as `X-Webhook-Secret`.
+ * Fallback: the `Authorization: Bearer <SERVICE_ROLE_KEY>` header the README
+ * configures (the service-role key is injected into the function env).
+ */
+function isAuthorized(req: Request): boolean {
+  if (WAITLIST_NOTIFY_SECRET) {
+    return safeEqual(req.headers.get("x-webhook-secret") ?? "", WAITLIST_NOTIFY_SECRET);
+  }
+  if (SUPABASE_SERVICE_ROLE_KEY) {
+    const token = (req.headers.get("authorization") ?? "").replace(/^Bearer\s+/i, "");
+    return safeEqual(token, SUPABASE_SERVICE_ROLE_KEY);
+  }
+  // Nothing to verify against — fail closed rather than accept forgeries.
+  return false;
+}
 
 // @ts-expect-error Deno.serve is the runtime entrypoint
 Deno.serve(async (req: Request) => {
   try {
     if (req.method !== "POST") {
       return json({ ok: false, reason: "method_not_allowed" }, 405);
+    }
+
+    if (!isAuthorized(req)) {
+      console.warn("[waitlist-notify] rejected unauthorized request.");
+      return json({ ok: false, reason: "unauthorized" }, 401);
     }
 
     const payload = (await req.json().catch(() => null)) as DbWebhookPayload | null;

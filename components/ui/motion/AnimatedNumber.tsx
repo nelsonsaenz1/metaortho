@@ -32,13 +32,13 @@ export default function AnimatedNumber({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.6 });
   const reduce = useReducedMotion();
-  const [display, setDisplay] = useState(reduce ? value : 0);
+  const [display, setDisplay] = useState(0);
+  // Reduced-motion users always see the final value; everyone else sees the
+  // animated `display`. Deriving this at render avoids a setState in the effect.
+  const shown = reduce ? value : display;
 
   useEffect(() => {
-    if (!inView || reduce) {
-      if (reduce) setDisplay(value);
-      return;
-    }
+    if (!inView || reduce) return;
     const start = performance.now();
     let raf = 0;
     const tick = (now: number) => {
@@ -55,7 +55,7 @@ export default function AnimatedNumber({
   return (
     <span ref={ref} className={`tabular-nums ${className}`}>
       {prefix}
-      {display.toFixed(decimals)}
+      {shown.toFixed(decimals)}
       {suffix}
     </span>
   );

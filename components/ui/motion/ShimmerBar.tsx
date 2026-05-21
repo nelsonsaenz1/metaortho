@@ -31,14 +31,13 @@ export default function ShimmerBar({
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
   const reduce = useReducedMotion();
-  const [w, setW] = useState(reduce ? percent : 0);
+  const [w, setW] = useState(0);
+  // Reduced-motion users jump straight to the target width; deriving it at
+  // render avoids a setState in the effect.
+  const width = reduce ? percent : w;
 
   useEffect(() => {
-    if (!inView) return;
-    if (reduce) {
-      setW(percent);
-      return;
-    }
+    if (!inView || reduce) return;
     const t = setTimeout(() => setW(percent), 40);
     return () => clearTimeout(t);
   }, [inView, percent, reduce]);
@@ -51,7 +50,7 @@ export default function ShimmerBar({
       <div
         className={`${shimmer ? "shimmer-overlay " : ""}relative h-full rounded-full transition-[width] ${fillClassName}`}
         style={{
-          width: `${w}%`,
+          width: `${width}%`,
           transitionDuration: `${duration}ms`,
           transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)",
         }}

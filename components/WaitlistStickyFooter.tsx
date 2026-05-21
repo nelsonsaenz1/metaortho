@@ -18,12 +18,17 @@ export default function WaitlistStickyFooter() {
   const [successHidden, setSuccessHidden] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- standard client-mounted flag to avoid an SSR hydration mismatch
     setMounted(true);
   }, []);
 
   useEffect(() => {
     if (!mounted) return;
 
+    // Visibility is read from pathname + localStorage once mounted (client
+    // only). The set-state-in-effect rule is a false positive for this
+    // read-then-show pattern; disabled across the block below.
+    /* eslint-disable react-hooks/set-state-in-effect */
     const hidden = HIDDEN_PREFIXES.some((p) => pathname.startsWith(p));
     if (hidden) {
       setVisible(false);
@@ -45,6 +50,7 @@ export default function WaitlistStickyFooter() {
     const msSince = Date.now() - dismissedAt;
     const msWindow = REMIND_AFTER_DAYS * 24 * 60 * 60 * 1000;
     setVisible(msSince > msWindow);
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [mounted, pathname]);
 
   if (!mounted || !visible || successHidden) return null;

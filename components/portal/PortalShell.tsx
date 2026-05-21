@@ -41,6 +41,7 @@ export default function PortalShell({
 
   useEffect(() => {
     if (isLoginRoute) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- client-only auth gate; `ready` must flip after mount to avoid an SSR/client mismatch
       setReady(true);
       return;
     }
