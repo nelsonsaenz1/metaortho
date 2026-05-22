@@ -125,7 +125,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               {[
-                { label: "Risk Assessment", href: "/assessment" },
+                { label: "GLP-1 Profile", href: "/assessment" },
                 { label: "Blog", href: "/blog" },
                 { label: "FAQ", href: "/faq" },
                 { label: "Sources", href: "/legal/sources" },

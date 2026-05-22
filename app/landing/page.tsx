@@ -849,7 +849,7 @@ function FinalCTASection() {
               href="/assessment"
               className="inline-flex items-center justify-center px-10 py-4.5 text-base font-semibold rounded-[var(--radius-pill)] border border-white/20 text-white/80 hover:bg-white/5 hover:border-white/30 transition-all duration-300 tracking-[-0.01em]"
             >
-              Take the Free Risk Quiz
+              Get your GLP-1 Profile
             </a>
           </div>
 

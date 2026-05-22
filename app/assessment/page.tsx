@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import AssessmentPage from "./AssessmentPage";
 
 export const metadata: Metadata = {
-  title: "GLP-1 MSK Risk Assessment",
+  title: "GLP-1 Management Profile",
   description:
-    "Free quiz: Are your bones and muscles at risk from GLP-1 weight loss drugs? Take a 2-minute assessment to find out. From MetaOrtho, led by a board-certified orthopedic surgeon.",
+    "Get your personalized GLP-1 Management Profile — a clinical-style assessment of candidacy, drug-and-dose context, side effects, and monitoring needs, including bone, muscle, and joint health. Built by an endocrinologist and an orthopedic surgeon at MetaOrtho.",
 };
 
 export default function Assessment() {

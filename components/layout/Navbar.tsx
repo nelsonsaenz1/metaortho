@@ -9,7 +9,7 @@ const navLinks = [
   { label: "How It Works", href: "/home#how-it-works" },
   { label: "Services", href: "/pricing" },
   { label: "Our Team", href: "/about" },
-  { label: "Risk Assessment", href: "/assessment" },
+  { label: "GLP-1 Profile", href: "/assessment" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
 ];
@@ -31,7 +31,7 @@ export default function Navbar() {
         <span>Multi-specialty telehealth · Orthopedic + Endocrine</span>
         <span className="mx-2 text-white/75">|</span>
         <Link href="/assessment" className="underline underline-offset-2 font-semibold hover:opacity-100 transition-opacity duration-[var(--dur-hover)] ease-[var(--ease-out)]">
-          Free risk assessment →
+          Get your free GLP-1 Profile →
         </Link>
       </div>
 

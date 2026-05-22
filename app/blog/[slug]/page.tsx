@@ -168,17 +168,17 @@ export default async function BlogPost({
         <section className="bg-[var(--color-bg-cream)] py-16 md:py-20">
           <div className="max-w-3xl mx-auto px-5 sm:px-8 lg:px-12 text-center">
             <h3 className="text-2xl font-normal tracking-[-0.02em] mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
-              Concerned about your musculoskeletal health?
+              Want a specialist&apos;s read on your GLP-1?
             </h3>
             <p className="text-[var(--color-text-secondary)] mb-8 max-w-md mx-auto leading-relaxed">
-              Book a comprehensive MSK assessment with MetaOrtho. Expert orthopedic care, all via telehealth.
+              Get your personalized GLP-1 Management Profile — candidacy, drug and dose considerations, and a monitoring plan, including bone and muscle health.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button href="/book" variant="dark" size="lg">
-                Join the waitlist
+              <Button href="/assessment" variant="dark" size="lg">
+                Get your GLP-1 Profile
               </Button>
-              <Button href="/assessment" variant="outline" size="lg">
-                Take Free Risk Quiz
+              <Button href="/book" variant="outline" size="lg">
+                Join the waitlist
               </Button>
             </div>
           </div>
