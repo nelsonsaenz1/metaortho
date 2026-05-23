@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import MeshBackground from "@/components/ui/motion/MeshBackground";
 import ShimmerBar from "@/components/ui/motion/ShimmerBar";
 import AnimatedNumber from "@/components/ui/motion/AnimatedNumber";
-import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
+import { trackEvent } from "@/lib/analytics";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -51,8 +51,9 @@ export default function PortalPreview() {
             .
           </h2>
           <p className="text-lg text-white/80 leading-relaxed max-w-xl">
-            MSK score, bone density trend, lean-mass tracking, lab results, and
-            next-visit prep — in one place, updated every time we see you.
+            After your consult, your MSK score, bone-density trends, lean-mass,
+            lab results, and next-visit prep live in one place — tracked every
+            time we see you.
           </p>
         </motion.div>
 
@@ -443,25 +444,20 @@ export default function PortalPreview() {
           transition={{ duration: 0.6, delay: 0.35, ease }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 text-center"
         >
-          <WaitlistCTA
-            variant="onDark"
-            size="lg"
-            source="portal-preview"
-            eyebrow="Early access · MetaOrtho portal"
-            headline={
-              <>
-                Get portal access the day
-                <br />
-                we open in your state.
-              </>
-            }
-            subcopy="One email. You're first when MetaOrtho launches — no waitlist page to re-find."
+          <a
+            href="/assessment"
+            onClick={() => trackEvent("profile_cta_clicked", { location: "portal-preview" })}
+            className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold rounded-[var(--radius-pill)] bg-white text-[var(--color-bg-dark)] hover:bg-white/90 shadow-[var(--shadow-xl)] transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] motion-reduce:active:scale-100 tracking-[-0.01em]"
           >
-            Join the waitlist for portal access
-          </WaitlistCTA>
-          <p className="text-[13px] text-white/70">
-            Free early access · Launch notifications · No spam
-          </p>
+            Get my free GLP-1 profile
+          </a>
+          <a
+            href="/book"
+            onClick={() => trackEvent("consult_cta_clicked", { location: "portal-preview" })}
+            className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold rounded-[var(--radius-pill)] border border-white/20 text-white/85 hover:bg-white/5 hover:border-white/35 transition-[background-color,border-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] motion-reduce:active:scale-100 tracking-[-0.01em]"
+          >
+            Book a $400 consult
+          </a>
         </motion.div>
       </div>
     </section>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
-import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
+import { trackEvent } from "@/lib/analytics";
 import { licensedStatesCopy } from "@/lib/states";
 
 function openCookieSettings() {
@@ -19,28 +19,38 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-20 pb-10">
         {/* Top — CTA */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-12 border-b border-white/10">
-          <div>
+          <div className="max-w-xl">
             <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--color-accent-primary)] mb-2">
-              Coming soon
+              Specialty GLP-1 management
             </p>
             <h3
               className="text-2xl md:text-3xl font-normal tracking-[-0.02em] mb-2"
               style={{ color: "white" }}
             >
-              Be first when we open in your state.
+              Start with your GLP-1 Management Profile.
             </h3>
             <p className="text-white/85 text-sm">
-              Join the waitlist &mdash; one short monthly update and a
-              launch-day notice.
+              A few questions about your GLP-1 status, goals, medication
+              history, and monitoring needs &mdash; your profile previews what a
+              specialty consult would focus on.
             </p>
           </div>
-          <WaitlistCTA
-            variant="onDark"
-            source="footer"
-            eyebrow="Coming soon · Early access"
-          >
-            Join the waitlist
-          </WaitlistCTA>
+          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+            <Link
+              href="/assessment"
+              onClick={() => trackEvent("profile_cta_clicked", { location: "footer" })}
+              className="inline-flex items-center justify-center px-7 py-3.5 text-[15px] font-semibold rounded-[var(--radius-pill)] bg-white text-[var(--color-bg-dark)] hover:bg-white/90 shadow-[var(--shadow-xl)] transition-[background-color] duration-[var(--dur-hover)] ease-[var(--ease-out)]"
+            >
+              Get my free GLP-1 profile
+            </Link>
+            <Link
+              href="/book"
+              onClick={() => trackEvent("consult_cta_clicked", { location: "footer" })}
+              className="inline-flex items-center justify-center px-7 py-3.5 text-[15px] font-semibold rounded-[var(--radius-pill)] border border-white/25 text-white hover:bg-white/10 transition-[background-color] duration-[var(--dur-hover)] ease-[var(--ease-out)]"
+            >
+              Book a $400 consult
+            </Link>
+          </div>
         </div>
 
         {/* Practice identification */}
@@ -101,11 +111,11 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               {[
-                { label: "MSK Assessment", href: "/pricing" },
-                { label: "Monitoring Plans", href: "/pricing" },
-                { label: "Supplement Bundles", href: "/pricing" },
-                { label: "Gout Treatment", href: "/pricing" },
-                { label: "Lab & DEXA Orders", href: "/pricing" },
+                { label: "GLP-1 Management Profile", href: "/assessment" },
+                { label: "Specialty GLP-1 Consult", href: "/book" },
+                { label: "Medication & Dose Review", href: "/pricing" },
+                { label: "Side-Effect Review", href: "/pricing" },
+                { label: "Body Composition & Monitoring", href: "/pricing" },
               ].map((link) => (
                 <li key={link.label}>
                   <Link

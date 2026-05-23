@@ -2,12 +2,13 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useId, useState } from "react";
+import { useEffect } from "react";
 import Logo from "@/components/ui/Logo";
 import MeshBackground from "@/components/ui/motion/MeshBackground";
 import MagneticButton from "@/components/ui/motion/MagneticButton";
 import AnimatedNumber from "@/components/ui/motion/AnimatedNumber";
 import ShimmerBar from "@/components/ui/motion/ShimmerBar";
+import { trackEvent } from "@/lib/analytics";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -42,7 +43,7 @@ function TopBar() {
         <div className="hidden md:flex items-center gap-3">
           <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-white/75">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-success)] animate-breath" />
-            Coming soon
+            Physician-led GLP-1 care
           </span>
         </div>
       </div>
@@ -91,7 +92,7 @@ function Slide1Hero() {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-success)]" />
           </span>
           <span className="text-[13px]">
-            Accepting waitlist signups
+            Physician-led specialty GLP-1 management
           </span>
         </motion.div>
 
@@ -99,13 +100,13 @@ function Slide1Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.15, ease }}
-          className="text-[clamp(2.75rem,7.5vw,6rem)] font-normal leading-[0.98] tracking-[-0.045em] mb-8"
+          className="text-[clamp(2.5rem,6.5vw,5.25rem)] font-normal leading-[1.02] tracking-[-0.04em] mb-8"
           style={{ fontFamily: "var(--font-heading)", color: "white" }}
         >
-          The weight is coming off.
+          GLP-1 care should manage more
           <br />
           <span className="text-[var(--color-accent-primary)] opacity-95">
-            So are your muscles.
+            than the number on the scale.
           </span>
         </motion.h1>
 
@@ -115,27 +116,10 @@ function Slide1Hero() {
           transition={{ duration: 0.8, delay: 0.35, ease }}
           className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed mb-14 tracking-[-0.01em]"
         >
-          Research shows up to{" "}
-          <strong className="text-white/90 font-semibold">
-            40% of weight lost on GLP-1 drugs
-          </strong>{" "}
-          like Ozempic and Mounjaro is muscle and bone — not fat. MetaOrtho is
-          the first physician-led practice built to protect what the scale
-          can&apos;t measure.
-        </motion.p>
-        <motion.p
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.45, ease }}
-          className="text-[11px] text-white/45 mb-10 tracking-[0.04em]"
-        >
-          Source: AAOS 2026 ·{" "}
-          <Link
-            href="/legal/sources"
-            className="underline underline-offset-2 hover:text-white/70"
-          >
-            full citations
-          </Link>
+          MetaOrtho is a physician-led specialty GLP-1 management practice —
+          helping patients evaluate candidacy, medication fit, side-effect
+          concerns, and monitoring needs through a personalized GLP-1 Management
+          Profile and specialty consult.
         </motion.p>
 
         <motion.div
@@ -146,21 +130,32 @@ function Slide1Hero() {
         >
           <MagneticButton strength={8}>
             <Link
-              href="/home"
+              href="/assessment"
+              onClick={() => trackEvent("profile_cta_clicked", { location: "splash-hero" })}
               className="inline-flex items-center justify-center px-10 py-4 text-base font-semibold rounded-[var(--radius-pill)] bg-white text-[var(--color-bg-dark)] hover:bg-white/90 shadow-[0_0_60px_rgba(255,255,255,0.18)] transition-[background-color,box-shadow,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] motion-reduce:active:scale-100 tracking-[-0.01em]"
             >
-              Proceed to full site →
+              Get my free GLP-1 profile
             </Link>
           </MagneticButton>
           <MagneticButton strength={5}>
-            <a
-              href="#slide-2"
+            <Link
+              href="/home"
               className="inline-flex items-center justify-center px-10 py-4 text-base font-semibold rounded-[var(--radius-pill)] border border-white/20 text-white/85 hover:bg-white/5 hover:border-white/35 transition-[background-color,border-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] motion-reduce:active:scale-100 tracking-[-0.01em]"
             >
-              See more
-            </a>
+              Explore the practice →
+            </Link>
           </MagneticButton>
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6, ease }}
+          className="text-[12px] text-white/45 mt-10 tracking-[0.02em] max-w-md mx-auto leading-relaxed"
+        >
+          Educational assessment only. Final treatment decisions require
+          consultation with a licensed clinician.
+        </motion.p>
       </div>
 
       <motion.a
@@ -184,25 +179,18 @@ function Slide1Hero() {
 }
 
 /* -----------------------------------------------------------------
-   SLIDE 2 — COST COMPARISON
+   SLIDE 2 — THE FULL PICTURE (the scale is one data point)
 ----------------------------------------------------------------- */
-const costs = [
-  { label: "Hip fracture surgery", range: "$30,000 – $65,000", pct: 100 },
-  {
-    label: "Osteoporosis treatment (annual)",
-    range: "$8,000 – $15,000",
-    pct: 55,
-  },
-  { label: "ER visit for gout flare", range: "$2,000 – $5,000", pct: 25 },
-  {
-    label: "MetaOrtho monitoring (annual est.)",
-    range: "$948 – $1,788",
-    pct: 5,
-    highlight: true,
-  },
+const dimensions = [
+  { label: "Symptoms", note: "Reviewed in context" },
+  { label: "Nutrition", note: "Protein & intake" },
+  { label: "Strength", note: "Function the scale misses" },
+  { label: "Labs", note: "What's worth checking" },
+  { label: "Medication response", note: "Drug & dose fit" },
+  { label: "Body composition", note: "Lean mass & bone" },
 ];
 
-function Slide2Cost() {
+function Slide2FullPicture() {
   return (
     <section
       id="slide-2"
@@ -219,56 +207,39 @@ function Slide2Cost() {
           className="text-center mb-16"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70 mb-4">
-            The cost of inaction
+            The full picture
           </p>
           <h2
             className="text-[clamp(2rem,4.5vw,3.5rem)] font-normal tracking-[-0.025em] mb-5"
             style={{ color: "white", fontFamily: "var(--font-heading)" }}
           >
-            Monitoring costs a fraction
+            The scale is only
             <br />
-            of treatment.
+            one data point.
           </h2>
           <p className="text-lg text-white/80 max-w-xl mx-auto leading-relaxed">
-            The complications of unmonitored GLP-1 use are expensive and
-            painful &mdash; and easier to address when they&rsquo;re caught
-            early.
+            Patients on GLP-1 therapy often need a broader view. A specialty
+            consult looks at all of it.
           </p>
         </motion.div>
 
-        <div className="space-y-6">
-          {costs.map((cost, i) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {dimensions.map((d, i) => (
             <motion.div
-              key={cost.label}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              key={d.label}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1, ease }}
+              transition={{ duration: 0.5, delay: i * 0.07, ease }}
+              className="glass-dark rounded-[var(--radius-lg)] border border-white/10 p-6"
             >
-              <div className="flex items-baseline justify-between mb-2.5">
-                <span
-                  className={`text-sm ${cost.highlight ? "text-[var(--color-success)] font-semibold" : "text-white/85"}`}
-                >
-                  {cost.label}
-                </span>
-                <span
-                  className={`text-sm font-bold tabular-nums ${cost.highlight ? "text-[var(--color-success)]" : "text-red-400"}`}
-                >
-                  {cost.range}
-                </span>
-              </div>
-              <ShimmerBar
-                percent={cost.pct}
-                trackClassName="bg-white/8"
-                fillClassName={
-                  cost.highlight
-                    ? "bg-[var(--color-success)]"
-                    : "bg-gradient-to-r from-red-400/40 to-red-400/80"
-                }
-                heightClassName="h-2.5"
-                duration={1100}
-                shimmer={false}
-              />
+              <p
+                className="text-lg font-normal tracking-[-0.01em] text-white mb-1"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                {d.label}
+              </p>
+              <p className="text-[12px] text-white/65">{d.note}</p>
             </motion.div>
           ))}
         </div>
@@ -278,7 +249,7 @@ function Slide2Cost() {
             href="#slide-3"
             className="inline-flex items-center gap-2 text-sm text-white/75 hover:text-white transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]"
           >
-            See what members get
+            See how it works
             <svg
               className="w-4 h-4"
               fill="none"
@@ -300,50 +271,9 @@ function Slide2Cost() {
 }
 
 /* -----------------------------------------------------------------
-   SLIDE 3 — PORTAL PREVIEW + INLINE WAITLIST
+   SLIDE 3 — PATIENT PORTAL PREVIEW
 ----------------------------------------------------------------- */
-type Status = "idle" | "loading" | "success" | "error";
-
 function Slide3Portal() {
-  const emailId = useId();
-  const consentId = useId();
-  const [email, setEmail] = useState("");
-  const [consent, setConsent] = useState(true);
-  const [status, setStatus] = useState<Status>("idle");
-  const [message, setMessage] = useState<string | null>(null);
-
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
-    if (status === "loading") return;
-    setStatus("loading");
-    setMessage(null);
-    try {
-      const res = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email.trim().toLowerCase(),
-          source_component: "landing-slide-3",
-          consent_marketing: consent,
-        }),
-      });
-      const data: { success: boolean; message?: string } = await res
-        .json()
-        .catch(() => ({ success: false }));
-      if (!res.ok || !data.success) {
-        setStatus("error");
-        setMessage(data.message || "Something went wrong. Try again.");
-        return;
-      }
-      setStatus("success");
-      setMessage(data.message || "You're in. We'll be in touch.");
-      setEmail("");
-    } catch {
-      setStatus("error");
-      setMessage("Network error. Try again.");
-    }
-  }
-
   return (
     <section
       id="slide-3"
@@ -375,16 +305,17 @@ function Slide3Portal() {
               </span>
             </h2>
             <p className="text-lg text-white/80 max-w-lg leading-relaxed mb-10">
-              One MSK score. 28 tracked markers. Every DEXA, every lab, every
-              protocol update from your care team — in one place.
+              After your consult, your patient portal keeps every score, scan,
+              lab, and protocol update from your care team in one place —
+              tracked over time.
             </p>
 
-            {/* Feature pills */}
+            {/* Portal feature pills */}
             <div className="flex flex-wrap gap-2 mb-10">
               {[
                 "MSK Score tracking",
                 "DEXA trends",
-                "Monthly check-ins",
+                "Lab results",
                 "Protocol updates",
                 "Secure messaging",
               ].map((f) => (
@@ -397,88 +328,28 @@ function Slide3Portal() {
               ))}
             </div>
 
-            {/* Inline waitlist capture */}
-            {status === "success" ? (
-              <div className="glass-dark rounded-[var(--radius-lg)] p-6 max-w-md">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-8 h-8 rounded-full bg-[var(--color-success)]/20 flex items-center justify-center">
-                    <svg
-                      className="w-4 h-4 text-[var(--color-success)]"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-white font-medium">You&apos;re in.</p>
-                </div>
-                <p className="text-white/80 text-[13px]">{message}</p>
-              </div>
-            ) : (
-              <form onSubmit={submit} noValidate className="max-w-md">
-                <div className="glass-dark rounded-[var(--radius-pill)] p-1.5 flex items-center">
-                  <label htmlFor={emailId} className="sr-only">
-                    Email
-                  </label>
-                  <input
-                    id={emailId}
-                    type="email"
-                    autoComplete="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your@email.com"
-                    className="flex-1 min-w-0 bg-transparent px-4 py-2.5 text-[15px] text-white placeholder:text-white/70 focus:outline-none"
-                  />
-                  <MagneticButton strength={4}>
-                    <button
-                      type="submit"
-                      disabled={status === "loading"}
-                      className="px-6 py-2.5 text-[14px] font-semibold rounded-[var(--radius-pill)] bg-white text-[var(--color-bg-dark)] hover:bg-white/90 transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:active:scale-100 disabled:opacity-60 whitespace-nowrap cursor-pointer"
-                    >
-                      {status === "loading" ? "…" : "Join waitlist"}
-                    </button>
-                  </MagneticButton>
-                </div>
-                {status === "error" && message && (
-                  <p
-                    role="alert"
-                    className="mt-3 text-[12px] font-medium text-red-300"
-                  >
-                    {message}
-                  </p>
-                )}
-                <label
-                  htmlFor={consentId}
-                  className="mt-3 flex items-start gap-2.5 text-[12px] text-white/75 leading-relaxed cursor-pointer"
-                >
-                  <input
-                    id={consentId}
-                    type="checkbox"
-                    checked={consent}
-                    onChange={(e) => setConsent(e.target.checked)}
-                    className="mt-0.5 accent-[var(--color-accent-primary)]"
-                  />
-                  <span>
-                    Send me launch updates and the weekly newsletter on GLP-1
-                    side effects, new research, and counteraction protocols.
-                    Unsubscribe anytime.
-                  </span>
-                </label>
-                <p className="mt-3 text-[12px] text-white/70">
-                  Free · Unsubscribe anytime · No spam
-                </p>
-              </form>
-            )}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link
+                href="/assessment"
+                onClick={() => trackEvent("profile_cta_clicked", { location: "splash-profile" })}
+                className="inline-flex items-center justify-center px-8 py-3.5 text-[15px] font-semibold rounded-[var(--radius-pill)] bg-white text-[var(--color-bg-dark)] hover:bg-white/90 shadow-[var(--shadow-xl)] transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:active:scale-100"
+              >
+                Get my free GLP-1 profile
+              </Link>
+              <Link
+                href="/book"
+                onClick={() => trackEvent("consult_cta_clicked", { location: "splash-profile" })}
+                className="inline-flex items-center justify-center px-8 py-3.5 text-[15px] font-semibold rounded-[var(--radius-pill)] border border-white/20 text-white/85 hover:bg-white/5 hover:border-white/35 transition-[background-color,border-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:active:scale-100"
+              >
+                Book a $400 consult
+              </Link>
+            </div>
+            <p className="mt-5 text-[12px] text-white/50">
+              Free · ~5 minutes · educational, not a diagnosis
+            </p>
           </motion.div>
 
-          {/* Right — Mini portal preview (stable / still) */}
+          {/* Right — Patient portal preview (stable / still) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -487,7 +358,7 @@ function Slide3Portal() {
           >
             <div>
               <div className="glass-dark rounded-[var(--radius-xl)] p-3 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)]">
-                {/* App chrome */}
+                {/* Document chrome */}
                 <div className="flex items-center gap-2 px-2 pb-3">
                   <span className="w-2 h-2 rounded-full bg-white/20" />
                   <span className="w-2 h-2 rounded-full bg-white/20" />
@@ -513,9 +384,7 @@ function Slide3Portal() {
                         >
                           <AnimatedNumber value={82} duration={1400} />
                         </span>
-                        <span className="text-xs text-white/70 mb-2">
-                          / 100
-                        </span>
+                        <span className="text-xs text-white/70 mb-2">/ 100</span>
                       </div>
                       <ShimmerBar
                         percent={82}
@@ -547,9 +416,7 @@ function Slide3Portal() {
                             >
                               {m.v}
                             </span>
-                            <span className="text-[9px] text-white/80">
-                              {m.u}
-                            </span>
+                            <span className="text-[9px] text-white/80">{m.u}</span>
                           </div>
                           <span
                             className={`text-[10px] font-medium ${m.good ? "text-[var(--color-success)]" : "text-[var(--color-warning)]"}`}
@@ -600,7 +467,7 @@ export default function LandingPage() {
       <SlideDots />
       <main className="snap-y snap-proximity h-[100dvh] overflow-y-scroll scroll-smooth [scroll-padding-top:0]">
         <Slide1Hero />
-        <Slide2Cost />
+        <Slide2FullPicture />
         <Slide3Portal />
       </main>
     </>

@@ -23,21 +23,21 @@ const dmSerif = DM_Serif_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "MetaOrtho — Musculoskeletal Care for GLP-1 Patients",
+    default: "MetaOrtho — Specialty GLP-1 Management",
     template: "%s | MetaOrtho",
   },
   description:
-    "Multi-specialty telehealth practice — board-certified orthopedic surgeon and endocrinologist — protecting your bones, muscles, and joints while you lose weight on Ozempic, Wegovy, Mounjaro, or Zepbound.",
+    "MetaOrtho is a physician-led specialty GLP-1 management practice. Start with a free GLP-1 Management Profile, then meet a board-certified endocrinologist and orthopedic surgeon for a cash-pay specialty consult — candidacy, medication fit, side effects, and monitoring.",
   keywords: [
-    "GLP-1 muscle loss",
-    "Ozempic bone density",
+    "GLP-1 management",
+    "specialty GLP-1 consult",
+    "GLP-1 candidacy",
     "GLP-1 side effects",
-    "sarcopenia weight loss drugs",
-    "Ozempic muscle loss",
-    "GLP-1 musculoskeletal",
-    "weight loss bone loss",
-    "Mounjaro side effects",
-    "telehealth orthopedic",
+    "Ozempic management",
+    "Mounjaro management",
+    "GLP-1 second opinion",
+    "GLP-1 body composition",
+    "telehealth GLP-1",
     "MetaOrtho",
     "MetaOrthopedics",
   ],
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://metaortho.com",
     siteName: "MetaOrthopedics",
-    title: "MetaOrtho — Musculoskeletal Care for GLP-1 Patients",
+    title: "MetaOrtho — Specialty GLP-1 Management",
     description:
-      "Up to 40% of weight lost on GLP-1 drugs is muscle and bone, not fat. MetaOrtho monitors and protects your musculoskeletal health during weight loss.",
+      "Physician-led specialty GLP-1 management. Start with a free GLP-1 Management Profile, then a cash-pay specialty consult: candidacy, medication fit, side effects, and monitoring.",
   },
 };
 
@@ -64,29 +64,24 @@ export default function RootLayout({
     name: "MetaOrthopedics",
     alternateName: "MetaOrtho",
     description:
-      "Multi-specialty telemedicine practice led by a board-certified orthopedic surgeon and a board-certified endocrinologist, providing musculoskeletal and metabolic monitoring for patients on GLP-1 weight loss medications.",
+      "Physician-led specialty GLP-1 management practice led by a board-certified endocrinologist and a board-certified orthopedic surgeon. Helps patients evaluate candidacy, medication fit, side-effect concerns, and metabolic and musculoskeletal monitoring through a cash-pay specialty consult.",
     url: "https://metaortho.com",
-    medicalSpecialty: ["Orthopedic", "Endocrine"],
+    medicalSpecialty: ["Endocrine", "Orthopedic"],
     availableService: [
       {
         "@type": "MedicalProcedure",
-        name: "Comprehensive MSK Assessment for GLP-1 Patients",
+        name: "Specialty GLP-1 Management Consult",
         procedureType: "Diagnostic",
       },
       {
         "@type": "MedicalProcedure",
-        name: "Sarcopenia Risk-Reduction Protocol",
-        procedureType: "Therapeutic",
-      },
-      {
-        "@type": "MedicalProcedure",
-        name: "Bone Density Monitoring",
+        name: "GLP-1 Candidacy and Medication Review",
         procedureType: "Diagnostic",
       },
       {
         "@type": "MedicalProcedure",
-        name: "Gout Diagnosis and Treatment",
-        procedureType: "Therapeutic",
+        name: "Body Composition and Musculoskeletal Monitoring",
+        procedureType: "Diagnostic",
       },
     ],
     isAcceptingNewPatients: true,

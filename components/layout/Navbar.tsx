@@ -3,14 +3,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
-import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
+import { trackEvent } from "@/lib/analytics";
 
 const navLinks = [
   { label: "How It Works", href: "/home#how-it-works" },
-  { label: "Services", href: "/pricing" },
-  { label: "Our Team", href: "/about" },
   { label: "GLP-1 Profile", href: "/assessment" },
-  { label: "Blog", href: "/blog" },
+  { label: "Consult", href: "/book" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Medical Team", href: "/about" },
   { label: "FAQ", href: "/faq" },
 ];
 
@@ -31,7 +31,7 @@ export default function Navbar() {
         <span>Multi-specialty telehealth · Orthopedic + Endocrine</span>
         <span className="mx-2 text-white/75">|</span>
         <Link href="/assessment" className="underline underline-offset-2 font-semibold hover:opacity-100 transition-opacity duration-[var(--dur-hover)] ease-[var(--ease-out)]">
-          Get your free GLP-1 Profile →
+          Get my free GLP-1 profile →
         </Link>
       </div>
 
@@ -73,9 +73,13 @@ export default function Navbar() {
               >
                 Log in
               </Link>
-              <WaitlistCTA variant="dark" size="sm" source="navbar">
-                Join waitlist
-              </WaitlistCTA>
+              <Link
+                href="/assessment"
+                onClick={() => trackEvent("profile_cta_clicked", { location: "navbar" })}
+                className="inline-flex items-center justify-center font-semibold rounded-[var(--radius-pill)] tracking-[-0.01em] px-5 py-2.5 text-sm bg-[var(--color-bg-dark)] text-white hover:bg-[var(--color-bg-darkest)] shadow-[var(--shadow-md)] transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2"
+              >
+                Get my free profile
+              </Link>
             </div>
 
             {/* Mobile Toggle */}
@@ -115,20 +119,32 @@ export default function Navbar() {
             ))}
             <div className="pt-4 space-y-2">
               <Link
-                href="/portal/login"
-                onClick={() => setMobileOpen(false)}
+                href="/book"
+                onClick={() => {
+                  trackEvent("consult_cta_clicked", { location: "navbar-mobile" });
+                  setMobileOpen(false);
+                }}
                 className="block text-center px-4 py-3 text-base font-medium text-[var(--color-text-primary)] hover:text-[var(--color-accent-primary)] hover:bg-[var(--color-bg-cream)] rounded-[var(--radius-md)] transition-[color,background-color] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:bg-[var(--color-bg-warm)] border border-[var(--color-border)]"
               >
-                Log in
+                Book a consult
               </Link>
-              <WaitlistCTA
-                variant="dark"
-                size="md"
-                source="navbar-mobile"
-                className="w-full"
+              <Link
+                href="/assessment"
+                onClick={() => {
+                  trackEvent("profile_cta_clicked", { location: "navbar-mobile" });
+                  setMobileOpen(false);
+                }}
+                className="block text-center px-4 py-3 text-base font-semibold rounded-[var(--radius-pill)] bg-[var(--color-bg-dark)] text-white hover:bg-[var(--color-bg-darkest)] shadow-[var(--shadow-md)] transition-[background-color] duration-[var(--dur-hover)] ease-[var(--ease-out)]"
               >
-                Join waitlist
-              </WaitlistCTA>
+                Get my free GLP-1 profile
+              </Link>
+              <Link
+                href="/portal/login"
+                onClick={() => setMobileOpen(false)}
+                className="block text-center px-4 py-3 text-sm font-medium text-[var(--color-text-tertiary)] hover:text-[var(--color-accent-primary)] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]"
+              >
+                Patient log in
+              </Link>
             </div>
           </div>
         </div>

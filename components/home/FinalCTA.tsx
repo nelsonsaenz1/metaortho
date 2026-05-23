@@ -1,52 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useId, useState } from "react";
 import MeshBackground from "@/components/ui/motion/MeshBackground";
-import MagneticButton from "@/components/ui/motion/MagneticButton";
+import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
+import { trackEvent } from "@/lib/analytics";
 
-type Status = "idle" | "loading" | "success" | "error";
+const ease = [0.23, 1, 0.32, 1] as const;
 
 export default function FinalCTA() {
-  const [email, setEmail] = useState("");
-  const [consent, setConsent] = useState(true);
-  const [status, setStatus] = useState<Status>("idle");
-  const [message, setMessage] = useState<string | null>(null);
-  const emailId = useId();
-  const consentId = useId();
-
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
-    if (status === "loading") return;
-    setStatus("loading");
-    setMessage(null);
-    try {
-      const res = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email.trim().toLowerCase(),
-          source_component: "final-cta",
-          consent_marketing: consent,
-        }),
-      });
-      const data: { success: boolean; message?: string } = await res
-        .json()
-        .catch(() => ({ success: false }));
-      if (!res.ok || !data.success) {
-        setStatus("error");
-        setMessage(data.message || "Something went wrong. Try again.");
-        return;
-      }
-      setStatus("success");
-      setMessage(data.message || "You're in. We'll be in touch.");
-      setEmail("");
-    } catch {
-      setStatus("error");
-      setMessage("Network error. Try again.");
-    }
-  }
-
   return (
     <section className="relative py-32 md:py-40 bg-[var(--color-bg-dark)] overflow-hidden">
       <MeshBackground variant="dark" />
@@ -56,12 +17,12 @@ export default function FinalCTA() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
+          transition={{ duration: 0.7, ease }}
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 glass-dark rounded-[var(--radius-pill)] mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-success)] animate-breath" />
             <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/90">
-              Coming soon · Early access
+              Physician-led · Telehealth
             </span>
           </div>
 
@@ -69,90 +30,60 @@ export default function FinalCTA() {
             className="text-[clamp(2.25rem,5vw,3.75rem)] font-normal mb-8 tracking-[-0.035em] leading-[1.05]"
             style={{ color: "white" }}
           >
-            Your scale says you lost 40 pounds.
+            Start with your
             <br />
-            <span className="text-white/85">How much of that was muscle?</span>
+            <span className="text-white/85">GLP-1 Management Profile.</span>
           </h2>
 
           <p className="text-lg text-white/85 max-w-2xl mx-auto mb-12 leading-relaxed tracking-[-0.01em]">
-            Don&apos;t wait until a fracture, gout attack, or sarcopenia
-            diagnosis reveals the damage. Be first when MetaOrtho opens to new
-            patients in your state.
+            A structured assessment that previews what a specialty consult would
+            focus on for you — candidacy, medication context, side effects, and
+            monitoring needs. Initial consults are $400; follow-ups are $200.
           </p>
 
-          {/* Inline waitlist form */}
-          {status === "success" ? (
-            <div className="max-w-md mx-auto glass-dark rounded-[var(--radius-lg)] p-6 text-center">
-              <div className="w-10 h-10 rounded-full bg-[var(--color-success)]/20 flex items-center justify-center mx-auto mb-3">
-                <svg className="w-5 h-5 text-[var(--color-success)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <p className="text-white font-medium mb-1">You&apos;re in.</p>
-              <p className="text-white/80 text-[13px]">{message}</p>
-            </div>
-          ) : (
-            <form
-              onSubmit={submit}
-              noValidate
-              className="max-w-md mx-auto mb-6"
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <a
+              href="/assessment"
+              onClick={() => trackEvent("profile_cta_clicked", { location: "home-final-cta" })}
+              className="inline-flex items-center justify-center px-10 py-4 text-base font-semibold rounded-[var(--radius-pill)] bg-white text-[var(--color-bg-dark)] hover:bg-white/90 shadow-[0_0_60px_rgba(255,255,255,0.1)] transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] motion-reduce:active:scale-100 tracking-[-0.01em]"
             >
-              <div className="glass-dark rounded-[var(--radius-pill)] p-1.5 flex items-center">
-                <label htmlFor={emailId} className="sr-only">
-                  Email address
-                </label>
-                <input
-                  id={emailId}
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  className="flex-1 min-w-0 bg-transparent px-4 py-2.5 text-[15px] text-white placeholder:text-white/70 focus:outline-none"
-                />
-                <MagneticButton strength={4}>
-                  <button
-                    type="submit"
-                    disabled={status === "loading"}
-                    className="px-6 py-2.5 text-[14px] font-semibold rounded-[var(--radius-pill)] bg-white text-[var(--color-bg-dark)] hover:bg-white/90 transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] active:duration-[var(--dur-press)] motion-reduce:active:scale-100 disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-dark)]"
-                  >
-                    {status === "loading" ? "…" : "Join waitlist"}
-                  </button>
-                </MagneticButton>
-              </div>
-              {status === "error" && message && (
-                <p role="alert" className="mt-3 text-[12px] font-medium text-red-300">
-                  {message}
-                </p>
-              )}
-            </form>
-          )}
-
-          <label
-            htmlFor={consentId}
-            className="mt-4 flex items-start gap-2.5 text-[12px] text-white/75 max-w-md mx-auto leading-relaxed text-left cursor-pointer"
-          >
-            <input
-              id={consentId}
-              type="checkbox"
-              checked={consent}
-              onChange={(e) => setConsent(e.target.checked)}
-              className="mt-0.5 accent-[var(--color-accent-primary)]"
-            />
-            <span>
-              Send me launch updates and the weekly newsletter on GLP-1 side
-              effects, new research, and counteraction protocols. Unsubscribe
-              anytime.
-            </span>
-          </label>
-          <div className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[12px] text-white/70">
-            <span>Free to join</span>
-            <span>·</span>
-            <span>Unsubscribe anytime</span>
-            <span>·</span>
-            <span>No spam</span>
+              Get my free GLP-1 profile
+            </a>
+            <a
+              href="/book"
+              onClick={() => trackEvent("consult_cta_clicked", { location: "home-final-cta" })}
+              className="inline-flex items-center justify-center px-10 py-4 text-base font-semibold rounded-[var(--radius-pill)] border border-white/20 text-white/85 hover:bg-white/5 hover:border-white/35 transition-[background-color,border-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] motion-reduce:active:scale-100 tracking-[-0.01em]"
+            >
+              Book a $400 specialty consult
+            </a>
           </div>
+
+          <p className="text-[13px] text-white/70 leading-relaxed max-w-xl mx-auto">
+            Educational assessment only. Final treatment decisions require
+            consultation with a licensed clinician. If you&apos;re experiencing
+            urgent or severe symptoms, seek immediate medical care.
+          </p>
+
+          <p className="mt-6 text-[13px] text-white/60">
+            Not in a state where we&apos;re licensed yet?{" "}
+            <WaitlistCTA
+              variant="ghost"
+              size="sm"
+              source="home-final-cta-waitlist"
+              eyebrow="Waitlist · Early access"
+              headline={
+                <>
+                  Tell me when MetaOrtho
+                  <br />
+                  opens in my state.
+                </>
+              }
+              subcopy="One short email when we go live where you live. No spam."
+              className="!px-2 !py-1 align-baseline underline underline-offset-2 !text-white/85 hover:!bg-transparent hover:!text-white"
+            >
+              Join the waitlist
+            </WaitlistCTA>
+          </p>
         </motion.div>
       </div>
     </section>

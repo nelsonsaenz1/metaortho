@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import PricingContent from "./PricingContent";
 
 export const metadata: Metadata = {
-  title: "Pricing & Services",
+  title: "Pricing",
   description:
-    "MetaOrtho pricing: Initial MSK Assessment starting at $149, monthly monitoring subscriptions from $79/month, supplement bundles, and more. Transparent, flat-rate telehealth.",
+    "MetaOrtho pricing: cash-pay specialty GLP-1 consult — $400 initial, $200 follow-up. Start with a free GLP-1 Management Profile. Transparent, flat-rate telehealth.",
 };
 
 export default function PricingPage() {

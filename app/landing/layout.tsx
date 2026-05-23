@@ -1,9 +1,9 @@
 import LandingShell from "./LandingShell";
 
 export const metadata = {
-  title: "Protect Your Muscles & Bones on GLP-1s | MetaOrtho",
+  title: "Specialty GLP-1 Management Consult | MetaOrtho",
   description:
-    "Up to 40% of weight lost on Ozempic, Mounjaro & Wegovy is muscle and bone — not fat. Get a physician-led musculoskeletal assessment. $149. Telehealth.",
+    "Physician-led specialty GLP-1 management for people starting, taking, or questioning GLP-1 treatment. Start with a free GLP-1 Management Profile. Cash-pay consult: $400 initial, $200 follow-up. Telehealth.",
 };
 
 export default function LandingLayout({

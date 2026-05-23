@@ -3,69 +3,74 @@
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Accordion from "@/components/ui/Accordion";
 
-const clinicalFAQs = [
+const practiceFAQs = [
   {
-    question: "Why do GLP-1 medications cause muscle and bone loss?",
+    question: "Is MetaOrtho a weight-loss clinic?",
     answer:
-      "GLP-1 receptor agonists like Ozempic, Wegovy, Mounjaro, and Zepbound cause rapid weight loss — but the body doesn't just lose fat. Research presented at the 2026 AAOS Annual Meeting found that 15-40% of total weight lost on GLP-1s is lean mass: muscle, bone, and connective tissue. This happens because rapid calorie restriction triggers the body to break down both fat and lean tissue for energy. Without proper nutritional support and resistance training, patients lose structural integrity along with their weight.",
+      "MetaOrtho is a specialty GLP-1 management practice. We help patients evaluate candidacy, medication fit, side-effect concerns, and monitoring needs. Depending on clinical scope and state availability, care may include prescribing, prescription-transfer support, monitoring recommendations, or coordination with your existing clinicians.",
   },
   {
-    question: "What is sarcopenia and why should I be worried about it?",
+    question: "Do I need to already be on a GLP-1?",
     answer:
-      "Sarcopenia is the progressive loss of muscle mass and function. On GLP-1 medications, rapid weight loss can accelerate this process. Sarcopenia is associated with higher rates of falls, fractures, metabolic dysfunction, and reduced quality of life. The hard part is that it's silent — you feel lighter on the scale but your muscles are wasting. MetaOrtho monitors muscle composition and uses evidence-based protocols — resistance training prescriptions and protein and supplement optimization — designed to slow lean-mass loss while you're on therapy.",
+      "No. The GLP-1 Management Profile supports current users, former users, and people considering treatment for the first time. The consult is built to meet you wherever you are in your GLP-1 journey.",
   },
   {
-    question: "How does GLP-1 weight loss affect bone density?",
+    question: "Does the Profile tell me which drug to take?",
     answer:
-      "GLP-1 users face a 30% increased risk of osteoporosis over 5 years and an over 150% increased risk of osteomalacia (bone softening) versus matched controls. Rapid weight loss reduces mechanical loading on bones, and nutritional deficiencies common on GLP-1s (vitamin D, calcium, protein) further compromise bone health. MetaOrtho orders and monitors DEXA scans, optimizes bone-protective nutrition, and prescribes bisphosphonates when indicated.",
+      "No. The Profile is educational and helps organize the clinical considerations a specialist would want to review. Specific medication decisions require a consultation with a licensed clinician.",
   },
   {
-    question: "Can GLP-1 drugs cause gout?",
+    question: "What does the $400 consult include?",
     answer:
-      "Yes. Rapid weight loss on GLP-1 medications causes uric acid spikes that can trigger acute gout attacks. The 2026 AAOS data showed a 12% increased risk of gout in GLP-1 users. When you lose weight quickly, your body breaks down cells that release purines, which convert to uric acid. MetaOrtho can diagnose gout, treat acute flares (colchicine, NSAIDs), and help reduce the risk of recurrence through diet and medication management.",
+      "The initial consult includes a specialty review of your GLP-1 status, goals, relevant history, medication and dose context, side-effect concerns, monitoring needs, and recommended next steps. Follow-up consults are $200 and cover progress, side effects, medication-management considerations, monitoring, and plan refinement.",
   },
   {
-    question: "What labs and imaging does MetaOrtho order?",
+    question: "Is this covered by insurance?",
     answer:
-      "Our standard panel includes: DEXA scan (bone density and body composition), serum vitamin D, comprehensive metabolic panel, uric acid levels, CBC, and additional markers as clinically indicated. All labs are ordered through Quest Diagnostics or Labcorp — you visit a location near you. DEXA scans are performed at local imaging centers. MetaOrtho orders, reviews, and acts on all results.",
+      "Phase 1 consults are cash-pay. Initial consults are $400 and follow-up consults are $200. Some labs, imaging, nutrition services, or third-party services may have separate costs or insurance options depending on provider and location. Many HSA and FSA accounts can be used — confirm with your plan.",
   },
   {
-    question: "Do I need MetaOrtho if I already exercise and eat well?",
+    question: "Can MetaOrtho order labs or DEXA?",
     answer:
-      "Exercise and nutrition are critical — but most patients don't know the specific protocols that protect against GLP-1-related lean mass loss. You need targeted resistance training prescriptions, specific protein and caloric targets, and baseline lab work and DEXA scans to track what's actually happening. MetaOrtho provides the data-driven, physician-supervised monitoring that ensures your healthy habits are working.",
+      "When clinically appropriate and available in your state, the care team may recommend or coordinate labs, DEXA, or other monitoring. Availability depends on licensure, clinical eligibility, and partner workflows.",
+  },
+  {
+    question: "Will you replace my current doctor?",
+    answer:
+      "No. MetaOrtho can serve as a specialty management layer and may coordinate with your existing clinician when appropriate. We complement your existing care team rather than replace it.",
+  },
+  {
+    question: "Can you guarantee I won't lose muscle or bone?",
+    answer:
+      "No. MetaOrtho does not guarantee outcomes. The goal is to help patients identify relevant risk factors, monitor what may matter, and make more informed clinical decisions with licensed professionals.",
   },
 ];
 
-const logisticalFAQs = [
+const clinicalFAQs = [
   {
-    question: "How does a MetaOrtho virtual visit work?",
+    question: "Why do GLP-1 medications affect muscle and bone?",
     answer:
-      "After booking, you'll complete an intake form about your GLP-1 history, current symptoms, and health background. Your visit is conducted via secure, HIPAA-compliant video. The initial assessment takes about 30 minutes. Follow-up monitoring visits are typically 15-20 minutes. Lab and imaging orders are placed electronically — you visit a Quest, Labcorp, or imaging center near you.",
+      "Rapid weight loss doesn't only reduce fat. Research presented at the 2026 AAOS Annual Meeting suggests a meaningful share of weight lost on GLP-1 medications may be lean mass — muscle, bone, and connective tissue — particularly without adequate protein intake and resistance training. A specialty consult helps you understand what's worth monitoring and plan for it.",
+  },
+  {
+    question: "What is sarcopenia, and why does it matter on a GLP-1?",
+    answer:
+      "Sarcopenia is the loss of muscle mass and function. Because GLP-1 weight loss can be rapid, it's worth paying attention to muscle and strength along the way. A consult can review your body composition, protein and nutrition, and resistance training, and discuss whether monitoring makes sense for your situation.",
+  },
+  {
+    question: "What labs and imaging might a consult involve?",
+    answer:
+      "When clinically appropriate, a clinician may discuss a DEXA scan (bone density and body composition), vitamin D, a metabolic panel, uric acid, and other markers — typically ordered through Quest Diagnostics or Labcorp near you. What's ordered depends on your individual situation and state availability.",
+  },
+  {
+    question: "How does a MetaOrtho consult work?",
+    answer:
+      "You start with the GLP-1 Management Profile, then meet a licensed clinician via secure, HIPAA-compliant video for a specialty review. Initial consults are about 30 minutes; follow-ups are shorter. Any lab or imaging orders are placed electronically — you visit a location near you.",
   },
   {
     question: "What states does MetaOrtho serve?",
     answer:
-      "MetaOrtho is rolling out telehealth services state by state. Join the waitlist with your email and we'll notify you the moment we begin accepting patients in your state.",
-  },
-  {
-    question: "Does MetaOrtho accept insurance?",
-    answer:
-      "MetaOrtho currently operates on a direct-pay model with transparent, flat-rate pricing. We provide detailed superbills for potential out-of-network reimbursement. Many HSA and FSA accounts can be used. Lab work and DEXA scans ordered through Quest/Labcorp may be covered by your insurance.",
-  },
-  {
-    question: "Can MetaOrtho prescribe medications?",
-    answer:
-      "Yes. MetaOrtho prescribes all non-controlled medications relevant to musculoskeletal health: high-dose prescription vitamin D, bisphosphonates, colchicine, NSAIDs, and other supportive medications. We do not prescribe controlled substances. Prescriptions are sent electronically to your preferred pharmacy.",
-  },
-  {
-    question: "How is MetaOrtho different from my primary care doctor?",
-    answer:
-      "Your PCP manages your general health and may not have specialized training to identify GLP-1-specific musculoskeletal risks. MetaOrtho is led by a board-certified orthopedic surgeon with dedicated protocols for sarcopenia prevention, bone density monitoring, gout management, and nutritional optimization. We complement your existing care team.",
-  },
-  {
-    question: "What if I'm not on a GLP-1 yet but planning to start?",
-    answer:
-      "A baseline assessment before starting GLP-1 therapy is ideal. We can establish your baseline bone density, muscle composition, and lab values — then monitor changes as your weight loss progresses. This gives us the clearest picture and allows for early intervention if needed.",
+      "MetaOrtho is a telemedicine practice, so consults are available only where our clinicians are licensed, and we're expanding state by state. Your GLP-1 Management Profile is yours regardless of where you live; if we're not yet licensed in your state, you can ask to be notified when we open there.",
   },
 ];
 
@@ -82,23 +87,32 @@ export default function FAQContent() {
             Frequently asked questions
           </h1>
           <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed">
-            Everything you need to know about GLP-1 musculoskeletal risks and how MetaOrtho protects you.
+            Everything you need to know about MetaOrtho&apos;s specialty GLP-1
+            management and how the consult works.
           </p>
         </div>
       </section>
 
-      {/* Clinical FAQs */}
+      {/* Practice & consult FAQs */}
       <SectionWrapper bg="primary" size="sm">
-        <h2 className="text-2xl font-normal tracking-[-0.02em] mb-2 text-center">Clinical questions</h2>
-        <p className="text-[var(--color-text-tertiary)] text-center mb-10 text-sm">About GLP-1 musculoskeletal risks</p>
-        <Accordion items={clinicalFAQs} />
+        <h2 className="text-2xl font-normal tracking-[-0.02em] mb-2 text-center">
+          About MetaOrtho &amp; your consult
+        </h2>
+        <p className="text-[var(--color-text-tertiary)] text-center mb-10 text-sm">
+          The practice, the Profile, and what the consult includes
+        </p>
+        <Accordion items={practiceFAQs} />
       </SectionWrapper>
 
-      {/* Logistical FAQs */}
+      {/* Clinical FAQs */}
       <SectionWrapper bg="cream" size="sm">
-        <h2 className="text-2xl font-normal tracking-[-0.02em] mb-2 text-center">About your visit</h2>
-        <p className="text-[var(--color-text-tertiary)] text-center mb-10 text-sm">Logistics, insurance, and what to expect</p>
-        <Accordion items={logisticalFAQs} />
+        <h2 className="text-2xl font-normal tracking-[-0.02em] mb-2 text-center">
+          Clinical &amp; monitoring
+        </h2>
+        <p className="text-[var(--color-text-tertiary)] text-center mb-10 text-sm">
+          GLP-1 therapy, body composition, and what may be worth monitoring
+        </p>
+        <Accordion items={clinicalFAQs} />
       </SectionWrapper>
     </>
   );

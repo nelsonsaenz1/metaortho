@@ -15,32 +15,43 @@ type Service = {
 
 const services: Service[] = [
   {
-    title: "Sarcopenia Prevention",
+    title: "Candidacy & goals",
     description:
-      "Muscle mass assessment, resistance training prescriptions, protein optimization, and creatine/HMB supplementation guidance.",
-    tag: "Core",
+      "Whether GLP-1 therapy may be appropriate for you, based on your profile, history, goals, and risk factors.",
+    tag: "Candidacy",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
   },
   {
-    title: "Bone Density Monitoring",
+    title: "Medication & dose context",
     description:
-      "DEXA scan ordering + interpretation. Osteoporosis risk assessment. Calcium and vitamin D optimization.",
-    tag: "Core",
+      "A review of your current or potential GLP-1 — drug class, dosing history, response, and tolerability. Drug decisions stay with your clinician; the consult reviews the considerations.",
+    tag: "Medication",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
       </svg>
     ),
   },
   {
-    title: "Nutritional Optimization",
+    title: "Side effects & tolerability",
     description:
-      "Comprehensive metabolic lab panels plus personalized supplementation protocols tailored to your GLP-1 therapy.",
-    tag: "Core",
+      "Clinical questions worth discussing — nausea, fatigue, weakness, joint symptoms, gout concerns, nutrition, and the effects of rapid weight loss.",
+    tag: "Side effects",
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Weight-loss pace & nutrition",
+    description:
+      "Your pace of loss, protein and nutrition, and how to support strength and energy while the weight comes off.",
+    tag: "Nutrition",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
@@ -48,35 +59,24 @@ const services: Service[] = [
     ),
   },
   {
-    title: "Gout Treatment",
+    title: "Body composition, muscle & bone",
     description:
-      "Rapid weight loss can drive uric acid spikes. We diagnose acute flares and help reduce recurrence risk through evidence-based management.",
-    tag: "Acute + Ongoing",
+      "Whether DEXA, strength tracking, or musculoskeletal monitoring may make sense for your situation — the orthopedic depth most GLP-1 programs skip.",
+    tag: "Monitoring",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
       </svg>
     ),
   },
   {
-    title: "Lab & Imaging Orders",
+    title: "Labs, DEXA & follow-up",
     description:
-      "DEXA scans, metabolic panels, vitamin D, uric acid — ordered through Quest or Labcorp near you.",
-    tag: "Nationwide",
+      "Which labs or imaging may be worth ordering when clinically appropriate, and what a sensible follow-up cadence looks like for you.",
+    tag: "Labs & follow-up",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
-      </svg>
-    ),
-  },
-  {
-    title: "Exercise Prescriptions",
-    description:
-      "Structured resistance programs designed for GLP-1 patients. PT network coming soon.",
-    tag: "Coming Soon",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
   },
@@ -87,17 +87,18 @@ export default function Services() {
     <SectionWrapper bg="dark" id="services">
       <div className="max-w-3xl mx-auto text-center mb-16">
         <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/80 mb-4 font-[var(--font-body)]">
-          Comprehensive care
+          What your consult reviews
         </p>
         <h2
           className="text-[clamp(2rem,4vw,3rem)] font-normal tracking-[-0.02em] mb-6"
           style={{ color: "white" }}
         >
-          Everything your weight-loss doctor isn&apos;t monitoring
+          A specialty GLP-1 consult, not another generic weight-loss program
         </h2>
         <p className="text-lg text-white/85 leading-relaxed">
-          MetaOrtho manages an entire category of side effects from GLP-1 rapid
-          weight loss — not just one condition.
+          One focused visit that looks at the whole picture — candidacy,
+          medication, side effects, nutrition, and the musculoskeletal monitoring
+          most programs leave out.
         </p>
       </div>
 

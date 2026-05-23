@@ -2,9 +2,11 @@
 
 import { motion } from "framer-motion";
 import { useId, useState } from "react";
+import Link from "next/link";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import MeshBackground from "@/components/ui/motion/MeshBackground";
 import MagneticButton from "@/components/ui/motion/MagneticButton";
+import { trackEvent } from "@/lib/analytics";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -23,13 +25,14 @@ export default function BookContent() {
     if (status === "loading") return;
     setStatus("loading");
     setMessage(null);
+    trackEvent("booking_request_started", { source: "book-page" });
     try {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: email.trim().toLowerCase(),
-          source_component: "book-page",
+          source_component: "consult-request",
           consent_marketing: consent,
         }),
       });
@@ -42,8 +45,11 @@ export default function BookContent() {
         return;
       }
       setStatus("success");
-      setMessage(data.message || "You're in. We'll be in touch.");
+      setMessage(
+        data.message || "Request received. We'll reach out about your consult.",
+      );
       setEmail("");
+      trackEvent("booking_request_completed", { source: "book-page" });
     } catch {
       setStatus("error");
       setMessage("Network error. Try again.");
@@ -65,7 +71,7 @@ export default function BookContent() {
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-success)] animate-breath" />
             <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/75">
-              Coming soon · Early access
+              Cash-pay specialty consult
             </span>
           </motion.div>
 
@@ -76,10 +82,10 @@ export default function BookContent() {
             className="text-[clamp(2.5rem,6vw,4.5rem)] font-normal tracking-[-0.035em] leading-[1.02] mb-6"
             style={{ color: "white", fontFamily: "var(--font-heading)" }}
           >
-            We&apos;re launching soon.
+            Book your Specialty
             <br />
             <span className="text-[var(--color-accent-primary)]">
-              Be first in line.
+              GLP-1 Consult.
             </span>
           </motion.h1>
 
@@ -87,20 +93,47 @@ export default function BookContent() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.25, ease }}
-            className="text-lg text-white/80 max-w-xl mx-auto leading-relaxed mb-12"
+            className="text-lg text-white/80 max-w-xl mx-auto leading-relaxed mb-8"
           >
-            MetaOrtho is finishing setup now. Join the waitlist and
-            we&apos;ll email you the moment we open to new patients in your
-            state.
+            A focused specialty review for patients starting, taking, or
+            questioning GLP-1 treatment. <strong className="text-white">$400</strong>{" "}
+            initial consult · <strong className="text-white">$200</strong>{" "}
+            follow-ups.
           </motion.p>
 
-          {/* Inline capture */}
+          {/* Pre-booking note */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.35, ease }}
+            className="glass-dark rounded-[var(--radius-lg)] p-5 max-w-lg mx-auto mb-10 text-left"
+          >
+            <p className="text-[14px] text-white/85 leading-relaxed">
+              <strong className="text-white">Start with your Profile first.</strong>{" "}
+              If you haven&apos;t completed the GLP-1 Management Profile, take it
+              first so your consult can focus on your specific questions.
+            </p>
+            <MagneticButton strength={5}>
+              <Link
+                href="/assessment"
+                onClick={() => trackEvent("profile_cta_clicked", { location: "book-page" })}
+                className="mt-4 inline-flex items-center justify-center px-6 py-3 text-[14px] font-semibold rounded-[var(--radius-pill)] bg-white text-[var(--color-bg-dark)] hover:bg-white/90 transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:active:scale-100"
+              >
+                Get my free GLP-1 profile →
+              </Link>
+            </MagneticButton>
+          </motion.div>
+
+          {/* Consult request capture */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease }}
             className="max-w-md mx-auto"
           >
+            <p className="text-[13px] uppercase tracking-[0.12em] font-semibold text-white/60 mb-4">
+              Or request a consult directly
+            </p>
             {status === "success" ? (
               <div className="glass-dark rounded-[var(--radius-lg)] p-6 text-center">
                 <div className="w-10 h-10 rounded-full bg-[var(--color-success)]/20 flex items-center justify-center mx-auto mb-3">
@@ -118,7 +151,7 @@ export default function BookContent() {
                     />
                   </svg>
                 </div>
-                <p className="text-white font-medium mb-1">You&apos;re in.</p>
+                <p className="text-white font-medium mb-1">Request received.</p>
                 <p className="text-white/80 text-[13px]">{message}</p>
               </div>
             ) : (
@@ -144,7 +177,7 @@ export default function BookContent() {
                         disabled={status === "loading"}
                         className="px-6 py-3 text-[14px] font-semibold rounded-[var(--radius-pill)] bg-white text-[var(--color-bg-dark)] hover:bg-white/90 transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:active:scale-100 disabled:opacity-60 whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-darkest)]"
                       >
-                        {status === "loading" ? "…" : "Join waitlist"}
+                        {status === "loading" ? "…" : "Request consult"}
                       </button>
                     </MagneticButton>
                   </div>
@@ -169,13 +202,13 @@ export default function BookContent() {
                     className="mt-0.5 accent-[var(--color-accent-primary)]"
                   />
                   <span>
-                    Send me launch updates and the weekly newsletter on GLP-1
-                    side effects, new research, and counteraction protocols.
-                    Unsubscribe anytime.
+                    Email me about my consult and occasional updates on specialty
+                    GLP-1 management. Unsubscribe anytime.
                   </span>
                 </label>
                 <p className="mt-3 text-[12px] text-white/70">
-                  Free · Unsubscribe anytime · No spam
+                  Consult availability depends on state licensure and clinical
+                  eligibility.
                 </p>
               </>
             )}
@@ -188,40 +221,41 @@ export default function BookContent() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-accent-primary)] mb-4">
-              When we launch
+              What to expect
             </p>
             <h2 className="text-[clamp(2rem,4vw,2.75rem)] font-normal tracking-[-0.02em] mb-4">
-              Here&apos;s what booking will look like
+              How your specialty consult works
             </h2>
             <p className="text-[var(--color-text-secondary)]">
-              The moment we open, you&apos;ll be able to book in minutes.
+              A focused, structured visit — built around your GLP-1 Management
+              Profile.
             </p>
           </div>
           <div className="space-y-5">
             {[
               {
                 step: "1",
-                title: "Complete intake form",
+                title: "Complete your GLP-1 Management Profile",
                 description:
-                  "A secure intake covering your GLP-1 history, medications, weight loss timeline, and symptoms.",
+                  "A structured assessment of your GLP-1 status, goals, medication history, side effects, and monitoring needs — so your consult starts informed.",
               },
               {
                 step: "2",
-                title: "30-minute video assessment",
+                title: "Specialty video consult",
                 description:
-                  "Meet with our clinical team via secure video. Review your history and discuss your concerns.",
+                  "Meet a licensed clinician via secure video to review your candidacy, medication context, side effects, and what to monitor.",
               },
               {
                 step: "3",
-                title: "Lab & imaging orders",
+                title: "Lab & imaging orders when appropriate",
                 description:
-                  "Baseline labs (vitamin D, metabolic panel, uric acid) and DEXA scan ordered through Quest/Labcorp near you.",
+                  "If clinically appropriate and available in your state, the team may recommend or coordinate labs or a DEXA scan near you.",
               },
               {
                 step: "4",
-                title: "Personalized plan within 48 hours",
+                title: "Your management plan & next steps",
                 description:
-                  "Dr. Saenz reviews your assessment and builds a comprehensive protocol: nutrition, supplements, exercise.",
+                  "Leave with a clearer understanding of your management tier, recommended next steps, and what should be monitored over time.",
               },
             ].map((item, i) => (
               <motion.div

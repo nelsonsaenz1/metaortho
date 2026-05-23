@@ -5,7 +5,7 @@ import MeshBackground from "@/components/ui/motion/MeshBackground";
 import TiltCard from "@/components/ui/motion/TiltCard";
 import MagneticButton from "@/components/ui/motion/MagneticButton";
 import AnimatedNumber from "@/components/ui/motion/AnimatedNumber";
-import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
+import { trackEvent } from "@/lib/analytics";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -50,23 +50,23 @@ const trustItems = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
-    text: "Orthopedic + endocrine board-certified",
+    text: "Physician-led: orthopedic + endocrine",
   },
   {
     icon: (
       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
-    text: "HIPAA-compliant telehealth",
+    text: "Cash-pay consult: $400 initial · $200 follow-up",
   },
   {
     icon: (
       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
       </svg>
     ),
-    text: "No controlled substances",
+    text: "Candidacy, medication & monitoring review",
   },
 ];
 
@@ -94,40 +94,31 @@ export default function Hero() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-success)]" />
               </span>
               <span className="text-[13px]">
-                Accepting waitlist signups
+                Physician-led specialty GLP-1 management
               </span>
             </motion.div>
 
             <h1 className="text-[clamp(2.5rem,5.5vw,4.25rem)] font-normal leading-[1.03] mb-8 tracking-[-0.035em]">
-              You&apos;re losing weight.
+              GLP-1 care should manage
               <br />
               <span className="text-[var(--color-accent-primary)]">
-                What else are you losing?
+                more than the number on the scale.
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-[var(--color-text-secondary)] leading-[1.55] mb-2 max-w-lg tracking-[-0.01em]">
-              Up to{" "}
-              <strong className="text-[var(--color-text-heading)] font-semibold">
-                40% of weight lost on GLP-1 drugs
-              </strong>{" "}
-              like Ozempic and Mounjaro may be muscle and bone — not fat.
-            </p>
-            <p className="text-[11px] text-[var(--color-text-tertiary)] mb-5 tracking-[0.03em]">
-              Source: AAOS 2026 ·{" "}
-              <a
-                href="/legal/sources"
-                className="underline underline-offset-2 hover:text-[var(--color-accent-primary)]"
-              >
-                full citations
-              </a>
+            <p className="text-lg md:text-xl text-[var(--color-text-secondary)] leading-[1.55] mb-6 max-w-lg tracking-[-0.01em]">
+              MetaOrtho helps patients starting, taking, or questioning GLP-1
+              treatment get a physician-led review of candidacy, medication fit,
+              side-effect concerns, and monitoring needs.
             </p>
 
             <p className="text-base text-[var(--color-text-secondary)] leading-[1.6] mb-10 max-w-lg tracking-[-0.01em]">
-              MetaOrtho monitors your bones, muscles, and joints while you lose
-              weight — led by a multi-specialty team of a board-certified
-              orthopedic surgeon and a board-certified endocrinologist, all
-              via telehealth.
+              Start with a personalized{" "}
+              <strong className="text-[var(--color-text-heading)] font-semibold">
+                GLP-1 Management Profile
+              </strong>
+              , then meet with our team — a board-certified endocrinologist and
+              orthopedic surgeon — for a specialty consult, all via telehealth.
             </p>
 
             <motion.div
@@ -137,28 +128,21 @@ export default function Hero() {
               className="flex flex-col sm:flex-row gap-3"
             >
               <MagneticButton strength={8}>
-                <WaitlistCTA
-                  variant="dark"
-                  size="lg"
-                  source="hero-primary"
-                  eyebrow="Early access · MetaOrtho"
-                  headline={
-                    <>
-                      Be first when MetaOrtho
-                      <br />
-                      opens in your state.
-                    </>
-                  }
+                <a
+                  href="/assessment"
+                  onClick={() => trackEvent("profile_cta_clicked", { location: "home-hero" })}
+                  className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold rounded-[var(--radius-pill)] bg-[var(--color-bg-dark)] text-white hover:bg-[var(--color-bg-darkest)] shadow-[var(--shadow-md)] transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] active:duration-[var(--dur-press)] motion-reduce:active:scale-100 tracking-[-0.01em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2"
                 >
-                  Join the waitlist
-                </WaitlistCTA>
+                  Get my free GLP-1 profile
+                </a>
               </MagneticButton>
               <MagneticButton strength={6}>
                 <a
-                  href="/assessment"
+                  href="/book"
+                  onClick={() => trackEvent("consult_cta_clicked", { location: "home-hero" })}
                   className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold rounded-[var(--radius-pill)] border-2 border-[var(--color-text-heading)] text-[var(--color-text-heading)] hover:bg-[var(--color-text-heading)] hover:text-white transition-[background-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] active:duration-[var(--dur-press)] motion-reduce:active:scale-100 tracking-[-0.01em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2"
                 >
-                  Get your GLP-1 Profile
+                  Book a $400 specialty consult
                 </a>
               </MagneticButton>
             </motion.div>
@@ -167,14 +151,10 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.6 }}
-              className="mt-6 text-[13px] text-[var(--color-text-secondary)]"
+              className="mt-6 text-[13px] text-[var(--color-text-tertiary)] max-w-lg leading-relaxed"
             >
-              <span className="font-semibold text-[var(--color-text-heading)]">
-                Coming soon.
-              </span>{" "}
-              Join the waitlist — no credit card, unsubscribe anytime. Includes
-              our weekly newsletter on GLP-1 side effects, new research, and
-              counteraction protocols.
+              Educational assessment only. Final treatment decisions require
+              consultation with a licensed clinician.
             </motion.p>
           </motion.div>
 
@@ -210,9 +190,9 @@ export default function Hero() {
                     className="text-[22px] md:text-[26px] font-normal tracking-[-0.02em] mb-8 leading-[1.15] text-[var(--color-text-heading)]"
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
-                    The hidden cost of GLP-1
+                    Why specialty management
                     <br />
-                    weight loss.
+                    matters.
                   </h3>
 
                   <div className="space-y-5">
@@ -253,9 +233,10 @@ export default function Hero() {
 
                   <div className="mt-8 pt-6 border-t border-[var(--color-border)] text-center">
                     <p className="text-[var(--color-text-primary)] text-sm leading-relaxed">
-                      Your scale says you lost 40 lbs.{" "}
+                      Some studies suggest a meaningful share of GLP-1 weight
+                      loss may be lean mass.{" "}
                       <span className="text-[var(--color-text-heading)] font-semibold">
-                        How much was muscle?
+                        A specialty consult helps you see the full picture.
                       </span>
                     </p>
                   </div>

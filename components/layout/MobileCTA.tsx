@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
+import Link from "next/link";
+import { trackEvent } from "@/lib/analytics";
 
 export default function MobileCTA() {
   const [visible, setVisible] = useState(false);
@@ -22,14 +23,13 @@ export default function MobileCTA() {
           : "translate-y-full opacity-0 pointer-events-none"
       }`}
     >
-      <WaitlistCTA
-        variant="dark"
-        size="md"
-        source="mobile-cta"
-        className="w-full"
+      <Link
+        href="/assessment"
+        onClick={() => trackEvent("profile_cta_clicked", { location: "mobile-cta" })}
+        className="flex w-full items-center justify-center px-7 py-3.5 text-[15px] font-semibold rounded-[var(--radius-pill)] bg-[var(--color-bg-dark)] text-white hover:bg-[var(--color-bg-darkest)] shadow-[var(--shadow-md)] transition-[background-color] duration-[var(--dur-hover)] ease-[var(--ease-out)]"
       >
-        Join the waitlist
-      </WaitlistCTA>
+        Get my free GLP-1 profile
+      </Link>
     </div>
   );
 }

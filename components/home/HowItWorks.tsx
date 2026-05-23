@@ -3,33 +3,34 @@
 import { motion } from "framer-motion";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Spotlight from "@/components/ui/motion/Spotlight";
+import { trackEvent } from "@/lib/analytics";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
 const steps = [
   {
     step: "01",
-    title: "Comprehensive MSK assessment",
+    title: "Get my free GLP-1 profile",
     description:
-      "A 30-minute virtual visit with our clinical team. We review your GLP-1 history, assess your musculoskeletal risk factors, and order baseline labs and imaging.",
-    includes: ["DEXA scan order", "Vitamin D + metabolic panel", "Uric acid + risk stratification"],
-    duration: "30 min",
+      "Answer questions about your GLP-1 status, goals, medication history, side effects, weight-loss pace, nutrition, strength, labs, and body-composition concerns.",
+    includes: ["Status & goals", "Medication & dose context", "Side effects & monitoring needs"],
+    duration: "~5 minutes · free",
   },
   {
     step: "02",
-    title: "Personalized protection plan",
+    title: "Receive your profile preview",
     description:
-      "Dr. Saenz reviews your results and builds your protocol: resistance training prescriptions, nutritional optimization, and any medications needed.",
-    includes: ["Protein & creatine targets", "Exercise prescription", "Supplement dosing"],
-    duration: "Delivered within 48h",
+      "Your results summarize your management complexity — Standard, Enhanced, or High-Risk — and preview what a specialty consult would focus on for you.",
+    includes: ["Candidacy signals", "Management tier", "What your consult would cover"],
+    duration: "Instant",
   },
   {
     step: "03",
-    title: "Ongoing monitoring",
+    title: "Book a specialty consult",
     description:
-      "Monthly video check-ins track your bone density trends, muscle composition, lab values, and symptoms. We adjust your protocol as your weight loss progresses.",
-    includes: ["DEXA tracking", "Lab trend analysis", "Protocol adjustments"],
-    duration: "Monthly",
+      "Meet a licensed clinician for a cash-pay specialty review of your GLP-1 plan, side effects, and monitoring needs — then leave with clear next steps.",
+    includes: ["Specialty review", "Recommended next steps", "Monitoring plan if appropriate"],
+    duration: "$400 initial · $200 follow-up",
   },
 ];
 
@@ -41,11 +42,12 @@ export default function HowItWorks() {
           How it works
         </p>
         <h2 className="text-[clamp(2rem,4vw,3rem)] font-normal tracking-[-0.02em] mb-6">
-          Three steps to protect your body
-          <br className="hidden md:block" /> while you lose weight
+          Profile, preview,
+          <br className="hidden md:block" /> then a specialty consult
         </h2>
         <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed">
-          All from home. No travel. No waiting rooms. Expert orthopedic care via secure video.
+          A simple path from a free, structured assessment to a focused
+          physician consult — all from home, via secure telehealth.
         </p>
       </div>
 
@@ -127,6 +129,25 @@ export default function HowItWorks() {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55, delay: 0.2, ease }}
+          className="mt-14 text-center"
+        >
+          <a
+            href="/assessment"
+            onClick={() => trackEvent("profile_cta_clicked", { location: "home-how-it-works" })}
+            className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold rounded-[var(--radius-pill)] bg-[var(--color-bg-dark)] text-white hover:bg-[var(--color-bg-darkest)] shadow-[var(--shadow-md)] transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] motion-reduce:active:scale-100 tracking-[-0.01em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2"
+          >
+            Get my free GLP-1 profile
+          </a>
+          <p className="mt-4 text-[13px] text-[var(--color-text-tertiary)]">
+            Free · ~5 minutes · educational, not a diagnosis
+          </p>
+        </motion.div>
       </div>
     </SectionWrapper>
   );

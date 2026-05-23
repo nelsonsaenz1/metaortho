@@ -1,10 +1,12 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
 import CostComparison from "@/components/home/CostComparison";
+import PortalPreview from "@/components/home/PortalPreview";
+import { trackEvent } from "@/lib/analytics";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -28,7 +30,6 @@ function TopBar() {
 
 /* ---------------------------------------------------------------
    SECTION 1 — HERO
-   Full-viewport emotional hook. Provocative headline.
 --------------------------------------------------------------- */
 function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -60,9 +61,7 @@ function HeroSection() {
       />
 
       <div className="max-w-5xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10 text-center pt-24 pb-32">
-        <motion.div
-          style={{ y: yText, opacity: opacityText }}
-        >
+        <motion.div style={{ y: yText, opacity: opacityText }}>
           {/* Status pill */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -71,7 +70,7 @@ function HeroSection() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius-pill)] border border-white/10 bg-white/5 backdrop-blur-sm text-sm text-white/80 mb-10"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-success)] animate-pulse" />
-            Now accepting waitlist signups
+            Physician-led specialty GLP-1 management
           </motion.div>
 
           {/* Main headline */}
@@ -82,10 +81,10 @@ function HeroSection() {
             className="text-[clamp(2.5rem,7vw,5.5rem)] font-normal leading-[1.02] tracking-[-0.04em] mb-8"
             style={{ fontFamily: "var(--font-heading)", color: "white" }}
           >
-            The weight is coming off.
+            GLP-1 care should manage more than
             <br />
             <span className="text-[var(--color-accent-primary)] opacity-90">
-              So are your muscles.
+              the number on the scale.
             </span>
           </motion.h1>
 
@@ -94,29 +93,11 @@ function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35, ease }}
-            className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed mb-14 tracking-[-0.01em]"
+            className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed mb-12 tracking-[-0.01em]"
           >
-            Research shows up to{" "}
-            <strong className="text-white/90 font-semibold">
-              40% of weight lost on GLP-1 drugs
-            </strong>{" "}
-            like Ozempic and Mounjaro is muscle and bone — not fat. MetaOrtho is
-            the first physician-led practice built to protect what the scale
-            can&apos;t measure.
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.45, ease }}
-            className="text-[11px] text-white/45 mb-10 tracking-[0.04em]"
-          >
-            Source: AAOS 2026 ·{" "}
-            <a
-              href="/legal/sources"
-              className="underline underline-offset-2 hover:text-white/70"
-            >
-              full citations
-            </a>
+            A physician-led specialty consult for people starting, taking, or
+            questioning GLP-1 treatment. Start with a personalized GLP-1
+            Management Profile that previews what your consult should focus on.
           </motion.p>
 
           {/* CTAs */}
@@ -127,18 +108,30 @@ function HeroSection() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <a
-              href="#get-started"
+              href="/assessment"
+              onClick={() => trackEvent("profile_cta_clicked", { location: "landing-hero" })}
               className="inline-flex items-center justify-center px-10 py-4.5 text-base font-semibold rounded-[var(--radius-pill)] bg-white text-[var(--color-bg-dark)] hover:bg-white/90 shadow-[0_0_40px_rgba(255,255,255,0.12)] transition-all duration-300 tracking-[-0.01em]"
             >
-              Protect Your Body — $149
+              Get my free GLP-1 profile
             </a>
             <a
-              href="#risk-factors"
+              href="/book"
+              onClick={() => trackEvent("consult_cta_clicked", { location: "landing-hero" })}
               className="inline-flex items-center justify-center px-10 py-4.5 text-base font-semibold rounded-[var(--radius-pill)] border border-white/20 text-white/80 hover:bg-white/5 hover:border-white/30 transition-all duration-300 tracking-[-0.01em]"
             >
-              See the Research
+              Book a $400 specialty consult
             </a>
           </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7, duration: 0.6 }}
+            className="mt-8 text-[12px] text-white/45 tracking-[0.02em] max-w-md mx-auto leading-relaxed"
+          >
+            Educational assessment only. Final treatment decisions require
+            consultation with a licensed clinician.
+          </motion.p>
         </motion.div>
 
         {/* Scroll indicator */}
@@ -162,43 +155,23 @@ function HeroSection() {
 }
 
 /* ---------------------------------------------------------------
-   SECTION 2 — THE PROBLEM (stat ticker)
-   Dramatic stats on cream background. Fear of loss > desire for gain.
+   SECTION 2 — THE PROBLEM (the bigger questions)
 --------------------------------------------------------------- */
-const stats = [
-  {
-    value: "+30%",
-    label: "Osteoporosis Risk",
-    detail: "After 5 years on GLP-1 medications",
-    color: "var(--color-danger)",
-  },
-  {
-    value: "+150%",
-    label: "Bone Softening Risk",
-    detail: "Osteomalacia incidence vs. controls",
-    color: "#E67E22",
-  },
-  {
-    value: "40%",
-    label: "Weight Lost Is Muscle",
-    detail: "Not fat — lean tissue, bone & connective tissue",
-    color: "var(--color-warning)",
-  },
-  {
-    value: "+12%",
-    label: "Gout Risk Increase",
-    detail: "From rapid uric acid fluctuations",
-    color: "var(--color-accent-warm)",
-  },
+const questions = [
+  "Am I a good candidate for a GLP-1?",
+  "Is my current medication and dose still the right fit?",
+  "Are my side effects normal, or a sign I need a change?",
+  "Am I losing fat, muscle, or both?",
+  "Should I be tracking labs, DEXA, strength, or bone health?",
+  "Who is looking at the full picture?",
 ];
 
 function ProblemSection() {
   return (
     <section
-      id="risk-factors"
+      id="bigger-questions"
       className="relative py-28 md:py-36 bg-[var(--color-bg-cream)]"
     >
-      {/* Subtle texture */}
       <div
         className="absolute inset-0 opacity-[0.025]"
         style={{
@@ -213,65 +186,61 @@ function ProblemSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-accent-primary)] mb-4">
-            AAOS 2026 Research
+            The bigger picture
           </p>
           <h2 className="text-[clamp(2rem,4.5vw,3.25rem)] font-normal tracking-[-0.03em] mb-6 max-w-3xl mx-auto">
-            What your prescriber isn&apos;t monitoring
+            Most GLP-1 care focuses on weight. But patients have bigger
+            questions.
           </h2>
           <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed">
-            Weight loss clinics track pounds on the scale. No one is tracking
-            what&apos;s happening underneath — until something breaks.
+            GLP-1 therapy is one of the most consequential drug classes in modern
+            medicine. The questions worth asking go beyond the scale.
           </p>
         </motion.div>
 
-        {/* Stat cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {stats.map((stat, i) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+          {questions.map((q, i) => (
             <motion.div
-              key={stat.label}
+              key={q}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: i * 0.1, ease }}
-              className="bg-white rounded-[var(--radius-xl)] p-7 border border-[var(--color-border)] hover:shadow-[var(--shadow-lg)] transition-all duration-300"
+              transition={{ duration: 0.6, delay: i * 0.08, ease }}
+              className="bg-white rounded-[var(--radius-xl)] p-7 border border-[var(--color-border)] hover:shadow-[var(--shadow-lg)] transition-all duration-300 flex items-start gap-3"
             >
               <span
-                className="block text-4xl md:text-5xl font-bold tracking-tighter mb-3 leading-none"
-                style={{ color: stat.color, fontFamily: "var(--font-heading)" }}
+                className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-bg-cream)] text-[var(--color-accent-primary)] flex items-center justify-center text-sm font-semibold tabular-nums"
+                style={{ fontFamily: "var(--font-heading)" }}
               >
-                {stat.value}
+                {i + 1}
               </span>
-              <p className="text-[var(--color-text-heading)] font-semibold text-sm mb-2 tracking-[-0.01em]">
-                {stat.label}
-              </p>
-              <p className="text-[var(--color-text-tertiary)] text-xs leading-relaxed">
-                {stat.detail}
+              <p
+                className="text-[var(--color-text-heading)] text-lg font-normal tracking-[-0.01em] leading-snug"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                {q}
               </p>
             </motion.div>
           ))}
         </div>
 
-        {/* Callout */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.3, ease }}
-          className="mt-12 bg-[var(--color-bg-dark)] rounded-[var(--radius-xl)] p-8 md:p-10 text-center"
+          className="mt-12 bg-[var(--color-bg-dark)] rounded-[var(--radius-xl)] p-8 md:p-10 text-center max-w-3xl mx-auto"
         >
           <p
             className="text-lg md:text-xl font-normal tracking-[-0.02em] leading-snug"
-            style={{
-              fontFamily: "var(--font-heading)",
-              color: "white",
-            }}
+            style={{ fontFamily: "var(--font-heading)", color: "white" }}
           >
-            Your weight loss doctor manages the scale.{" "}
+            MetaOrtho was built for these questions —{" "}
             <span className="text-[var(--color-accent-primary)]">
-              Who&apos;s managing everything else?
+              a structured, physician-led review.
             </span>
           </p>
         </motion.div>
@@ -282,60 +251,32 @@ function ProblemSection() {
 
 /* ---------------------------------------------------------------
    SECTION 3 — WHO THIS IS FOR
-   Symptom timeline that escalates in urgency.
 --------------------------------------------------------------- */
-const riskTimeline = [
+const segments = [
   {
-    month: "Month 1\u20133",
-    title: "The weight drops fast",
+    label: "Already taking a GLP-1",
     detail:
-      "You\u2019re on Ozempic, Wegovy, Mounjaro, or Zepbound. The scale is moving. No one mentions what else is changing.",
-    severity: 1,
-    color: "var(--color-accent-primary)",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-      </svg>
-    ),
+      "You're losing weight but unsure whether your current medication, dose, side effects, nutrition, or monitoring plan is still right.",
   },
   {
-    month: "Month 3\u20136",
-    title: "Muscle starts disappearing",
+    label: "Considering starting",
     detail:
-      "20+ lbs gone \u2014 but you\u2019re not resistance training. Up to 40% of what you lost is lean tissue, not fat. You feel weaker. Your prescriber says \u201Cthat\u2019s normal.\u201D",
-    severity: 2,
-    color: "var(--color-warning)",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+      "You want a second opinion on candidacy, tradeoffs, risks, and what should be monitored before you begin.",
   },
   {
-    month: "Month 6\u201312",
-    title: "Bones weaken silently",
+    label: "Losing weight rapidly",
     detail:
-      "No DEXA scan ordered. No vitamin D or calcium checked. Bone density is declining but you have zero symptoms \u2014 until you don\u2019t.",
-    severity: 3,
-    color: "#E67E22",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+      "You want to understand body-composition, lean-mass, bone-health, and strength considerations before the scale becomes the only metric.",
   },
   {
-    month: "Month 12+",
-    title: "The damage surfaces",
+    label: "Experiencing symptoms",
     detail:
-      "A fracture from a minor fall. A gout flare that sends you to the ER. Joint pain that won\u2019t resolve. Weakness that limits your life. The weight is gone \u2014 and so is your structural health.",
-    severity: 4,
-    color: "var(--color-danger)",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M4.93 4.93l14.14 14.14M12 2a10 10 0 100 20 10 10 0 000-20z" />
-      </svg>
-    ),
+      "Fatigue, weakness, joint pain, gout concerns, nausea, or appetite changes you'd like reviewed in context.",
+  },
+  {
+    label: "Higher-risk patients",
+    detail:
+      "Low bone density, prior fractures, orthopedic issues, older age, or significant weight-loss goals.",
   },
 ];
 
@@ -343,7 +284,6 @@ function WhoSection() {
   return (
     <section className="relative py-24 md:py-32 bg-white overflow-hidden">
       <div className="max-w-5xl mx-auto px-5 sm:px-8 lg:px-12">
-        {/* Heading — one line */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -351,101 +291,52 @@ function WhoSection() {
           transition={{ duration: 0.8, ease }}
           className="text-center mb-16"
         >
+          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--color-accent-primary)] mb-4">
+            Who this is for
+          </p>
           <h2
-            className="text-[clamp(3rem,8vw,6rem)] font-normal tracking-[-0.04em] leading-[1] text-[var(--color-text-heading)] whitespace-nowrap"
+            className="text-[clamp(2.25rem,5vw,3.5rem)] font-normal tracking-[-0.035em] leading-[1.02] text-[var(--color-text-heading)]"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            Is this you?
+            Built for patients who want more
+            <br className="hidden md:block" /> structure around GLP-1 treatment.
           </h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="mt-5 text-base text-[var(--color-text-secondary)] max-w-lg mx-auto leading-relaxed"
-          >
-            Here&apos;s what unmonitored GLP-1 weight loss looks like over time.
-          </motion.p>
         </motion.div>
 
-        {/* Timeline */}
-        <div className="relative max-w-2xl mx-auto">
-          {/* Vertical connector line */}
-          <div className="absolute left-5 top-0 bottom-0 w-px bg-[var(--color-border-strong)] hidden sm:block" />
-
-          <div className="space-y-5">
-            {riskTimeline.map((stage, i) => (
-              <motion.div
-                key={stage.month}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: i * 0.1, ease }}
-                className="relative grid sm:grid-cols-[40px_1fr] gap-4 items-start"
-              >
-                {/* Timeline node */}
-                <div className="relative z-10 flex-shrink-0 hidden sm:flex items-center justify-center">
-                  <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center ring-[3px] ring-white"
-                    style={{ backgroundColor: "var(--color-bg-cream)", color: "var(--color-accent-primary)" }}
-                  >
-                    {stage.icon}
-                  </div>
-                </div>
-
-                {/* Compact card */}
-                <div className="bg-[var(--color-bg-cream)] rounded-[var(--radius-lg)] px-6 py-5 border border-[var(--color-border)] hover:shadow-[var(--shadow-md)] transition-all duration-300">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--color-accent-primary)]">
-                      {stage.month}
-                    </span>
-                  </div>
-                  <h3
-                    className="text-lg font-normal tracking-[-0.02em] mb-1.5 text-[var(--color-text-heading)]"
-                    style={{ fontFamily: "var(--font-heading)" }}
-                  >
-                    {stage.title}
-                  </h3>
-                  <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-                    {stage.detail}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className="grid gap-4 md:gap-5 md:grid-cols-2">
+          {segments.map((seg, i) => (
+            <motion.div
+              key={seg.label}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease }}
+              className={`bg-[var(--color-bg-cream)] rounded-[var(--radius-lg)] px-6 py-6 border border-[var(--color-border)] hover:shadow-[var(--shadow-md)] transition-all duration-300 ${
+                i === segments.length - 1 ? "md:col-span-2" : ""
+              }`}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <span className="w-2 h-2 rounded-full bg-[var(--color-accent-primary)]" />
+                <h3
+                  className="text-lg font-normal tracking-[-0.02em] text-[var(--color-text-heading)]"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {seg.label}
+                </h3>
+              </div>
+              <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed pl-5">
+                {seg.detail}
+              </p>
+            </motion.div>
+          ))}
         </div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6, ease }}
-          className="mt-14 text-center"
-        >
-          <p
-            className="text-lg font-normal tracking-[-0.02em] text-[var(--color-text-secondary)] mb-6"
-          >
-            Recognize yourself?{" "}
-            <span className="text-[var(--color-text-heading)] font-medium">
-              You can change the outcome.
-            </span>
-          </p>
-          <a
-            href="#get-started"
-            className="inline-flex items-center justify-center px-8 py-3.5 text-[15px] font-semibold rounded-[var(--radius-pill)] bg-[var(--color-bg-dark)] text-white hover:bg-[var(--color-bg-darkest)] shadow-[var(--shadow-lg)] transition-all duration-300 tracking-[-0.01em]"
-          >
-            Get Your Assessment &mdash; $149
-          </a>
-        </motion.div>
       </div>
     </section>
   );
 }
 
 /* ---------------------------------------------------------------
-   SECTION 4 — THE SOLUTION (what MetaOrtho does)
-   Visual comparison: what others miss vs. what we monitor
+   SECTION 4 — SPECIALTY CONSULT vs GENERIC PROGRAM
 --------------------------------------------------------------- */
 function SolutionSection() {
   return (
@@ -470,13 +361,12 @@ function SolutionSection() {
             The MetaOrtho difference
           </p>
           <h2 className="text-[clamp(2rem,4vw,3rem)] font-normal tracking-[-0.02em] mb-6 max-w-3xl mx-auto">
-            The only practice built to protect GLP-1 patients from the inside
-            out
+            A specialty consult, not another generic weight-loss program
           </h2>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {/* What others do */}
+          {/* Typical program */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -484,23 +374,18 @@ function SolutionSection() {
             transition={{ duration: 0.6, ease }}
             className="bg-white rounded-[var(--radius-xl)] p-8 border border-[var(--color-border)]"
           >
-            <div className="w-10 h-10 rounded-full bg-[var(--color-danger-bg)] flex items-center justify-center mb-5">
-              <svg className="w-5 h-5 text-[var(--color-danger)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </div>
             <h3
               className="text-lg font-normal tracking-[-0.02em] mb-5 text-[var(--color-text-heading)]"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              What your current provider monitors
+              A typical GLP-1 program
             </h3>
             <ul className="space-y-3">
               {[
-                "Scale weight",
-                "BMI",
-                "Appetite changes",
-                "GI side effects",
+                "Scale weight and a prescription",
+                "Monthly refills",
+                "Limited side-effect review",
+                "No body-composition or bone monitoring",
               ].map((item) => (
                 <li
                   key={item}
@@ -511,14 +396,9 @@ function SolutionSection() {
                 </li>
               ))}
             </ul>
-            <div className="mt-6 pt-5 border-t border-[var(--color-border)]">
-              <p className="text-xs text-[var(--color-danger)] font-semibold uppercase tracking-wide">
-                Not monitoring muscle, bone, or joints
-              </p>
-            </div>
           </motion.div>
 
-          {/* What MetaOrtho does */}
+          {/* MetaOrtho specialty consult */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -528,28 +408,20 @@ function SolutionSection() {
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-[var(--color-accent-primary)]/8 rounded-full blur-3xl" />
             <div className="relative z-10">
-              <div className="w-10 h-10 rounded-full bg-[var(--color-success)]/15 flex items-center justify-center mb-5">
-                <svg className="w-5 h-5 text-[var(--color-success)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
               <h3
                 className="text-lg font-normal tracking-[-0.02em] mb-5"
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  color: "white",
-                }}
+                style={{ fontFamily: "var(--font-heading)", color: "white" }}
               >
-                What MetaOrtho monitors
+                A MetaOrtho specialty consult
               </h3>
               <ul className="space-y-3">
                 {[
-                  "DEXA-verified bone density",
-                  "Lean muscle mass tracking",
-                  "Vitamin D, calcium & metabolic panels",
-                  "Uric acid & gout risk",
-                  "Resistance training prescription",
-                  "Supplement & nutrition protocols",
+                  "Candidacy and goals review",
+                  "Medication and dose context",
+                  "Side-effect and tolerability discussion",
+                  "Body composition, muscle & bone monitoring",
+                  "Labs and DEXA when clinically appropriate",
+                  "Recommended next steps and follow-up",
                 ].map((item) => (
                   <li
                     key={item}
@@ -562,7 +434,7 @@ function SolutionSection() {
               </ul>
               <div className="mt-6 pt-5 border-t border-white/10">
                 <p className="text-xs text-[var(--color-success)] font-semibold uppercase tracking-wide">
-                  Led by a board-certified orthopedic surgeon
+                  Led by a board-certified endocrinologist &amp; orthopedic surgeon
                 </p>
               </div>
             </div>
@@ -574,26 +446,51 @@ function SolutionSection() {
 }
 
 /* ---------------------------------------------------------------
-   SECTION 5 — HOW IT WORKS (3 steps)
+   SECTION 5 — CREDIBILITY STRIP
+--------------------------------------------------------------- */
+function TrustStrip() {
+  return (
+    <section className="py-12 bg-[var(--color-bg-cream)] border-y border-[var(--color-border)]">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 text-sm text-[var(--color-text-secondary)]">
+          {[
+            { icon: "⚕️", text: "Board-certified endocrinologist + orthopedic surgeon" },
+            { icon: "🔒", text: "HIPAA-compliant telehealth" },
+            { icon: "📋", text: "Cash-pay: $400 initial · $200 follow-up" },
+            { icon: "🧭", text: "Candidacy, medication & monitoring review" },
+          ].map((item) => (
+            <div key={item.text} className="flex items-center gap-2.5">
+              <span className="text-base">{item.icon}</span>
+              <span className="tracking-[-0.01em]">{item.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------------------------------------------------------
+   SECTION 6 — HOW IT WORKS (3 steps)
 --------------------------------------------------------------- */
 const steps = [
   {
     num: "01",
-    title: "Book your assessment",
-    body: "A 30-minute telehealth visit with our clinical team. We review your GLP-1 history, assess risk factors, and order baseline labs and a DEXA scan.",
-    tag: "Coming soon",
+    title: "Get my free GLP-1 profile",
+    body: "Answer questions about your GLP-1 status, goals, medication history, side effects, nutrition, strength, and body-composition concerns.",
+    tag: "~5 minutes · free",
   },
   {
     num: "02",
-    title: "Get your protection plan",
-    body: "Dr. Saenz reviews everything and builds your personalized protocol: resistance training, nutrition targets, supplements, and any needed medications.",
-    tag: "Board-certified surgeon",
+    title: "Receive your profile preview",
+    body: "Your results summarize your management complexity — Standard, Enhanced, or High-Risk — and preview what a specialty consult would focus on.",
+    tag: "Instant",
   },
   {
     num: "03",
-    title: "Monitor as you lose",
-    body: "Monthly video check-ins track bone density, muscle composition, and lab trends. Your protocol adapts as your weight loss progresses.",
-    tag: "Plans from $79/mo",
+    title: "Book a specialty consult",
+    body: "Meet a licensed clinician for a cash-pay specialty review. Initial consults are $400; follow-ups are $200.",
+    tag: "$400 initial · $200 follow-up",
   },
 ];
 
@@ -612,11 +509,11 @@ function HowSection() {
             How it works
           </p>
           <h2 className="text-[clamp(2rem,4vw,3rem)] font-normal tracking-[-0.02em] mb-5">
-            Three steps. All from home.
+            Profile, preview, then a consult.
           </h2>
           <p className="text-lg text-[var(--color-text-secondary)] max-w-xl mx-auto leading-relaxed">
-            No travel. No waiting rooms. Expert orthopedic care delivered via
-            secure telehealth.
+            No travel. No waiting rooms. A structured assessment, then a focused
+            specialty consult — all via secure telehealth.
           </p>
         </motion.div>
 
@@ -649,7 +546,6 @@ function HowSection() {
                 {step.tag}
               </span>
 
-              {/* Connector */}
               {i < steps.length - 1 && (
                 <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-px bg-[var(--color-border)]" />
               )}
@@ -662,54 +558,20 @@ function HowSection() {
 }
 
 /* ---------------------------------------------------------------
-   SECTION 6 — CREDIBILITY STRIP
-   Trust signals in a tight bar
---------------------------------------------------------------- */
-function TrustStrip() {
-  return (
-    <section className="py-12 bg-[var(--color-bg-cream)] border-y border-[var(--color-border)]">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 text-sm text-[var(--color-text-secondary)]">
-          {[
-            { icon: "⚕\uFE0F", text: "Board-certified orthopedic surgeon" },
-            { icon: "\uD83D\uDD12", text: "HIPAA-compliant telehealth" },
-            { icon: "\uD83D\uDCCA", text: "DEXA + lab-verified tracking" },
-            { icon: "\uD83D\uDCAA", text: "No controlled substances" },
-          ].map((item) => (
-            <div key={item.text} className="flex items-center gap-2.5">
-              <span className="text-base">{item.icon}</span>
-              <span className="tracking-[-0.01em] whitespace-nowrap">
-                {item.text}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------------------------------------------------------
-   SECTION 7 — COST COMPARISON
-   Uses the shared <CostComparison /> from components/home/ so /home and
-   /landing render an identical block (single source of truth).
---------------------------------------------------------------- */
-
-/* ---------------------------------------------------------------
-   SECTION 8 — FAQ (mini, 3 questions)
+   SECTION 8 — FAQ (mini)
 --------------------------------------------------------------- */
 const faqs = [
   {
-    q: "Do I need a referral from my prescriber?",
-    a: "No referral needed. MetaOrtho is a direct-to-patient telehealth practice. You can book an assessment whether your GLP-1 was prescribed by a primary care doctor, weight loss clinic, or online platform.",
+    q: "Do I need to already be on a GLP-1?",
+    a: "No. The GLP-1 Management Profile is built for current users, former users, and people considering treatment for the first time.",
   },
   {
-    q: "What happens during the initial assessment?",
-    a: "A 30-minute video visit where we review your GLP-1 history, assess musculoskeletal risk factors, order baseline labs (DEXA, vitamin D, metabolic panel, uric acid), and build your personalized protection protocol.",
+    q: "What does the $400 consult include?",
+    a: "A specialty review of your GLP-1 status, goals, relevant history, medication and dose context, side-effect concerns, monitoring needs, and recommended next steps. Follow-up consults are $200.",
   },
   {
     q: "Is this covered by insurance?",
-    a: "The MetaOrtho consultation is a cash-pay service ($149). Labs and DEXA scans ordered through the visit are typically covered by insurance when processed through Quest Diagnostics or Labcorp. Coverage varies by plan; confirm with your insurer.",
+    a: "Phase 1 consults are cash-pay. Some labs, imaging, or third-party services may have separate costs or insurance options depending on provider and location.",
   },
 ];
 
@@ -797,7 +659,6 @@ function FAQSection() {
 
 /* ---------------------------------------------------------------
    SECTION 9 — FINAL CTA
-   High-urgency conversion section
 --------------------------------------------------------------- */
 function FinalCTASection() {
   return (
@@ -805,7 +666,6 @@ function FinalCTASection() {
       id="get-started"
       className="relative py-32 md:py-44 bg-[var(--color-bg-dark)] overflow-hidden"
     >
-      {/* Layered glows */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] rounded-full bg-[var(--color-accent-primary)]/4 blur-[180px]" />
       </div>
@@ -818,47 +678,47 @@ function FinalCTASection() {
           transition={{ duration: 0.8, ease }}
         >
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/75 mb-6">
-            One assessment. Total clarity.
+            Start with the Profile
           </p>
 
           <h2
             className="text-[clamp(2.25rem,5.5vw,4rem)] font-normal tracking-[-0.03em] leading-[1.05] mb-8"
             style={{ color: "white" }}
           >
-            You took control of your weight.
+            Get your GLP-1
             <br />
             <span className="text-[var(--color-accent-primary)]">
-              Now take control of what&apos;s left.
+              Management Profile.
             </span>
           </h2>
 
           <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed mb-14">
-            A 30-minute telehealth visit with a board-certified orthopedic
-            surgeon. Baseline labs. A DEXA scan. A plan to protect your muscles,
-            bones, and joints while the weight keeps coming off.
+            A structured assessment that previews what a specialty consult would
+            focus on — candidacy, medication context, side effects, and
+            monitoring. Initial consults are $400; follow-ups are $200.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <a
-              href="/book"
+              href="/assessment"
+              onClick={() => trackEvent("profile_cta_clicked", { location: "landing-final-cta" })}
               className="inline-flex items-center justify-center px-10 py-4.5 text-base font-semibold rounded-[var(--radius-pill)] bg-white text-[var(--color-bg-dark)] hover:bg-white/90 shadow-[0_0_60px_rgba(255,255,255,0.1)] transition-all duration-300 tracking-[-0.01em]"
             >
-              Join the waitlist
+              Get my free GLP-1 profile
             </a>
             <a
-              href="/assessment"
+              href="/book"
+              onClick={() => trackEvent("consult_cta_clicked", { location: "landing-final-cta" })}
               className="inline-flex items-center justify-center px-10 py-4.5 text-base font-semibold rounded-[var(--radius-pill)] border border-white/20 text-white/80 hover:bg-white/5 hover:border-white/30 transition-all duration-300 tracking-[-0.01em]"
             >
-              Get your GLP-1 Profile
+              Book a $400 specialty consult
             </a>
           </div>
 
-          <p className="text-sm text-white/70">
-            No insurance needed &middot; Results within 48 hours
-          </p>
-          <p className="mt-3 text-[13px] text-white/70 max-w-md mx-auto leading-relaxed">
-            Join the waitlist and you&apos;ll also receive our weekly newsletter
-            on GLP-1 side effects, new research, and counteraction protocols.
+          <p className="text-[13px] text-white/65 max-w-xl mx-auto leading-relaxed">
+            Educational assessment only. Final treatment decisions require
+            consultation with a licensed clinician. Consult availability depends
+            on state licensure and clinical eligibility.
           </p>
         </motion.div>
       </div>
@@ -885,7 +745,7 @@ function BottomBar() {
             <Link href="/about" className="hover:text-white transition-colors">
               About
             </Link>
-            <Link href="/" className="hover:text-white transition-colors">
+            <Link href="/home" className="hover:text-white transition-colors">
               Full Site
             </Link>
             <Link href="/faq" className="hover:text-white transition-colors">
@@ -896,10 +756,12 @@ function BottomBar() {
         </div>
 
         <p className="text-[11px] text-white/75 mt-6 leading-relaxed max-w-4xl">
-          MetaOrthopedics provides telehealth consultations for musculoskeletal
-          health monitoring. This site is for informational purposes and does not
-          constitute medical advice. Always consult your healthcare provider
-          before making changes to your treatment plan.
+          MetaOrtho is a physician-led telemedicine practice providing specialty
+          GLP-1 management. This site is for educational purposes and does not
+          constitute medical advice. Care is provided only by clinicians
+          licensed in your state. Always consult a licensed clinician before
+          starting, stopping, or changing any medication. Individual results
+          vary.
         </p>
       </div>
     </footer>
@@ -910,10 +772,15 @@ function BottomBar() {
    PAGE ASSEMBLY
 --------------------------------------------------------------- */
 export default function LandingPage() {
+  useEffect(() => {
+    trackEvent("landing_view", { page: "landing" });
+  }, []);
+
   return (
     <div className="min-h-[100dvh]">
       <TopBar />
       <HeroSection />
+      <PortalPreview />
       <ProblemSection />
       <WhoSection />
       <SolutionSection />
