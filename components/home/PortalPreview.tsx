@@ -44,16 +44,17 @@ export default function PortalPreview() {
             className="text-[clamp(2rem,5vw,3.5rem)] font-normal tracking-[-0.03em] leading-[1.05] mb-5"
             style={{ color: "white" }}
           >
-            Your body, tracked like a{" "}
+            Your GLP-1 plan, tracked with a{" "}
             <span className="text-[var(--color-accent-primary)]">
               clinical dashboard
             </span>
             .
           </h2>
           <p className="text-lg text-white/80 leading-relaxed max-w-xl">
-            After your consult, your MSK score, bone-density trends, lean-mass,
-            lab results, and next-visit prep live in one place — tracked every
-            time we see you.
+            After your consult, your GLP-1 Optimization Score, medication
+            response, side effects, nutrition and strength needs, and
+            body-composition trends live in one place — tracked every time we
+            see you.
           </p>
         </motion.div>
 
@@ -118,7 +119,7 @@ export default function PortalPreview() {
 
                 {/* Bento grid */}
                 <div className="relative grid grid-cols-6 gap-3 md:gap-4">
-                  {/* MSK Score — hero tile */}
+                  {/* GLP-1 Optimization Score — hero tile */}
                   <div className="col-span-6 md:col-span-4 relative rounded-[var(--radius-lg)] bg-gradient-to-br from-[var(--color-accent-primary)]/20 to-[var(--color-accent-teal)]/10 border border-white/10 p-5 md:p-6 overflow-hidden">
                     <div
                       aria-hidden
@@ -126,7 +127,7 @@ export default function PortalPreview() {
                     />
                     <div className="relative">
                       <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/75 mb-4">
-                        MSK Score
+                        GLP-1 Optimization Score
                       </p>
                       <div className="flex items-end gap-3 mb-4">
                         <span
@@ -148,8 +149,8 @@ export default function PortalPreview() {
                         className="mb-4"
                       />
                       <p className="text-[12px] text-white/80 leading-relaxed">
-                        Composite across muscle mass, bone density, joint
-                        function, and nutrition.{" "}
+                        Maximizing benefit while minimizing downside — dose
+                        response, side effects, nutrition, and body composition.{" "}
                         <span className="text-[var(--color-accent-primary)] font-semibold">
                           +3 vs last assessment
                         </span>
@@ -407,8 +408,8 @@ export default function PortalPreview() {
         >
           {[
             {
-              title: "One MSK score",
-              copy: "A single number that rolls up muscle, bone, joint, and nutrition — so you can feel your progress week to week.",
+              title: "One GLP-1 Optimization Score",
+              copy: "A single signal that rolls up dose response, side effects, nutrition, strength, and body composition — so you can see whether the plan is working.",
             },
             {
               title: "Every marker tracked",

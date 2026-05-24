@@ -4,42 +4,26 @@ import { motion } from "framer-motion";
 import MeshBackground from "@/components/ui/motion/MeshBackground";
 import TiltCard from "@/components/ui/motion/TiltCard";
 import MagneticButton from "@/components/ui/motion/MagneticButton";
-import AnimatedNumber from "@/components/ui/motion/AnimatedNumber";
 import { trackEvent } from "@/lib/analytics";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
-const stats = [
+const issues = [
   {
-    stat: 30,
-    suffix: "%",
-    prefix: "+",
-    label: "Osteoporosis risk",
-    sub: "Over 5 years of GLP-1 use",
-    tone: "text-red-700",
+    label: "Nausea, reflux, or food aversion",
+    detail: "Suboptimal dose escalation can make treatment harder to tolerate.",
   },
   {
-    stat: 150,
-    suffix: "%",
-    prefix: "+",
-    label: "Osteomalacia risk",
-    sub: "Bone softening vs. controls",
-    tone: "text-orange-700",
+    label: "Plateaus or under-response",
+    detail: "A dose or medication may not match your goals, history, or response.",
   },
   {
-    stat: 40,
-    suffix: "%",
-    label: "Of weight lost is lean mass",
-    sub: "Muscle, bone & connective tissue",
-    tone: "text-amber-700",
+    label: "Fatigue and low intake",
+    detail: "Appetite suppression without nutrition planning can leave you depleted.",
   },
   {
-    stat: 12,
-    suffix: "%",
-    prefix: "+",
-    label: "Gout risk increase",
-    sub: "From rapid weight loss",
-    tone: "text-yellow-700",
+    label: "Muscle and bone loss",
+    detail: "Rapid weight loss can involve lean mass and bone density — not just fat.",
   },
 ];
 
@@ -150,8 +134,17 @@ export default function Hero() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.55 }}
+              className="mt-6 text-[13px] font-medium text-[var(--color-text-secondary)]"
+            >
+              Free profile · FSA/HSA eligible consults · No credit card required.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.6 }}
-              className="mt-6 text-[13px] text-[var(--color-text-tertiary)] max-w-lg leading-relaxed"
+              className="mt-3 text-[13px] text-[var(--color-text-tertiary)] max-w-lg leading-relaxed"
             >
               Educational assessment only. Final treatment decisions require
               consultation with a licensed clinician.
@@ -178,25 +171,22 @@ export default function Hero() {
 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-8">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
-                      AAOS 2026 Research
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--color-accent-primary)]">
+                      When GLP-1 care is one-size-fits-all
                     </p>
-                    <span className="text-[10px] font-mono text-[var(--color-text-tertiary)] tabular-nums">
-                      AAOS 2026 · Two studies
-                    </span>
                   </div>
 
                   <h3
                     className="text-[22px] md:text-[26px] font-normal tracking-[-0.02em] mb-8 leading-[1.15] text-[var(--color-text-heading)]"
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
-                    Why specialty management
+                    Suboptimal dosing can create
                     <br />
-                    matters.
+                    avoidable tradeoffs.
                   </h3>
 
                   <div className="space-y-5">
-                    {stats.map((item, i) => (
+                    {issues.map((item, i) => (
                       <motion.div
                         key={item.label}
                         initial={{ opacity: 0, x: -14 }}
@@ -207,24 +197,15 @@ export default function Hero() {
                           delay: 0.05 + i * 0.08,
                           ease,
                         }}
-                        className="flex items-center gap-5 py-3 border-b border-[var(--color-border)] last:border-0"
+                        className="flex items-start gap-4 py-3 border-b border-[var(--color-border)] last:border-0"
                       >
-                        <span
-                          className={`text-[28px] md:text-[34px] font-bold ${item.tone} w-[120px] flex-shrink-0 tracking-tight leading-none`}
-                        >
-                          <AnimatedNumber
-                            value={item.stat}
-                            prefix={item.prefix}
-                            suffix={item.suffix}
-                            duration={1200}
-                          />
-                        </span>
+                        <span className="mt-[7px] w-2 h-2 rounded-full bg-[var(--color-accent-primary)] flex-shrink-0" />
                         <div>
-                          <p className="text-[var(--color-text-heading)] text-sm font-medium">
+                          <p className="text-[var(--color-text-heading)] text-[15px] font-medium tracking-[-0.01em]">
                             {item.label}
                           </p>
-                          <p className="text-[var(--color-text-secondary)] text-xs mt-0.5">
-                            {item.sub}
+                          <p className="text-[var(--color-text-secondary)] text-[13px] mt-0.5 leading-relaxed">
+                            {item.detail}
                           </p>
                         </div>
                       </motion.div>
@@ -233,10 +214,9 @@ export default function Hero() {
 
                   <div className="mt-8 pt-6 border-t border-[var(--color-border)] text-center">
                     <p className="text-[var(--color-text-primary)] text-sm leading-relaxed">
-                      Some studies suggest a meaningful share of GLP-1 weight
-                      loss may be lean mass.{" "}
+                      The goal isn&apos;t simply losing weight.{" "}
                       <span className="text-[var(--color-text-heading)] font-semibold">
-                        A specialty consult helps you see the full picture.
+                        It&apos;s better-managed GLP-1 care.
                       </span>
                     </p>
                   </div>

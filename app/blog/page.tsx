@@ -22,7 +22,7 @@ export default function BlogPage() {
             GLP-1 musculoskeletal health
           </h1>
           <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed">
-            Evidence-based articles from a board-certified orthopedic surgeon on protecting your bones, muscles, and joints during GLP-1 weight loss.
+            Evidence-based articles from a board-certified orthopedic surgeon on monitoring and supporting your bones, muscles, and joints during GLP-1 weight loss.
           </p>
         </div>
       </section>

@@ -7,7 +7,6 @@ import SectionWrapper from "@/components/ui/SectionWrapper";
 import TiltCard from "@/components/ui/motion/TiltCard";
 import Spotlight from "@/components/ui/motion/Spotlight";
 import MeshBackground from "@/components/ui/motion/MeshBackground";
-import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -287,14 +286,12 @@ export default function KashifLatifContent() {
             update, every follow-up happens from wherever you are. No travel,
             no waiting rooms, no compromises on the depth of care.
           </p>
-          <WaitlistCTA
-            variant="dark"
-            size="lg"
-            source="about-latif-bottom"
-            eyebrow="Early access · MetaOrtho"
+          <Link
+            href="/assessment"
+            className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold rounded-[var(--radius-pill)] bg-[var(--color-bg-dark)] text-white hover:bg-[var(--color-bg-darkest)] shadow-[var(--shadow-md)] transition-[background-color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] motion-reduce:active:scale-100 tracking-[-0.01em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2"
           >
-            Join the waitlist
-          </WaitlistCTA>
+            Get my free GLP-1 profile
+          </Link>
         </div>
       </SectionWrapper>
     </>

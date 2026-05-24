@@ -31,8 +31,8 @@ export default function Footer() {
             </h3>
             <p className="text-white/85 text-sm">
               A few questions about your GLP-1 status, goals, medication
-              history, and monitoring needs &mdash; your profile previews what a
-              specialty consult would focus on.
+              history, and monitoring needs &mdash; free, with FSA/HSA eligible
+              consults available if appropriate.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">

@@ -10,6 +10,16 @@ const practiceFAQs = [
       "MetaOrtho is a specialty GLP-1 management practice. We help patients evaluate candidacy, medication fit, side-effect concerns, and monitoring needs. Depending on clinical scope and state availability, care may include prescribing, prescription-transfer support, monitoring recommendations, or coordination with your existing clinicians.",
   },
   {
+    question: "Is the GLP-1 Management Profile free?",
+    answer:
+      "Yes. The GLP-1 Management Profile is free and helps organize your GLP-1 status, goals, medication history, side-effect concerns, and monitoring needs before a specialty consult.",
+  },
+  {
+    question: "Why is one-size-fits-all GLP-1 care a problem?",
+    answer:
+      "Patients differ in goals, medical history, side effects, dose tolerance, weight-loss pace, nutrition intake, and monitoring needs. A plan that works for one person may be suboptimal for another, which is why MetaOrtho reviews your specific situation rather than applying a single template.",
+  },
+  {
     question: "Do I need to already be on a GLP-1?",
     answer:
       "No. The GLP-1 Management Profile supports current users, former users, and people considering treatment for the first time. The consult is built to meet you wherever you are in your GLP-1 journey.",
@@ -30,6 +40,11 @@ const practiceFAQs = [
       "Phase 1 consults are cash-pay. Initial consults are $400 and follow-up consults are $200. Some labs, imaging, nutrition services, or third-party services may have separate costs or insurance options depending on provider and location. Many HSA and FSA accounts can be used — confirm with your plan.",
   },
   {
+    question: "Can I use FSA/HSA funds?",
+    answer:
+      "Specialty consults may be FSA/HSA eligible for many patients. Check with your plan administrator for your specific account rules.",
+  },
+  {
     question: "Can MetaOrtho order labs or DEXA?",
     answer:
       "When clinically appropriate and available in your state, the care team may recommend or coordinate labs, DEXA, or other monitoring. Availability depends on licensure, clinical eligibility, and partner workflows.",
@@ -47,6 +62,11 @@ const practiceFAQs = [
 ];
 
 const clinicalFAQs = [
+  {
+    question: "What is a GLP-1 Optimization Score?",
+    answer:
+      "It is a simple way to organize whether your current plan appears aligned with your goals, tolerability, weight-loss pace, nutrition and strength needs, and monitoring considerations. It is not a diagnosis and does not replace clinician judgment.",
+  },
   {
     question: "Why do GLP-1 medications affect muscle and bone?",
     answer:

@@ -70,7 +70,7 @@ export default function PricingContent() {
           <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed">
             One focused specialty consult, with follow-ups when you need them.
             Start with the free GLP-1 Management Profile so your visit focuses on
-            your specific questions.
+            your specific questions. Consults may be FSA/HSA eligible.
           </p>
         </div>
       </section>

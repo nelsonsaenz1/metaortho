@@ -171,14 +171,14 @@ export default async function BlogPost({
               Want a specialist&apos;s read on your GLP-1?
             </h3>
             <p className="text-[var(--color-text-secondary)] mb-8 max-w-md mx-auto leading-relaxed">
-              Get your personalized GLP-1 Management Profile — candidacy, drug and dose considerations, and a monitoring plan, including bone and muscle health.
+              Get your free, personalized GLP-1 Management Profile — candidacy, drug and dose considerations, and a monitoring plan, including bone and muscle health.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button href="/assessment" variant="dark" size="lg">
-                Get your GLP-1 Profile
+                Get my free GLP-1 profile
               </Button>
               <Button href="/book" variant="outline" size="lg">
-                Join the waitlist
+                Book a $400 consult
               </Button>
             </div>
           </div>

@@ -250,7 +250,7 @@ export default function AssessmentPage() {
               Free clinical assessment
             </p>
             <h1 className="text-[clamp(2.25rem,5vw,3.25rem)] font-normal tracking-[-0.03em] mb-5">
-              Get your GLP-1 Management Profile
+              Get your free GLP-1 Management Profile
             </h1>
             <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed">
               Answer a clinical-style assessment built around candidacy, drug-and-dose context, side
@@ -919,7 +919,7 @@ function NextStepCta({
     );
   }
 
-  const label = profile.cta === "book" ? "Book your initial consultation" : "Book a consultation to discuss your situation";
+  const label = profile.cta === "book" ? "Book a $400 specialty consult" : "Book a consultation to discuss your situation";
 
   if (!licensed) {
     return (

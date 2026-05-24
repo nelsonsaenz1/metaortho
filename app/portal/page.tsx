@@ -13,7 +13,7 @@ function greeting() {
   return "Good evening";
 }
 
-/* ---------------- MSK Score ---------------- */
+/* ---------------- GLP-1 Optimization Score ---------------- */
 function MSKScoreCard() {
   return (
     <motion.div
@@ -25,14 +25,14 @@ function MSKScoreCard() {
       <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-[var(--color-accent-primary)]/20 blur-[80px] pointer-events-none" />
       <div className="relative">
         <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/85 mb-4">
-          Your MSK Score
+          Your GLP-1 Optimization Score
         </p>
         <div className="flex items-end gap-3 mb-4">
           <span className="text-[72px] font-normal leading-none tracking-[-0.04em]">82</span>
           <span className="text-sm text-white/80 mb-3">/ 100</span>
         </div>
         <p className="text-sm text-white/85 leading-relaxed">
-          Composite score across muscle mass, bone density, joint function, and nutrition markers.
+          Maximizing benefit while minimizing downside — dose response, side effects, nutrition, and body composition.
           <span className="block mt-1 text-[var(--color-accent-primary)]">+3 points since last assessment</span>
         </p>
       </div>

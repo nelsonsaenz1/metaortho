@@ -103,10 +103,10 @@ function Slide1Hero() {
           className="text-[clamp(2.5rem,6.5vw,5.25rem)] font-normal leading-[1.02] tracking-[-0.04em] mb-8"
           style={{ fontFamily: "var(--font-heading)", color: "white" }}
         >
-          GLP-1 care should manage more
+          GLP-1 care should be personalized
           <br />
           <span className="text-[var(--color-accent-primary)] opacity-95">
-            than the number on the scale.
+            — not one-size-fits-all.
           </span>
         </motion.h1>
 
@@ -116,10 +116,10 @@ function Slide1Hero() {
           transition={{ duration: 0.8, delay: 0.35, ease }}
           className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed mb-14 tracking-[-0.01em]"
         >
-          MetaOrtho is a physician-led specialty GLP-1 management practice —
-          helping patients evaluate candidacy, medication fit, side-effect
-          concerns, and monitoring needs through a personalized GLP-1 Management
-          Profile and specialty consult.
+          MetaOrtho is a physician-led specialty GLP-1 practice. Start with a
+          free GLP-1 Management Profile to understand your candidacy, medication
+          and dose questions, side-effect concerns, and monitoring needs —
+          before your specialty consult.
         </motion.p>
 
         <motion.div
@@ -142,7 +142,7 @@ function Slide1Hero() {
               href="/home"
               className="inline-flex items-center justify-center px-10 py-4 text-base font-semibold rounded-[var(--radius-pill)] border border-white/20 text-white/85 hover:bg-white/5 hover:border-white/35 transition-[background-color,border-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] motion-reduce:active:scale-100 tracking-[-0.01em]"
             >
-              Explore the practice →
+              See how MetaOrtho helps →
             </Link>
           </MagneticButton>
         </motion.div>
@@ -150,8 +150,17 @@ function Slide1Hero() {
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease }}
-          className="text-[12px] text-white/45 mt-10 tracking-[0.02em] max-w-md mx-auto leading-relaxed"
+          transition={{ duration: 0.8, delay: 0.55, ease }}
+          className="text-[13px] font-medium text-white/70 mt-10 tracking-[0.01em]"
+        >
+          Free profile · FSA/HSA eligible consults · No credit card required.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.65, ease }}
+          className="text-[12px] text-white/45 mt-3 tracking-[0.02em] max-w-md mx-auto leading-relaxed"
         >
           Educational assessment only. Final treatment decisions require
           consultation with a licensed clinician.
@@ -297,27 +306,28 @@ function Slide3Portal() {
               className="text-[clamp(2rem,5vw,3.75rem)] font-normal tracking-[-0.035em] leading-[1.02] mb-6"
               style={{ color: "white", fontFamily: "var(--font-heading)" }}
             >
-              Your body, tracked
+              Your GLP-1 plan, tracked
               <br />
-              like a{" "}
+              with a{" "}
               <span className="text-[var(--color-accent-primary)]">
                 clinical dashboard.
               </span>
             </h2>
             <p className="text-lg text-white/80 max-w-lg leading-relaxed mb-10">
-              After your consult, your patient portal keeps every score, scan,
-              lab, and protocol update from your care team in one place —
-              tracked over time.
+              After your consult, your patient portal keeps your GLP-1
+              Optimization Score, medication response, side effects, labs, and
+              protocol updates from your care team in one place — tracked over
+              time.
             </p>
 
             {/* Portal feature pills */}
             <div className="flex flex-wrap gap-2 mb-10">
               {[
-                "MSK Score tracking",
-                "DEXA trends",
-                "Lab results",
-                "Protocol updates",
-                "Secure messaging",
+                "GLP-1 Optimization Score",
+                "Side-effect tracking",
+                "Dose-history review",
+                "Lean mass & bone monitoring",
+                "Consult-ready profile",
               ].map((f) => (
                 <span
                   key={f}
@@ -372,10 +382,10 @@ function Slide3Portal() {
                   />
 
                   <div className="relative space-y-3">
-                    {/* MSK Score */}
+                    {/* GLP-1 Optimization Score */}
                     <div className="rounded-[var(--radius-lg)] bg-gradient-to-br from-[var(--color-accent-primary)]/25 to-[var(--color-accent-teal)]/10 border border-white/10 p-5">
                       <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/75 mb-3">
-                        MSK Score
+                        GLP-1 Optimization Score
                       </p>
                       <div className="flex items-end gap-2 mb-3">
                         <span
