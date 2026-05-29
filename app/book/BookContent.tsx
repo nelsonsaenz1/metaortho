@@ -7,6 +7,10 @@ import SectionWrapper from "@/components/ui/SectionWrapper";
 import MeshBackground from "@/components/ui/motion/MeshBackground";
 import MagneticButton from "@/components/ui/motion/MagneticButton";
 import { trackEvent } from "@/lib/analytics";
+import {
+  INITIAL_CONSULT_PRICE_LABEL,
+  FOLLOW_UP_PRICE_LABEL,
+} from "@/lib/site-config";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -96,8 +100,10 @@ export default function BookContent() {
             className="text-lg text-white/80 max-w-xl mx-auto leading-relaxed mb-8"
           >
             A focused specialty review for patients starting, taking, or
-            questioning GLP-1 treatment. <strong className="text-white">$400</strong>{" "}
-            initial consult · <strong className="text-white">$200</strong>{" "}
+            questioning GLP-1 treatment.{" "}
+            <strong className="text-white">{INITIAL_CONSULT_PRICE_LABEL}</strong>{" "}
+            initial consult ·{" "}
+            <strong className="text-white">{FOLLOW_UP_PRICE_LABEL}</strong>{" "}
             follow-ups.
           </motion.p>
 
@@ -282,6 +288,20 @@ export default function BookContent() {
                 </div>
               </motion.div>
             ))}
+          </div>
+          <div className="text-center mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-2">
+            <Link
+              href="/how-it-works"
+              className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-[var(--color-accent-primary)] underline underline-offset-2 hover:opacity-80 transition-opacity duration-[var(--dur-hover)] ease-[var(--ease-out)]"
+            >
+              See the full step-by-step: what happens next →
+            </Link>
+            <Link
+              href="/resources"
+              className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-[var(--color-accent-primary)] underline underline-offset-2 hover:opacity-80 transition-opacity duration-[var(--dur-hover)] ease-[var(--ease-out)]"
+            >
+              Browse GLP-1 resources →
+            </Link>
           </div>
         </div>
       </SectionWrapper>

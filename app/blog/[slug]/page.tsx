@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getPostBySlug, getAllSlugs } from "@/content/blog";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
+import { BOOK_CONSULT_LABEL } from "@/lib/site-config";
 
 export async function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -178,7 +179,7 @@ export default async function BlogPost({
                 Get my free GLP-1 profile
               </Button>
               <Button href="/book" variant="outline" size="lg">
-                Book a $400 consult
+                {BOOK_CONSULT_LABEL}
               </Button>
             </div>
           </div>

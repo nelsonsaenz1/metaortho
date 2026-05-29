@@ -7,6 +7,12 @@ import Logo from "@/components/ui/Logo";
 import CostComparison from "@/components/home/CostComparison";
 import PortalPreview from "@/components/home/PortalPreview";
 import { trackEvent } from "@/lib/analytics";
+import {
+  INITIAL_CONSULT_PRICE_LABEL,
+  FOLLOW_UP_PRICE_LABEL,
+  CONSULT_PRICE_SUMMARY,
+  BOOK_CONSULT_SPECIALTY_LABEL,
+} from "@/lib/site-config";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -119,7 +125,7 @@ function HeroSection() {
               onClick={() => trackEvent("consult_cta_clicked", { location: "landing-hero" })}
               className="inline-flex items-center justify-center px-10 py-4.5 text-base font-semibold rounded-[var(--radius-pill)] border border-white/20 text-white/80 hover:bg-white/5 hover:border-white/30 transition-all duration-300 tracking-[-0.01em]"
             >
-              Book a $400 specialty consult
+              {BOOK_CONSULT_SPECIALTY_LABEL}
             </a>
           </motion.div>
 
@@ -456,7 +462,7 @@ function TrustStrip() {
           {[
             { icon: "⚕️", text: "Board-certified endocrinologist + orthopedic surgeon" },
             { icon: "🔒", text: "HIPAA-compliant telehealth" },
-            { icon: "📋", text: "Cash-pay: $400 initial · $200 follow-up" },
+            { icon: "📋", text: `Cash-pay: ${CONSULT_PRICE_SUMMARY}` },
             { icon: "🧭", text: "Candidacy, medication & monitoring review" },
           ].map((item) => (
             <div key={item.text} className="flex items-center gap-2.5">
@@ -489,8 +495,8 @@ const steps = [
   {
     num: "03",
     title: "Book a specialty consult",
-    body: "Meet a licensed clinician for a cash-pay specialty review. Initial consults are $400; follow-ups are $200.",
-    tag: "$400 initial · $200 follow-up",
+    body: `Meet a licensed clinician for a cash-pay specialty review. Initial consults are ${INITIAL_CONSULT_PRICE_LABEL}; follow-ups are ${FOLLOW_UP_PRICE_LABEL}.`,
+    tag: CONSULT_PRICE_SUMMARY,
   },
 ];
 
@@ -566,8 +572,8 @@ const faqs = [
     a: "No. The GLP-1 Management Profile is built for current users, former users, and people considering treatment for the first time.",
   },
   {
-    q: "What does the $400 consult include?",
-    a: "A specialty review of your GLP-1 status, goals, relevant history, medication and dose context, side-effect concerns, monitoring needs, and recommended next steps. Follow-up consults are $200.",
+    q: `What does the ${INITIAL_CONSULT_PRICE_LABEL} consult include?`,
+    a: `A specialty review of your GLP-1 status, goals, relevant history, medication and dose context, side-effect concerns, monitoring needs, and recommended next steps. Follow-up consults are ${FOLLOW_UP_PRICE_LABEL}.`,
   },
   {
     q: "Is this covered by insurance?",
@@ -695,7 +701,8 @@ function FinalCTASection() {
           <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed mb-14">
             A structured assessment that previews what a specialty consult would
             focus on — candidacy, medication context, side effects, and
-            monitoring. Initial consults are $400; follow-ups are $200.
+            monitoring. Initial consults are {INITIAL_CONSULT_PRICE_LABEL};
+            follow-ups are {FOLLOW_UP_PRICE_LABEL}.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -711,7 +718,7 @@ function FinalCTASection() {
               onClick={() => trackEvent("consult_cta_clicked", { location: "landing-final-cta" })}
               className="inline-flex items-center justify-center px-10 py-4.5 text-base font-semibold rounded-[var(--radius-pill)] border border-white/20 text-white/80 hover:bg-white/5 hover:border-white/30 transition-all duration-300 tracking-[-0.01em]"
             >
-              Book a $400 specialty consult
+              {BOOK_CONSULT_SPECIALTY_LABEL}
             </a>
           </div>
 

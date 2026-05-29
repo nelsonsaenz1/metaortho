@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
@@ -26,12 +27,14 @@ import type {
   Responses,
 } from "@/lib/assessment/types";
 import { getStateByCode, isLicensed, licensedStatesCopy } from "@/lib/states";
+import {
+  BOOKING_URL,
+  BOOK_CONSULT_SPECIALTY_LABEL,
+  INITIAL_CONSULT_PRICE_LABEL,
+  FOLLOW_UP_PRICE_LABEL,
+} from "@/lib/site-config";
 
 const ease = [0.23, 1, 0.32, 1] as const;
-
-// Booking destination. Wire this to the Healthie scheduling URL once live; it
-// falls back to the existing lead-capture page during the pre-launch phase.
-const BOOKING_URL = process.env.NEXT_PUBLIC_BOOKING_URL || "/book";
 
 // Persist progress + the completed Profile to sessionStorage so the assessment
 // survives a page reload (including Next dev Fast Refresh) and the user can
@@ -892,6 +895,15 @@ function ProfileView({
         a prescription. A MetaOrtho clinician reviews your specific situation during a consultation
         before any treatment decision.
       </p>
+
+      <p className="text-sm text-center mt-6">
+        <Link
+          href="/resources"
+          className="font-semibold text-[var(--color-accent-primary)] underline underline-offset-2"
+        >
+          Keep learning: browse GLP-1 resources →
+        </Link>
+      </p>
     </motion.div>
   );
 }
@@ -919,7 +931,7 @@ function NextStepCta({
     );
   }
 
-  const label = profile.cta === "book" ? "Book a $400 specialty consult" : "Book a consultation to discuss your situation";
+  const label = profile.cta === "book" ? BOOK_CONSULT_SPECIALTY_LABEL : "Book a consultation to discuss your situation";
 
   if (!licensed) {
     return (
@@ -975,9 +987,17 @@ function NextStepCta({
         {label}
       </Button>
       <p className="text-sm text-[var(--color-text-secondary)] mt-3">
-        <span className="font-semibold text-[var(--color-text-heading)]">$400</span> initial specialty
-        consultation · <span className="font-semibold text-[var(--color-text-heading)]">$200</span>{" "}
+        <span className="font-semibold text-[var(--color-text-heading)]">{INITIAL_CONSULT_PRICE_LABEL}</span> initial specialty
+        consultation · <span className="font-semibold text-[var(--color-text-heading)]">{FOLLOW_UP_PRICE_LABEL}</span>{" "}
         follow-ups. May be HSA/FSA eligible — check with your plan.
+      </p>
+      <p className="text-xs text-[var(--color-text-tertiary)] mt-3">
+        <Link
+          href="/how-it-works"
+          className="font-semibold text-[var(--color-accent-primary)] underline underline-offset-2"
+        >
+          See what happens next, step by step →
+        </Link>
       </p>
     </div>
   );

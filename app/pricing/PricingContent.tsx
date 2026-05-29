@@ -5,13 +5,18 @@ import SectionWrapper from "@/components/ui/SectionWrapper";
 import Badge from "@/components/ui/Badge";
 import Spotlight from "@/components/ui/motion/Spotlight";
 import { trackEvent } from "@/lib/analytics";
+import {
+  INITIAL_CONSULT_PRICE_LABEL,
+  FOLLOW_UP_PRICE_LABEL,
+  BOOK_CONSULT_SPECIALTY_LABEL,
+} from "@/lib/site-config";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
 const consults = [
   {
     name: "Initial Specialty GLP-1 Consult",
-    price: "$400",
+    price: INITIAL_CONSULT_PRICE_LABEL,
     period: "one-time",
     description:
       "A focused specialty review for patients starting, taking, or questioning GLP-1 treatment.",
@@ -28,7 +33,7 @@ const consults = [
   },
   {
     name: "Follow-Up Specialty Consult",
-    price: "$200",
+    price: FOLLOW_UP_PRICE_LABEL,
     period: "per follow-up",
     description:
       "Ongoing specialty management as your treatment and monitoring needs evolve.",
@@ -162,7 +167,7 @@ export default function PricingContent() {
               onClick={() => trackEvent("consult_cta_clicked", { location: "pricing" })}
               className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold rounded-[var(--radius-pill)] border-2 border-[var(--color-text-heading)] text-[var(--color-text-heading)] hover:bg-[var(--color-text-heading)] hover:text-white transition-[background-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] motion-reduce:active:scale-100 tracking-[-0.01em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2"
             >
-              Book a $400 specialty consult
+              {BOOK_CONSULT_SPECIALTY_LABEL}
             </a>
           </div>
         </div>

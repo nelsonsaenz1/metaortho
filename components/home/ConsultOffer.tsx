@@ -5,6 +5,11 @@ import SectionWrapper from "@/components/ui/SectionWrapper";
 import Badge from "@/components/ui/Badge";
 import Spotlight from "@/components/ui/motion/Spotlight";
 import { trackEvent } from "@/lib/analytics";
+import {
+  INITIAL_CONSULT_PRICE_LABEL,
+  FOLLOW_UP_PRICE_LABEL,
+  BOOK_CONSULT_SPECIALTY_LABEL,
+} from "@/lib/site-config";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -96,7 +101,7 @@ export default function ConsultOffer() {
                 className="text-5xl font-bold text-[var(--color-text-heading)] tracking-tight"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
-                $400
+                {INITIAL_CONSULT_PRICE_LABEL}
               </span>
               <span className="text-[var(--color-text-tertiary)] text-sm">one-time</span>
             </div>
@@ -135,7 +140,7 @@ export default function ConsultOffer() {
                 className="text-5xl font-bold text-[var(--color-text-heading)] tracking-tight"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
-                $200
+                {FOLLOW_UP_PRICE_LABEL}
               </span>
               <span className="text-[var(--color-text-tertiary)] text-sm">per follow-up</span>
             </div>
@@ -177,7 +182,7 @@ export default function ConsultOffer() {
             onClick={() => trackEvent("consult_cta_clicked", { location: "home-consult-offer" })}
             className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold rounded-[var(--radius-pill)] border-2 border-[var(--color-text-heading)] text-[var(--color-text-heading)] hover:bg-[var(--color-text-heading)] hover:text-white transition-[background-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] motion-reduce:active:scale-100 tracking-[-0.01em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2"
           >
-            Book a $400 specialty consult
+            {BOOK_CONSULT_SPECIALTY_LABEL}
           </a>
         </div>
         <p className="mt-6 text-[13px] text-[var(--color-text-tertiary)] max-w-2xl mx-auto leading-relaxed">

@@ -2,6 +2,10 @@
 
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Accordion from "@/components/ui/Accordion";
+import {
+  INITIAL_CONSULT_PRICE_LABEL,
+  FOLLOW_UP_PRICE_LABEL,
+} from "@/lib/site-config";
 
 const practiceFAQs = [
   {
@@ -30,14 +34,12 @@ const practiceFAQs = [
       "No. The Profile is educational and helps organize the clinical considerations a specialist would want to review. Specific medication decisions require a consultation with a licensed clinician.",
   },
   {
-    question: "What does the $400 consult include?",
-    answer:
-      "The initial consult includes a specialty review of your GLP-1 status, goals, relevant history, medication and dose context, side-effect concerns, monitoring needs, and recommended next steps. Follow-up consults are $200 and cover progress, side effects, medication-management considerations, monitoring, and plan refinement.",
+    question: `What does the ${INITIAL_CONSULT_PRICE_LABEL} consult include?`,
+    answer: `The initial consult includes a specialty review of your GLP-1 status, goals, relevant history, medication and dose context, side-effect concerns, monitoring needs, and recommended next steps. Follow-up consults are ${FOLLOW_UP_PRICE_LABEL} and cover progress, side effects, medication-management considerations, monitoring, and plan refinement.`,
   },
   {
     question: "Is this covered by insurance?",
-    answer:
-      "Phase 1 consults are cash-pay. Initial consults are $400 and follow-up consults are $200. Some labs, imaging, nutrition services, or third-party services may have separate costs or insurance options depending on provider and location. Many HSA and FSA accounts can be used — confirm with your plan.",
+    answer: `Phase 1 consults are cash-pay. Initial consults are ${INITIAL_CONSULT_PRICE_LABEL} and follow-up consults are ${FOLLOW_UP_PRICE_LABEL}. Some labs, imaging, nutrition services, or third-party services may have separate costs or insurance options depending on provider and location. Many HSA and FSA accounts can be used — confirm with your plan.`,
   },
   {
     question: "Can I use FSA/HSA funds?",

@@ -26,6 +26,10 @@ import {
   ICONS,
   styles,
 } from "./template";
+import {
+  INITIAL_CONSULT_PRICE_LABEL,
+  FOLLOW_UP_PRICE_LABEL,
+} from "../site-config";
 
 type TemplateInputs = {
   email: string;
@@ -83,16 +87,18 @@ export function welcomeEmailText(inputs?: TemplateInputs): string {
     ``,
     `Thanks for joining the MetaOrtho waitlist — I'm glad you're here.`,
     ``,
-    `We built this practice around one idea: GLP-1s work, but as much as 40%`,
-    `of the weight you lose can be lean tissue, and bone density often follows.`,
-    `You've spent years building your strength. You deserve care that protects it.`,
+    `We built this practice around one idea: GLP-1s work, but a meaningful`,
+    `share of the weight you lose can come from lean mass — muscle and bone —`,
+    `and that often goes unmeasured. You've spent years building your strength.`,
+    `You deserve care that protects it.`,
     ``,
     `That's what we do — across four areas your prescriber usually isn't measuring:`,
     ``,
     `   MUSCLE   ·   BONE   ·   JOINT   ·   NUTRITION`,
     ``,
-    `A DEXA scan, targeted labs, a 30-minute visit, and a protocol matched to`,
-    `your risk. No filler, no guesswork.`,
+    `It starts with a free GLP-1 Management Profile — a few questions about your`,
+    `GLP-1 status, goals, medications, side effects, and monitoring needs. From`,
+    `there, a specialty consult reviews your plan in depth when you're ready.`,
     ``,
     `────────────`,
     ``,
@@ -104,9 +110,9 @@ export function welcomeEmailText(inputs?: TemplateInputs): string {
     ``,
     `────────────`,
     ``,
-    `Already on a GLP-1 and in a state we serve?`,
-    `  →  Book your $149 initial assessment: ${site}/book`,
-    `  →  Or take our free 5-minute risk quiz: ${site}/quiz`,
+    `Ready when you are:`,
+    `  →  Get your free GLP-1 Management Profile: ${site}/assessment`,
+    `  →  Book a specialty consult (${INITIAL_CONSULT_PRICE_LABEL} initial · ${FOLLOW_UP_PRICE_LABEL} follow-up): ${site}/book`,
     ``,
     `────────────`,
     ``,
@@ -124,18 +130,16 @@ export function welcomeEmailHtml(inputs?: TemplateInputs): string {
   // in WAITLIST_FROM_NAME (currently "MetaOrtho") so the inbox label reads as
   // a brand while the letter reads as a person.
   const name = "Dr. Jay Saenz";
-  // TODO: confirm URL — directive suggests /assessment; current live route is /book.
-  const assessmentUrl = `${site}/book`;
-  // TODO: confirm /quiz route exists.
-  const quizUrl = `${site}/quiz`;
+  const profileUrl = `${site}/assessment`;
+  const bookUrl = `${site}/book`;
   const portraitUrl = `${site}/images/dr-saenz.jpg`;
 
   const body = `        <p style="${styles.pLead}">Thanks for joining the MetaOrtho waitlist &mdash; I&rsquo;m glad you&rsquo;re here.</p>
 
         <p style="${styles.p}">
           We built this practice around one idea: GLP-1s work, but
-          <span style="${styles.strong}">as much as 40% of the weight you lose can be lean tissue</span>,
-          and bone density often follows. You&rsquo;ve spent years building your strength. You deserve care that protects it.
+          <span style="${styles.strong}">a meaningful share of the weight you lose can come from lean mass &mdash; muscle and bone</span>,
+          and that often goes unmeasured. You&rsquo;ve spent years building your strength. You deserve care that protects it.
         </p>
 
         <p style="${styles.p}">
@@ -150,7 +154,7 @@ ${renderPillarRow([
 ])}
 
         <p style="${styles.p}">
-          A DEXA scan, targeted labs, a 30-minute visit, and a protocol matched to your risk. No filler, no guesswork.
+          It starts with a free GLP-1 Management Profile &mdash; a few questions about your GLP-1 status, goals, medications, side effects, and monitoring needs. From there, a specialty consult reviews your plan in depth when you&rsquo;re ready.
         </p>
 ${renderSectionBreak()}
         <p style="${styles.eyebrow}">What to expect</p>
@@ -161,13 +165,13 @@ ${renderSteps([
 ])}
 ${renderSectionBreak()}
 ${renderCta({
-  question: "Already on a GLP-1 and in a state we serve?",
-  href: assessmentUrl,
-  label: "Book your $149 initial assessment",
+  question: "Ready when you are?",
+  href: profileUrl,
+  label: "Get your free GLP-1 Management Profile",
 })}
 ${renderCta({
-  href: quizUrl,
-  label: "Or take our free 5-minute risk quiz",
+  href: bookUrl,
+  label: `Or book a specialty consult (${INITIAL_CONSULT_PRICE_LABEL} initial · ${FOLLOW_UP_PRICE_LABEL} follow-up)`,
   tight: true,
 })}
 ${renderSectionBreak()}

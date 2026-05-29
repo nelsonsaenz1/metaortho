@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Spotlight from "@/components/ui/motion/Spotlight";
 import { trackEvent } from "@/lib/analytics";
+import { CONSULT_PRICE_SUMMARY } from "@/lib/site-config";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -30,7 +31,7 @@ const steps = [
     description:
       "Meet a licensed clinician for a cash-pay specialty review of your GLP-1 plan, side effects, and monitoring needs — then leave with clear next steps.",
     includes: ["Specialty review", "Recommended next steps", "Monitoring plan if appropriate"],
-    duration: "$400 initial · $200 follow-up",
+    duration: CONSULT_PRICE_SUMMARY,
   },
 ];
 

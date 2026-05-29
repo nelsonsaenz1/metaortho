@@ -5,6 +5,7 @@ import MeshBackground from "@/components/ui/motion/MeshBackground";
 import ShimmerBar from "@/components/ui/motion/ShimmerBar";
 import AnimatedNumber from "@/components/ui/motion/AnimatedNumber";
 import { trackEvent } from "@/lib/analytics";
+import { BOOK_CONSULT_LABEL } from "@/lib/site-config";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -457,7 +458,7 @@ export default function PortalPreview() {
             onClick={() => trackEvent("consult_cta_clicked", { location: "portal-preview" })}
             className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold rounded-[var(--radius-pill)] border border-white/20 text-white/85 hover:bg-white/5 hover:border-white/35 transition-[background-color,border-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] motion-reduce:active:scale-100 tracking-[-0.01em]"
           >
-            Book a $400 consult
+            {BOOK_CONSULT_LABEL}
           </a>
         </motion.div>
       </div>

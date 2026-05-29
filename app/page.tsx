@@ -9,6 +9,7 @@ import MagneticButton from "@/components/ui/motion/MagneticButton";
 import AnimatedNumber from "@/components/ui/motion/AnimatedNumber";
 import ShimmerBar from "@/components/ui/motion/ShimmerBar";
 import { trackEvent } from "@/lib/analytics";
+import { BOOK_CONSULT_LABEL } from "@/lib/site-config";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -351,7 +352,7 @@ function Slide3Portal() {
                 onClick={() => trackEvent("consult_cta_clicked", { location: "splash-profile" })}
                 className="inline-flex items-center justify-center px-8 py-3.5 text-[15px] font-semibold rounded-[var(--radius-pill)] border border-white/20 text-white/85 hover:bg-white/5 hover:border-white/35 transition-[background-color,border-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:active:scale-100"
               >
-                Book a $400 consult
+                {BOOK_CONSULT_LABEL}
               </Link>
             </div>
             <p className="mt-5 text-[12px] text-white/50">

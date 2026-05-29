@@ -6,7 +6,7 @@ import Logo from "@/components/ui/Logo";
 import { trackEvent } from "@/lib/analytics";
 
 const navLinks = [
-  { label: "How It Works", href: "/home#how-it-works" },
+  { label: "How It Works", href: "/how-it-works" },
   { label: "GLP-1 Profile", href: "/assessment" },
   { label: "Consult", href: "/book" },
   { label: "Pricing", href: "/pricing" },

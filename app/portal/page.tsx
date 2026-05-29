@@ -309,7 +309,7 @@ function ReferralCard() {
             Know someone else on a GLP-1?
           </h3>
           <p className="text-[13px] text-[var(--color-text-secondary)] mb-3 leading-relaxed">
-            Refer a friend or family member and they get their initial MSK assessment for $99 (reg. $149).
+            Refer a friend or family member starting or managing a GLP-1 — they can begin with a free GLP-1 Management Profile.
           </p>
           <button className="text-[13px] font-medium text-[var(--color-accent-primary)] hover:text-[var(--color-accent-hover)] transition-colors cursor-pointer">
             Copy referral link →

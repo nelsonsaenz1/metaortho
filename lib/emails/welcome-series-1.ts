@@ -22,6 +22,10 @@ import {
   replyToAddress,
   styles,
 } from "./template";
+import {
+  INITIAL_CONSULT_PRICE_LABEL,
+  FOLLOW_UP_PRICE_LABEL,
+} from "../site-config";
 
 type TemplateInputs = {
   email: string;
@@ -87,8 +91,8 @@ export function seriesOneText(inputs?: TemplateInputs): string {
     `────────────`,
     ``,
     `  01   MUSCLE`,
-    `       As much as 40% of what you lose on a GLP-1 can be lean`,
-    `       tissue. Your metabolism, your strength, your function —`,
+    `       A meaningful share of what you lose on a GLP-1 can be lean`,
+    `       mass. Your metabolism, your strength, your function —`,
     `       all ride on keeping as much of it as possible.`,
     ``,
     `  02   BONE`,
@@ -108,12 +112,12 @@ export function seriesOneText(inputs?: TemplateInputs): string {
     ``,
     `────────────`,
     ``,
-    `This is what your $149 initial assessment is built around: a DEXA scan,`,
-    `a targeted lab panel, a 30-minute visit with your orthopedic team, and`,
-    `a plan matched to where your risk actually is.`,
+    `Your free GLP-1 Management Profile organizes exactly this — your status,`,
+    `goals, medications, side effects, weight-loss pace, nutrition, strength,`,
+    `and what's worth monitoring — so a specialty consult can focus on you.`,
     ``,
-    `  →  Take the free 5-minute risk quiz: ${site}/quiz`,
-    `  →  Or start your $149 assessment: ${site}/book`,
+    `  →  Get your free GLP-1 Management Profile: ${site}/assessment`,
+    `  →  Or book a specialty consult (${INITIAL_CONSULT_PRICE_LABEL} initial · ${FOLLOW_UP_PRICE_LABEL} follow-up): ${site}/book`,
     ``,
     `────────────`,
     ``,
@@ -131,10 +135,8 @@ export function seriesOneHtml(inputs?: TemplateInputs): string {
   // in WAITLIST_FROM_NAME (currently "MetaOrtho") so the inbox label reads as
   // a brand while the letter reads as a person.
   const name = "Dr. Jay Saenz";
-  // TODO: confirm URL — directive suggests /assessment; current live route is /book.
-  const assessmentUrl = `${site}/book`;
-  // TODO: confirm /quiz route exists.
-  const quizUrl = `${site}/quiz`;
+  const profileUrl = `${site}/assessment`;
+  const bookUrl = `${site}/book`;
 
   // Directive build note: the 4-icon row from Email 1 can be echoed above the
   // numbered list as a visual callback. Uncomment the block below + re-import
@@ -157,7 +159,7 @@ ${renderPillarBlocks([
   {
     label: "Muscle",
     body:
-      "As much as 40% of what you lose on a GLP-1 can be lean tissue. Your metabolism, your strength, your function &mdash; all ride on keeping as much of it as possible.",
+      "A meaningful share of what you lose on a GLP-1 can be lean mass. Your metabolism, your strength, your function &mdash; all ride on keeping as much of it as possible.",
   },
   {
     label: "Bone",
@@ -177,16 +179,16 @@ ${renderPillarBlocks([
 ])}
 ${renderSectionBreak()}
         <p style="${styles.p}">
-          This is what your $149 initial assessment is built around: a DEXA scan, a targeted lab panel, a 30-minute visit with your orthopedic team, and a plan matched to where your risk actually is.
+          Your free GLP-1 Management Profile organizes exactly this &mdash; your status, goals, medications, side effects, weight-loss pace, nutrition, strength, and what&rsquo;s worth monitoring &mdash; so a specialty consult can focus on you.
         </p>
 
 ${renderCta({
-  href: quizUrl,
-  label: "Take the free 5-minute risk quiz",
+  href: profileUrl,
+  label: "Get your free GLP-1 Management Profile",
 })}
 ${renderCta({
-  href: assessmentUrl,
-  label: "Or start your $149 assessment",
+  href: bookUrl,
+  label: `Or book a specialty consult (${INITIAL_CONSULT_PRICE_LABEL} initial · ${FOLLOW_UP_PRICE_LABEL} follow-up)`,
   tight: true,
 })}
 ${renderSectionBreak()}

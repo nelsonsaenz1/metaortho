@@ -4,6 +4,11 @@ import { motion } from "framer-motion";
 import MeshBackground from "@/components/ui/motion/MeshBackground";
 import WaitlistCTA from "@/components/waitlist/WaitlistCTA";
 import { trackEvent } from "@/lib/analytics";
+import {
+  INITIAL_CONSULT_PRICE_LABEL,
+  FOLLOW_UP_PRICE_LABEL,
+  BOOK_CONSULT_SPECIALTY_LABEL,
+} from "@/lib/site-config";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -38,7 +43,8 @@ export default function FinalCTA() {
           <p className="text-lg text-white/85 max-w-2xl mx-auto mb-12 leading-relaxed tracking-[-0.01em]">
             A structured assessment that previews what a specialty consult would
             focus on for you — candidacy, medication context, side effects, and
-            monitoring needs. Initial consults are $400; follow-ups are $200.
+            monitoring needs. Initial consults are {INITIAL_CONSULT_PRICE_LABEL};
+            follow-ups are {FOLLOW_UP_PRICE_LABEL}.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -54,7 +60,7 @@ export default function FinalCTA() {
               onClick={() => trackEvent("consult_cta_clicked", { location: "home-final-cta" })}
               className="inline-flex items-center justify-center px-10 py-4 text-base font-semibold rounded-[var(--radius-pill)] border border-white/20 text-white/85 hover:bg-white/5 hover:border-white/35 transition-[background-color,border-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] motion-reduce:active:scale-100 tracking-[-0.01em]"
             >
-              Book a $400 specialty consult
+              {BOOK_CONSULT_SPECIALTY_LABEL}
             </a>
           </div>
 

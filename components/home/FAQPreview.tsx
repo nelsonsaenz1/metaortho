@@ -3,6 +3,10 @@
 import Link from "next/link";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Accordion from "@/components/ui/Accordion";
+import {
+  INITIAL_CONSULT_PRICE_LABEL,
+  FOLLOW_UP_PRICE_LABEL,
+} from "@/lib/site-config";
 
 const faqs = [
   {
@@ -21,9 +25,8 @@ const faqs = [
       "No. The Profile is educational and helps organize the clinical considerations a specialist would want to review. Specific medication decisions require a consultation with a licensed clinician.",
   },
   {
-    question: "What does the $400 consult include?",
-    answer:
-      "A specialty review of your GLP-1 status, goals, relevant history, medication and dose context, side-effect concerns, monitoring needs, and recommended next steps. Follow-up consults are $200. Some labs, imaging, or third-party services may have separate costs.",
+    question: `What does the ${INITIAL_CONSULT_PRICE_LABEL} consult include?`,
+    answer: `A specialty review of your GLP-1 status, goals, relevant history, medication and dose context, side-effect concerns, monitoring needs, and recommended next steps. Follow-up consults are ${FOLLOW_UP_PRICE_LABEL}. Some labs, imaging, or third-party services may have separate costs.`,
   },
   {
     question: "Can you guarantee I won't lose muscle or bone?",

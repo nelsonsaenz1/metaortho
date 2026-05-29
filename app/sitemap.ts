@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllSlugs } from "@/content/blog";
+import { getAllResourceSlugs } from "@/content/resources";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://metaortho.com";
@@ -10,6 +11,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.7,
+  }));
+
+  const resources = getAllResourceSlugs().map((slug) => ({
+    url: `${base}/resources/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
   }));
 
   const marketing = [
@@ -24,6 +32,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/faq`, priority: 0.7, changeFrequency: "monthly" as const },
     { url: `${base}/book`, priority: 0.9, changeFrequency: "weekly" as const },
     { url: `${base}/assessment`, priority: 0.8, changeFrequency: "monthly" as const },
+    { url: `${base}/how-it-works`, priority: 0.7, changeFrequency: "monthly" as const },
+    { url: `${base}/resources`, priority: 0.7, changeFrequency: "weekly" as const },
     { url: `${base}/blog`, priority: 0.8, changeFrequency: "weekly" as const },
   ].map((p) => ({ ...p, lastModified: now }));
 
@@ -47,5 +57,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.4,
   }));
 
-  return [...marketing, ...legal, ...blogPosts];
+  return [...marketing, ...legal, ...blogPosts, ...resources];
 }

@@ -3,7 +3,7 @@
  *
  * Fires 2 days after Email 2 (i.e. 4 days after signup) via the Resend
  * Automation. Closes the series on a founder-voice note explaining why
- * MetaOrtho exists and how the $149 assessment is structured.
+ * MetaOrtho exists and how the free Profile and specialty consult fit together.
  *
  * Env:
  *   WAITLIST_FROM_NAME      e.g. "Dr. Jay Saenz"
@@ -24,6 +24,10 @@ import {
   replyToAddress,
   styles,
 } from "./template";
+import {
+  INITIAL_CONSULT_PRICE_LABEL,
+  FOLLOW_UP_PRICE_LABEL,
+} from "../site-config";
 
 type TemplateInputs = {
   email: string;
@@ -101,17 +105,19 @@ export function seriesTwoText(inputs?: TemplateInputs): string {
     ``,
     `WHAT THAT LOOKS LIKE`,
     ``,
-    `  01   A DEXA scan — baseline bone density and body composition.`,
-    `  02   Targeted labs — vitamin D, calcium, metabolic panel.`,
-    `  03   A 30-minute visit with your orthopedic team.`,
-    `  04   A plan personalized to your risk, not a template.`,
+    `  01   A free GLP-1 Management Profile — your status, goals, and history.`,
+    `  02   A specialty consult — candidacy, medication fit, side effects,`,
+    `       and what to monitor.`,
+    `  03   Labs or a DEXA scan when clinically appropriate and available`,
+    `       in your state.`,
+    `  04   A plan matched to your situation, not a template.`,
     ``,
-    `One price: $149. No subscription required to start.`,
+    `The Profile is free. Consults are cash-pay: ${INITIAL_CONSULT_PRICE_LABEL} initial · ${FOLLOW_UP_PRICE_LABEL} follow-up.`,
     ``,
     `────────────`,
     ``,
-    `  →  Start your $149 assessment: ${site}/book`,
-    `  →  Or take the free 5-minute risk quiz first: ${site}/quiz`,
+    `  →  Get your free GLP-1 Management Profile: ${site}/assessment`,
+    `  →  Or book a specialty consult: ${site}/book`,
     ``,
     `────────────`,
     ``,
@@ -120,8 +126,8 @@ export function seriesTwoText(inputs?: TemplateInputs): string {
     `  Medical Director, MetaOrtho`,
     ``,
     `P.S. If you're not sure whether any of this applies to you yet, the`,
-    `5-minute risk quiz is the lowest-effort way to find out. It's free`,
-    `and it's honest.`,
+    `free GLP-1 Management Profile is the lowest-effort way to find out.`,
+    `It takes about five minutes.`,
     ``,
     ...recipientFooter,
   ].join("\n");
@@ -133,10 +139,8 @@ export function seriesTwoHtml(inputs?: TemplateInputs): string {
   // in WAITLIST_FROM_NAME (currently "MetaOrtho") so the inbox label reads as
   // a brand while the letter reads as a person.
   const name = "Dr. Jay Saenz";
-  // TODO: confirm URL — directive suggests /assessment; current live route is /book.
-  const assessmentUrl = `${site}/book`;
-  // TODO: confirm /quiz route exists.
-  const quizUrl = `${site}/quiz`;
+  const profileUrl = `${site}/assessment`;
+  const bookUrl = `${site}/book`;
   const portraitUrl = `${site}/images/dr-saenz.jpg`;
 
   const body = `        <p style="${styles.pLead}">A few years ago, as GLP-1 prescribing exploded, something quieter was happening underneath it:</p>
@@ -155,23 +159,23 @@ export function seriesTwoHtml(inputs?: TemplateInputs): string {
 ${renderSectionBreak()}
         <p style="${styles.eyebrow}">What that looks like</p>
 ${renderSteps([
-  "A DEXA scan &mdash; baseline bone density and body composition.",
-  "Targeted labs &mdash; vitamin D, calcium, metabolic panel.",
-  "A 30-minute visit with your orthopedic team.",
-  "A plan personalized to your risk, not a template.",
+  "A free GLP-1 Management Profile &mdash; your status, goals, and history.",
+  "A specialty consult &mdash; candidacy, medication fit, side effects, and what to monitor.",
+  "Labs or a DEXA scan when clinically appropriate and available in your state.",
+  "A plan matched to your situation, not a template.",
 ])}
 
         <p style="${styles.p}margin-top:24px;">
-          One price: <span style="${styles.strong}">$149</span>. No subscription required to start.
+          The Profile is <span style="${styles.strong}">free</span>. Consults are cash-pay: ${INITIAL_CONSULT_PRICE_LABEL} initial &middot; ${FOLLOW_UP_PRICE_LABEL} follow-up.
         </p>
 ${renderSectionBreak()}
 ${renderCta({
-  href: assessmentUrl,
-  label: "Start your $149 assessment",
+  href: profileUrl,
+  label: "Get your free GLP-1 Management Profile",
 })}
 ${renderCta({
-  href: quizUrl,
-  label: "Or take the free 5-minute risk quiz first",
+  href: bookUrl,
+  label: "Or book a specialty consult",
   tight: true,
 })}
 ${renderSectionBreak()}
@@ -189,7 +193,7 @@ ${renderPortrait({
   size: 80,
 })}
 ${renderPostscript(
-  "P.S. If you&rsquo;re not sure whether any of this applies to you yet, the 5-minute risk quiz is the lowest-effort way to find out. It&rsquo;s free and it&rsquo;s honest."
+  "P.S. If you&rsquo;re not sure whether any of this applies to you yet, the free GLP-1 Management Profile is the lowest-effort way to find out. It takes about five minutes."
 )}`;
 
   return renderEmail({

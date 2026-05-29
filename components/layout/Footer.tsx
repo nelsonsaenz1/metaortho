@@ -4,6 +4,7 @@ import Link from "next/link";
 import Logo from "@/components/ui/Logo";
 import { trackEvent } from "@/lib/analytics";
 import { licensedStatesCopy } from "@/lib/states";
+import { BOOK_CONSULT_LABEL } from "@/lib/site-config";
 
 function openCookieSettings() {
   if (typeof window === "undefined") return;
@@ -48,7 +49,7 @@ export default function Footer() {
               onClick={() => trackEvent("consult_cta_clicked", { location: "footer" })}
               className="inline-flex items-center justify-center px-7 py-3.5 text-[15px] font-semibold rounded-[var(--radius-pill)] border border-white/25 text-white hover:bg-white/10 transition-[background-color] duration-[var(--dur-hover)] ease-[var(--ease-out)]"
             >
-              Book a $400 consult
+              {BOOK_CONSULT_LABEL}
             </Link>
           </div>
         </div>
@@ -136,6 +137,8 @@ export default function Footer() {
             <ul className="space-y-3">
               {[
                 { label: "GLP-1 Profile", href: "/assessment" },
+                { label: "How It Works", href: "/how-it-works" },
+                { label: "Resources", href: "/resources" },
                 { label: "Blog", href: "/blog" },
                 { label: "FAQ", href: "/faq" },
                 { label: "Sources", href: "/legal/sources" },

@@ -5,6 +5,10 @@ import MeshBackground from "@/components/ui/motion/MeshBackground";
 import TiltCard from "@/components/ui/motion/TiltCard";
 import MagneticButton from "@/components/ui/motion/MagneticButton";
 import { trackEvent } from "@/lib/analytics";
+import {
+  CONSULT_PRICE_SUMMARY,
+  BOOK_CONSULT_SPECIALTY_LABEL,
+} from "@/lib/site-config";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -42,7 +46,7 @@ const trustItems = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
-    text: "Cash-pay consult: $400 initial · $200 follow-up",
+    text: `Cash-pay consult: ${CONSULT_PRICE_SUMMARY}`,
   },
   {
     icon: (
@@ -126,7 +130,7 @@ export default function Hero() {
                   onClick={() => trackEvent("consult_cta_clicked", { location: "home-hero" })}
                   className="inline-flex items-center justify-center px-9 py-4 text-base font-semibold rounded-[var(--radius-pill)] border-2 border-[var(--color-text-heading)] text-[var(--color-text-heading)] hover:bg-[var(--color-text-heading)] hover:text-white transition-[background-color,color,transform] duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.98] active:duration-[var(--dur-press)] motion-reduce:active:scale-100 tracking-[-0.01em] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-primary)] focus-visible:ring-offset-2"
                 >
-                  Book a $400 specialty consult
+                  {BOOK_CONSULT_SPECIALTY_LABEL}
                 </a>
               </MagneticButton>
             </motion.div>
