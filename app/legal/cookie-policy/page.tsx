@@ -14,13 +14,6 @@ const paraClass =
 
 const cookies = [
   {
-    name: "site-auth",
-    vendor: "MetaOrtho (first-party)",
-    purpose: "Pre-launch site password gate. Set after the visitor enters the access password and removed at logout. Necessary.",
-    expiry: "Session",
-    category: "Necessary",
-  },
-  {
     name: "metaortho-cookie-consent",
     vendor: "MetaOrtho (first-party, localStorage)",
     purpose: "Records the visitor&rsquo;s cookie consent choice so the banner doesn&rsquo;t appear again.",
@@ -70,9 +63,8 @@ export default function CookiePolicyPage() {
           <ul className="text-[var(--color-text-secondary)] leading-relaxed mb-4 text-[15px] list-disc pl-5 space-y-1.5">
             <li>
               <strong>Necessary</strong> &mdash; required for the site to
-              work (site password gate, your cookie-consent choice). These
-              are always on and cannot be disabled while the site is in
-              use.
+              work (your cookie-consent choice). These are always on and
+              cannot be disabled while the site is in use.
             </li>
             <li>
               <strong>Functional</strong> &mdash; remember preferences and
